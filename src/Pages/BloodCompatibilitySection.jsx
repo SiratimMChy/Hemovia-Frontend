@@ -1,9 +1,10 @@
-import { ArrowRight, CheckCircle, Droplet, Activity, Shield, TrendingUp, UserCheck, Heart } from 'lucide-react';
+import { ArrowRight, CheckCircle, Droplet, Activity, Shield, Search } from 'lucide-react';
 import { useState, useEffect, useMemo } from 'react';
 import useAxios from '../Hooks/useAxios';
 
 const BloodCompatibilitySection = () => {
   const [selectedBloodType, setSelectedBloodType] = useState('O+');
+  const [viewMode, setViewMode] = useState('all');
   const [stats, setStats] = useState({
     totalDonors: 0,
     totalRequests: 0,
@@ -11,11 +12,6 @@ const BloodCompatibilitySection = () => {
     bloodTypeCounts: {}
   });
   const [loading, setLoading] = useState(true);
-  const [animatedStats, setAnimatedStats] = useState({
-    donors: 0,
-    requests: 0,
-    successRate: 0
-  });
 
   const axios = useAxios();
 
@@ -32,45 +28,16 @@ const BloodCompatibilitySection = () => {
     'AB+': { canDonateTo: ['AB+'], canReceiveFrom: ['AB+', 'AB-', 'A+', 'A-', 'B+', 'B-', 'O+', 'O-'], description: 'Universal Recipient', rarity: 'Rare' }
   };
 
-  const formatCount = (count) => {
-    if (count >= 100) return '100+';
-    if (count >= 50) return '50+';
-    if (count >= 25) return '25+';
-    if (count >= 10) return '10+';
-    return count.toString();
+  const bloodColors = {
+    'O+': '#dc2626',
+    'O-': '#ef4444',
+    'A+': '#be123c',
+    'A-': '#f43f5e',
+    'B+': '#16a34a',
+    'B-': '#22c55e',
+    'AB+': '#c2410c',
+    'AB-': '#ea580c'
   };
-
-  useEffect(() => {
-    if (stats.totalDonors >= 0 && stats.totalRequests >= 0 && stats.successRate >= 0) {
-      const duration = 1500;
-      const steps = 60;
-      const stepDuration = duration / steps;
-
-      let currentStep = 0;
-      const interval = setInterval(() => {
-        currentStep++;
-        const progress = currentStep / steps;
-        const easeOut = 1 - Math.pow(1 - progress, 3);
-
-        setAnimatedStats({
-          donors: Math.floor(stats.totalDonors * easeOut),
-          requests: Math.floor(stats.totalRequests * easeOut),
-          successRate: Math.floor(stats.successRate * easeOut)
-        });
-
-        if (currentStep >= steps) {
-          clearInterval(interval);
-          setAnimatedStats({
-            donors: stats.totalDonors,
-            requests: stats.totalRequests,
-            successRate: stats.successRate
-          });
-        }
-      }, stepDuration);
-
-      return () => clearInterval(interval);
-    }
-  }, [stats.totalDonors, stats.totalRequests, stats.successRate]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -115,13 +82,13 @@ const BloodCompatibilitySection = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-base-100 flex items-center justify-center">
+      <div className="py-16 bg-base-100 flex items-center justify-center">
         <div className="text-center">
           <div className="relative">
-            <div className="w-16 h-16 border-4 border-red-200 dark:border-red-900/50 rounded-full animate-spin border-t-red-500 mx-auto mb-4"></div>
-            <Droplet className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-red-500" size={20} />
+            <div className="w-12 h-12 border-4 border-red-200 dark:border-red-900/50 rounded-full animate-spin border-t-red-500 mx-auto mb-3"></div>
+            <Droplet className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-red-500" size={16} />
           </div>
-          <p className="text-base-content/70 font-medium">Loading compatibility data...</p>
+          <p className="text-sm text-base-content/70 font-medium">Loading compatibility...</p>
         </div>
       </div>
     );
@@ -132,542 +99,347 @@ const BloodCompatibilitySection = () => {
   const demandLevel = getDemandLevel(selectedBloodType);
 
   return (
-    <div className="min-h-screen bg-base-100 relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 bg-gradient-to-br from-red-50 via-white to-rose-50 dark:from-base-200 dark:via-base-100 dark:to-base-200">
-        <div className="absolute inset-0 opacity-30 dark:opacity-10" style={{
-          backgroundImage: 'radial-gradient(circle at 1px 1px, rgb(254 202 202 / 0.3) 1px, transparent 0)',
-          backgroundSize: '40px 40px'
-        }}></div>
-      </div>
-
-      {/* Decorative Blobs */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-red-200 dark:bg-red-900/20 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-rose-200 dark:bg-rose-900/20 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse" style={{ animationDelay: '2s' }}></div>
-
-      <div className="py-12 sm:py-16 md:py-20 lg:py-24 relative z-10">
-        <div className="container mx-auto px-4 max-w-7xl">
-          {/* Section Header */}
-          <div className="text-center mb-8 sm:mb-12 md:mb-16">
-            <div className="inline-flex items-center gap-2 bg-red-100 px-3 py-2 md:px-4 md:py-2 rounded-full mb-4">
-              <Droplet className="text-red-600 fill-red-600" size={14} />
-              <span className="text-red-600 font-bold text-xs sm:text-sm">BLOOD COMPATIBILITY CENTER</span>
-            </div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-base-content mb-3 md:mb-4">
-              Know Your Blood Impact
-            </h2>
-            <p className="text-base sm:text-lg md:text-xl text-base-content/70 max-w-2xl mx-auto px-4">
-              Discover compatibility, find urgent requests, and connect with those who need your help
-            </p>
+    <div className="py-12 md:py-16 bg-base-100 relative">
+      <div className="container mx-auto px-4 max-w-6xl">
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center gap-1.5 bg-red-100 dark:bg-red-900/30 px-3 py-1 rounded-full mb-3">
+            <Droplet className="text-red-600 fill-red-600" size={13} />
+            <span className="text-red-600 dark:text-red-400 font-bold text-xs uppercase tracking-wider">
+              Compatibility Checker
+            </span>
           </div>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-base-content mb-2">
+            Blood Type Compatibility
+          </h2>
+          <p className="text-sm sm:text-base text-base-content/70 max-w-xl mx-auto">
+            Select your blood group to see who you can safely donate to and receive blood from.
+          </p>
+        </div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8 mb-12 md:mb-16 lg:mb-20">
-            {/* Active Donors */}
-            <div className="group bg-base-200 border-2 border-base-300 rounded-xl md:rounded-2xl p-4 md:p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:border-blue-200 dark:hover:border-blue-900/50">
-              <div className="flex items-center justify-between mb-3 md:mb-4">
-                <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg md:rounded-xl flex items-center justify-center shadow-md">
-                  <UserCheck className="text-white" size={18} />
-                </div>
-                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-              </div>
-              <h3 className="text-2xl md:text-3xl font-bold text-base-content mb-1">{formatCount(animatedStats.donors)}</h3>
-              <p className="text-base-content/70 text-sm md:text-base">Active Donors</p>
-            </div>
+        <div className="flex flex-wrap items-center justify-center gap-2 mb-8">
+          {bloodTypes.map((type) => {
+            const isSelected = selectedBloodType === type;
+            const reqCount = stats.bloodTypeCounts[type] || 0;
+            return (
+              <button
+                key={type}
+                onClick={() => setSelectedBloodType(type)}
+                className={`px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl font-bold text-sm sm:text-base transition-all flex items-center gap-1.5 ${
+                  isSelected
+                    ? 'bg-red-600 text-white shadow-md scale-105'
+                    : 'bg-base-200 hover:bg-base-300 text-base-content border border-base-300'
+                }`}
+              >
+                <span>{type}</span>
+                {reqCount > 0 && (
+                  <span
+                    className={`text-[10px] px-1.5 py-0.2 rounded-full font-semibold ${
+                      isSelected ? 'bg-white/20 text-white' : 'bg-base-300 text-base-content/70'
+                    }`}
+                  >
+                    {reqCount}
+                  </span>
+                )}
+              </button>
+            );
+          })}
+        </div>
 
-            {/* Blood Requests */}
-            <div className="group bg-base-200 border-2 border-base-300 rounded-xl md:rounded-2xl p-4 md:p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:border-red-200 dark:hover:border-red-900/50">
-              <div className="flex items-center justify-between mb-3 md:mb-4">
-                <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-red-500 to-red-600 rounded-lg md:rounded-xl flex items-center justify-center shadow-md">
-                  <Heart className="text-white" size={18} />
-                </div>
-                <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-              </div>
-              <h3 className="text-2xl md:text-3xl font-bold text-base-content mb-1">{formatCount(animatedStats.requests)}</h3>
-              <p className="text-base-content/70 text-sm md:text-base">Blood Requests</p>
-            </div>
-
-            {/* Blood Types */}
-            <div className="group bg-base-200 border-2 border-base-300 rounded-xl md:rounded-2xl p-4 md:p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:border-green-200 dark:hover:border-green-900/50">
-              <div className="flex items-center justify-between mb-3 md:mb-4">
-                <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-lg md:rounded-xl flex items-center justify-center shadow-md">
-                  <Droplet className="text-white" size={18} />
-                </div>
-                <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-              </div>
-              <h3 className="text-2xl md:text-3xl font-bold text-base-content mb-1">8</h3>
-              <p className="text-base-content/70 text-sm md:text-base">Blood Types</p>
-            </div>
-
-            {/* Success Rate */}
-            <div className="group bg-base-200 border-2 border-base-300 rounded-xl md:rounded-2xl p-4 md:p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:border-purple-200 dark:hover:border-purple-900/50">
-              <div className="flex items-center justify-between mb-3 md:mb-4">
-                <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg md:rounded-xl flex items-center justify-center shadow-md">
-                  <TrendingUp className="text-white" size={18} />
-                </div>
-                <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-              </div>
-              <h3 className="text-2xl md:text-3xl font-bold text-base-content mb-1">{animatedStats.successRate}%</h3>
-              <p className="text-base-content/70 text-sm md:text-base">Success Rate</p>
-            </div>
-          </div>
-
-          <div className="grid lg:grid-cols-3 gap-6 md:gap-8 items-stretch">
-            {/* Blood Type Selector */}
-            <div className="lg:col-span-2 flex">
-              <div className="bg-base-200 border-2 border-base-300 rounded-xl md:rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 w-full flex flex-col hover:border-red-200 dark:hover:border-red-900/50">
-                {/* Header */}
-                <div className="bg-gradient-to-br from-red-50 via-white to-rose-50 dark:from-base-200 dark:via-base-100 dark:to-base-200 p-4 md:p-6 border-b border-base-300">
-                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                    <div>
-                      <h2 className="text-xl md:text-2xl font-bold text-base-content mb-2 flex items-center gap-3">
-                        <div className="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-br from-red-500 to-red-600 rounded-lg md:rounded-xl flex items-center justify-center shadow-lg">
-                          <Droplet className="text-white fill-white" size={16} />
-                        </div>
-                        Blood Compatibility Analysis
-                      </h2>
-                      <p className="text-base-content/70 text-sm md:text-base">Select your blood type to explore donation compatibility and find matching recipients</p>
-                    </div>
-                    <div className="flex md:hidden items-center gap-2 bg-base-100 border border-base-300 px-3 py-2 rounded-full shadow-sm self-start">
-                      <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                      <span className="text-xs font-medium text-base-content/70">Live Data</span>
-                    </div>
-                    <div className="hidden md:flex items-center gap-2 bg-base-100 border border-base-300 px-4 py-2 rounded-full shadow-sm">
-                      <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                      <span className="text-sm font-medium text-base-content/70">Live Data</span>
+        <div className="grid lg:grid-cols-12 gap-6 items-stretch">
+          <div className="lg:col-span-7 bg-base-200 border border-base-300 rounded-2xl p-5 sm:p-6 shadow-sm flex flex-col justify-between">
+            <div className="flex-1 flex flex-col">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 mb-4 border-b border-base-300 gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center text-white font-black text-xl shadow-md shrink-0">
+                    {selectedBloodType}
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-base-content flex items-center gap-2">
+                      {selectedBlood.description}
+                    </h3>
+                    <div className="flex items-center gap-2 mt-0.5">
+                      <span className="text-xs text-base-content/60">
+                        Rarity: <strong className="text-base-content">{selectedBlood.rarity}</strong>
+                      </span>
+                      <span className="text-xs text-base-content/30">•</span>
+                      <span className={`text-xs font-semibold ${demandLevel.textColor}`}>
+                        {demandLevel.level} Demand
+                      </span>
                     </div>
                   </div>
                 </div>
 
-                <div className="p-4 md:p-6 flex-1 flex flex-col">
-                  {/* Blood Type Grid */}
-                  <div className="mb-6 md:mb-8">
-                    <h3 className="text-base md:text-lg font-bold text-base-content mb-3 md:mb-4 flex items-center gap-2">
-                      <Shield className="text-blue-600" size={16} />
-                      Select Blood Type
-                    </h3>
-                    <div className="grid grid-cols-4 gap-2 md:gap-3">
-                      {bloodTypes.map((type) => {
-                        const count = stats.bloodTypeCounts[type] || 0;
-                        const demand = getDemandLevel(type);
-                        const isSelected = selectedBloodType === type;
+                <div className="inline-flex bg-base-100 p-1 rounded-xl border border-base-300 text-xs font-bold self-start sm:self-auto">
+                  <button
+                    onClick={() => setViewMode('donate')}
+                    className={`px-3 py-1.5 rounded-lg border transition ${
+                      viewMode === 'donate' ? 'bg-green-600 border-green-600 text-white shadow-sm' : 'border-transparent text-base-content/70 hover:text-base-content'
+                    }`}
+                  >
+                    Give Blood
+                  </button>
+                  <button
+                    onClick={() => setViewMode('receive')}
+                    className={`px-3 py-1.5 rounded-lg border transition ${
+                      viewMode === 'receive' ? 'bg-red-600 border-red-600 text-white shadow-sm' : 'border-transparent text-base-content/70 hover:text-base-content'
+                    }`}
+                  >
+                    Receive Blood
+                  </button>
+                  <button
+                    onClick={() => setViewMode('all')}
+                    className={`px-3 py-1.5 rounded-lg border transition ${
+                      viewMode === 'all'
+                        ? 'bg-slate-900 text-white border-slate-900 dark:bg-slate-100 dark:text-slate-900 dark:border-slate-100 shadow-sm'
+                        : 'border-transparent text-base-content/70 hover:text-base-content'
+                    }`}
+                  >
+                    Both
+                  </button>
+                </div>
+              </div>
 
-                        return (
+              <div className={`grid gap-4 items-stretch flex-1 ${viewMode === 'all' ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'}`}>
+                {(viewMode === 'all' || viewMode === 'donate') && (
+                  <div className="bg-base-100 rounded-xl p-4 border-2 border-green-500/20 shadow-sm flex flex-col justify-between h-full">
+                    <div>
+                      <div className="flex items-center justify-between gap-1 mb-3">
+                        <span className="text-xs sm:text-sm font-bold text-base-content flex items-center gap-1.5 whitespace-nowrap">
+                          <ArrowRight size={15} className="text-green-600 shrink-0" />
+                          Can Donate To:
+                        </span>
+                        <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-green-600 text-white shrink-0 whitespace-nowrap">
+                          {selectedBlood.canDonateTo.length} of 8
+                        </span>
+                      </div>
+
+                      <div className="flex flex-wrap gap-2 mb-2">
+                        {selectedBlood.canDonateTo.map((type) => (
                           <button
                             key={type}
                             onClick={() => setSelectedBloodType(type)}
-                            className={`group relative p-3 md:p-4 rounded-lg md:rounded-xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 ${isSelected
-                                ? 'bg-gradient-to-br from-red-500 to-red-600 text-white shadow-xl scale-105'
-                                : 'bg-base-100 hover:bg-red-50 dark:hover:bg-red-900/20 border-2 border-base-300 hover:border-red-200 dark:hover:border-red-900/50'
-                              }`}
+                            className="px-3 py-1.5 rounded-lg font-black text-sm bg-green-600 hover:bg-green-700 text-white shadow-sm flex items-center gap-1.5 transition-all hover:scale-105 cursor-pointer"
                           >
-                            <div className="text-center">
-                              <div className={`text-lg md:text-2xl font-black mb-1 md:mb-2 ${isSelected ? 'text-white' : 'text-base-content'}`}>
-                                {type}
-                              </div>
-                              <div className={`text-xs mb-1 md:mb-2 font-medium ${isSelected ? 'text-red-100' : 'text-base-content/70'}`}>
-                                {count} requests
-                              </div>
-                              <div className={`text-xs px-2 py-1 rounded-full font-bold ${isSelected
-                                  ? 'bg-white/20 text-white'
-                                  : `${demand.textColor} bg-white dark:bg-base-100 shadow-sm`
-                                }`}>
-                                {demand.level}
-                              </div>
-                            </div>
-
-                            {/* Demand Indicator */}
-                            <div className={`absolute top-1 md:top-2 right-1 md:right-2 w-2 h-2 md:w-3 md:h-3 rounded-full ${demand.color} ${isSelected ? 'opacity-70' : ''}`}></div>
-
-                            {/* Selection Indicator */}
-                            {isSelected && (
-                              <div className="absolute -top-1 -right-1 w-5 h-5 md:w-6 md:h-6 bg-green-500 rounded-full flex items-center justify-center shadow-lg animate-bounce">
-                                <CheckCircle size={12} className="text-white md:w-4 md:h-4" />
-                              </div>
-                            )}
-
-                            {/* Hover Effect */}
-                            <div className={`absolute inset-0 rounded-lg md:rounded-xl transition-opacity duration-300 ${isSelected ? 'opacity-0' : 'opacity-0 group-hover:opacity-10 bg-red-500'
-                              }`}></div>
+                            <span>{type}</span>
+                            <CheckCircle size={13} className="text-white" />
                           </button>
-                        );
-                      })}
+                        ))}
+                      </div>
+
+                      {selectedBlood.canDonateTo.length === 8 && (
+                        <p className="text-xs text-green-600 dark:text-green-400 font-bold mt-1">
+                          🌟 Universal Donor — Can give blood to any patient!
+                        </p>
+                      )}
                     </div>
+
+                    {selectedBlood.canDonateTo.length < 8 && (
+                      <div className="mt-3 pt-2.5 border-t border-base-200">
+                        <div className="flex items-center gap-1.5 flex-wrap text-xs">
+                          <span className="text-base-content/50 font-semibold shrink-0">Cannot donate to:</span>
+                          <div className="flex items-center gap-1 flex-wrap">
+                            {bloodTypes
+                              .filter((t) => !selectedBlood.canDonateTo.includes(t))
+                              .map((t) => (
+                                <span key={t} className="px-1.5 py-0.5 rounded bg-base-200 text-base-content/50 font-semibold text-[11px]">
+                                  {t}
+                                </span>
+                              ))}
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
+                )}
 
-                  {/* Enhanced Compatibility Details */}
-                  <div className="bg-base-100 rounded-xl md:rounded-2xl p-4 md:p-6 border-2 border-base-300 shadow-inner">
-                    {/* Selected Blood Type Header */}
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 md:mb-6 pb-3 md:pb-4 border-b border-base-300 gap-4">
-                      <div className="flex items-center gap-3 md:gap-4">
-                        <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-xl md:rounded-2xl flex items-center justify-center shadow-lg">
-                          <span className="text-lg md:text-2xl font-black text-white">{selectedBloodType}</span>
-                        </div>
-                        <div>
-                          <h3 className="text-lg md:text-2xl font-bold text-base-content">{selectedBlood.description}</h3>
-                          <div className="flex flex-col sm:flex-row sm:items-center gap-2 md:gap-3 mt-1">
-                            <div className={`inline-flex items-center gap-2 px-2 md:px-3 py-1 rounded-full text-xs md:text-sm font-bold ${demandLevel.level === 'High' ? 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-900/50' :
-                                demandLevel.level === 'Medium' ? 'bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-400 border border-orange-200 dark:border-orange-900/50' :
-                                  demandLevel.level === 'Low' ? 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 border border-yellow-200 dark:border-yellow-900/50' :
-                                    'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 border border-green-200 dark:border-green-900/50'
-                              }`}>
-                              <div className={`w-2 h-2 rounded-full ${demandLevel.color} animate-pulse`}></div>
-                              {demandLevel.level} Demand
-                            </div>
-                            <div className="text-xs md:text-sm text-base-content/70 font-medium">
-                              Rarity: <span className="font-bold text-base-content">{selectedBlood.rarity}</span>
-                            </div>
+                {(viewMode === 'all' || viewMode === 'receive') && (
+                  <div className="bg-base-100 rounded-xl p-4 border-2 border-red-500/20 shadow-sm flex flex-col justify-between h-full">
+                    <div>
+                      <div className="flex items-center justify-between gap-1 mb-3">
+                        <span className="text-xs sm:text-sm font-bold text-base-content flex items-center gap-1.5 whitespace-nowrap">
+                          <Shield size={15} className="text-red-600 shrink-0" />
+                          Can Receive From:
+                        </span>
+                        <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-red-600 text-white shrink-0 whitespace-nowrap">
+                          {selectedBlood.canReceiveFrom.length} of 8
+                        </span>
+                      </div>
+
+                      <div className="flex flex-wrap gap-2 mb-2">
+                        {selectedBlood.canReceiveFrom.map((type) => (
+                          <button
+                            key={type}
+                            onClick={() => setSelectedBloodType(type)}
+                            className="px-3 py-1.5 rounded-lg font-black text-sm bg-red-600 hover:bg-red-700 text-white shadow-sm flex items-center gap-1.5 transition-all hover:scale-105 cursor-pointer"
+                          >
+                            <span>{type}</span>
+                            <CheckCircle size={13} className="text-white" />
+                          </button>
+                        ))}
+                      </div>
+
+                      {selectedBlood.canReceiveFrom.length === 8 && (
+                        <p className="text-xs text-red-600 dark:text-red-400 font-bold mt-1">
+                          🌟 Universal Recipient — Can safely receive blood from ALL groups!
+                        </p>
+                      )}
+                    </div>
+
+                    {selectedBlood.canReceiveFrom.length < 8 && (
+                      <div className="mt-3 pt-2.5 border-t border-base-200">
+                        <div className="flex items-center gap-1.5 flex-wrap text-xs">
+                          <span className="text-base-content/50 font-semibold shrink-0">Cannot receive from:</span>
+                          <div className="flex items-center gap-1 flex-wrap">
+                            {bloodTypes
+                              .filter((t) => !selectedBlood.canReceiveFrom.includes(t))
+                              .map((t) => (
+                                <span key={t} className="px-1.5 py-0.5 rounded bg-base-200 text-base-content/50 font-semibold text-[11px]">
+                                  {t}
+                                </span>
+                              ))}
                           </div>
                         </div>
                       </div>
-                      <div className="text-center sm:text-right">
-                        <div className="text-2xl md:text-3xl font-black text-base-content">{selectedCount}</div>
-                        <div className="text-xs md:text-sm text-base-content/70 font-medium">Active Requests</div>
-                      </div>
-                    </div>
-
-                    {/* Compatibility Matrix */}
-                    <div className="grid md:grid-cols-2 gap-4 md:gap-6">
-                      {/* Can Donate To */}
-                      <div className="bg-base-200 rounded-lg md:rounded-xl p-4 md:p-5 shadow-lg border border-green-100 dark:border-green-900/30">
-                        <h4 className="font-bold text-base-content flex items-center gap-2 mb-3 md:mb-4 text-base md:text-lg">
-                          <div className="w-6 h-6 md:w-8 md:h-8 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
-                            <ArrowRight className="text-green-600 dark:text-green-400" size={14} />
-                          </div>
-                          Can Donate To
-                          <span className="ml-auto bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-400 px-2 py-1 rounded-full text-xs md:text-sm font-bold">
-                            {selectedBlood.canDonateTo.length}
-                          </span>
-                        </h4>
-                        <div className="grid grid-cols-4 gap-1 md:gap-2">
-                          {bloodTypes.map((type) => (
-                            <div
-                              key={type}
-                              onClick={() => selectedBlood.canDonateTo.includes(type) && setSelectedBloodType(type)}
-                              className={`p-2 md:p-3 rounded-lg text-center text-xs md:text-sm font-bold transition-all duration-200 cursor-pointer ${selectedBlood.canDonateTo.includes(type)
-                                  ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-400 border-2 border-green-200 dark:border-green-900/50 hover:bg-green-200 dark:hover:bg-green-900/50 transform hover:scale-105'
-                                  : 'bg-base-100 text-base-content/40 border-2 border-base-300 cursor-not-allowed'
-                                }`}
-                            >
-                              {type}
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Can Receive From */}
-                      <div className="bg-base-200 rounded-lg md:rounded-xl p-4 md:p-5 shadow-lg border border-blue-100 dark:border-blue-900/30">
-                        <h4 className="font-bold text-base-content flex items-center gap-2 mb-3 md:mb-4 text-base md:text-lg">
-                          <div className="w-6 h-6 md:w-8 md:h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
-                            <Shield className="text-blue-600 dark:text-blue-400" size={14} />
-                          </div>
-                          Can Receive From
-                          <span className="ml-auto bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-400 px-2 py-1 rounded-full text-xs md:text-sm font-bold">
-                            {selectedBlood.canReceiveFrom.length}
-                          </span>
-                        </h4>
-                        <div className="grid grid-cols-4 gap-1 md:gap-2">
-                          {bloodTypes.map((type) => (
-                            <div
-                              key={type}
-                              onClick={() => selectedBlood.canReceiveFrom.includes(type) && setSelectedBloodType(type)}
-                              className={`p-2 md:p-3 rounded-lg text-center text-xs md:text-sm font-bold transition-all duration-200 cursor-pointer ${selectedBlood.canReceiveFrom.includes(type)
-                                  ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-400 border-2 border-blue-200 dark:border-blue-900/50 hover:bg-blue-200 dark:hover:bg-blue-900/50 transform hover:scale-105'
-                                  : 'bg-base-100 text-base-content/40 border-2 border-base-300 cursor-not-allowed'
-                                }`}
-                            >
-                              {type}
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Quick Stats */}
-                    <div className="mt-4 md:mt-6 grid grid-cols-3 gap-3 md:gap-4">
-                      <div className="bg-base-200 rounded-lg md:rounded-xl p-3 md:p-4 text-center shadow-md border border-base-300">
-                        <div className="text-xl md:text-2xl font-black text-green-600 dark:text-green-400">{selectedBlood.canDonateTo.length}</div>
-                        <div className="text-xs text-base-content/70 font-medium">Compatible Recipients</div>
-                      </div>
-                      <div className="bg-base-200 rounded-lg md:rounded-xl p-3 md:p-4 text-center shadow-md border border-base-300">
-                        <div className="text-xl md:text-2xl font-black text-blue-600 dark:text-blue-400">{selectedBlood.canReceiveFrom.length}</div>
-                        <div className="text-xs text-base-content/70 font-medium">Compatible Donors</div>
-                      </div>
-                      <div className="bg-base-200 rounded-lg md:rounded-xl p-3 md:p-4 text-center shadow-md border border-base-300">
-                        <div className="text-xl md:text-2xl font-black text-red-600 dark:text-red-400">{selectedCount}</div>
-                        <div className="text-xs text-base-content/70 font-medium">Current Requests</div>
-                      </div>
-                    </div>
+                    )}
                   </div>
+                )}
+              </div>
+            </div>
+
+            <div className="mt-5 pt-4 border-t border-base-300 flex flex-col sm:flex-row items-center justify-between gap-3">
+              <span className="text-xs text-base-content/60 font-medium text-center sm:text-left">
+                Active hospital requests for {selectedBloodType}: <strong className="text-base-content">{selectedCount}</strong>
+              </span>
+
+              <div className="flex items-center gap-2 w-full sm:w-auto">
+                <a
+                  href="/search"
+                  className="flex-1 sm:flex-none text-center px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-red-600 hover:bg-red-700 text-white transition-all shadow-sm flex items-center justify-center gap-1.5"
+                >
+                  <Search size={14} />
+                  <span>Find {selectedBloodType} Donors</span>
+                </a>
+                <a
+                  href="/donation-requests"
+                  className="flex-1 sm:flex-none text-center px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-base-100 hover:bg-base-300 text-base-content border border-base-300 transition-colors"
+                >
+                  Requests
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div className="lg:col-span-5 bg-base-200 border border-base-300 rounded-2xl p-5 sm:p-6 shadow-sm flex flex-col justify-between">
+            <div className="flex items-center justify-between mb-4 pb-3 border-b border-base-300">
+              <div className="flex items-center gap-2">
+                <Activity size={16} className="text-red-600" />
+                <h4 className="font-bold text-sm sm:text-base text-base-content">
+                  Live Request Distribution
+                </h4>
+              </div>
+              <span className="text-[11px] font-semibold text-green-600 dark:text-green-400 flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                Live
+              </span>
+            </div>
+
+            <div className="flex justify-center mb-4">
+              <div className="relative w-36 h-36 sm:w-40 sm:h-40">
+                <svg viewBox="0 0 240 240" className="-rotate-90">
+                  {(() => {
+                    const total = Object.values(stats.bloodTypeCounts).reduce((a, b) => a + b, 0);
+                    if (total === 0) {
+                      return (
+                        <circle cx="120" cy="120" r="75" fill="none" stroke="currentColor" className="text-base-300" strokeWidth="20" />
+                      );
+                    }
+
+                    let angle = 0;
+                    const cx = 120;
+                    const cy = 120;
+                    const outerR = 90;
+                    const innerR = 60;
+
+                    return (
+                      <>
+                        {bloodTypes.map((type) => {
+                          const val = stats.bloodTypeCounts[type] || 0;
+                          if (!val) return null;
+
+                          const slice = (val / total) * 360;
+                          const start = (angle * Math.PI) / 180;
+                          const end = ((angle + slice) * Math.PI) / 180;
+                          angle += slice;
+
+                          const largeArc = slice > 180 ? 1 : 0;
+                          const path = `M ${cx + outerR * Math.cos(start)} ${cy + outerR * Math.sin(start)}
+                                      A ${outerR} ${outerR} 0 ${largeArc} 1 ${cx + outerR * Math.cos(end)} ${cy + outerR * Math.sin(end)}
+                                      L ${cx + innerR * Math.cos(end)} ${cy + innerR * Math.sin(end)}
+                                      A ${innerR} ${innerR} 0 ${largeArc} 0 ${cx + innerR * Math.cos(start)} ${cy + innerR * Math.sin(start)}
+                                      Z`;
+
+                          const isSelected = selectedBloodType === type;
+
+                          return (
+                            <path
+                              key={type}
+                              d={path}
+                              fill={bloodColors[type] || '#dc2626'}
+                              stroke="currentColor"
+                              className={`text-base-200 cursor-pointer transition-all ${
+                                isSelected ? 'opacity-100' : 'opacity-85 hover:opacity-100'
+                              }`}
+                              strokeWidth="3"
+                              onClick={() => setSelectedBloodType(type)}
+                            />
+                          );
+                        })}
+                      </>
+                    );
+                  })()}
+                </svg>
+
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none px-2">
+                  <span className="text-xl sm:text-2xl font-black text-base-content leading-none">
+                    {selectedCount}
+                  </span>
+                  <span className="text-[10px] font-bold text-red-600 uppercase mt-1 truncate max-w-full">
+                    {selectedBloodType} Requests
+                  </span>
+                  <span className="text-[9px] text-base-content/50">
+                    of {Object.values(stats.bloodTypeCounts).reduce((a, b) => a + b, 0)} total
+                  </span>
                 </div>
               </div>
             </div>
 
-            {/* Sidebar - Blood Request Distribution only */}
-            <div className="flex">
-              {/* Beautiful Blood Request Distribution Card */}
-              <div className="bg-base-200 rounded-2xl md:rounded-3xl shadow-2xl border border-base-300 overflow-hidden hover:shadow-3xl transition-all duration-700 group w-full flex flex-col">
-                {/* Stunning Header with Enhanced Gradient */}
-                <div className="relative bg-gradient-to-br from-red-50 via-rose-50 to-pink-50 dark:from-base-200 dark:via-base-100 dark:to-base-200 p-6 md:p-8 border-b border-red-100/50 dark:border-base-300">
-                  {/* Decorative Background Elements */}
-                  <div className="absolute top-0 right-0 w-24 h-24 md:w-32 md:h-32 bg-red-200/20 dark:bg-red-900/10 rounded-full blur-2xl"></div>
-                  <div className="absolute bottom-0 left-0 w-16 h-16 md:w-24 md:h-24 bg-rose-200/20 dark:bg-rose-900/10 rounded-full blur-xl"></div>
+            <div className="grid grid-cols-2 gap-1.5">
+              {bloodTypes.map((type) => {
+                const count = stats.bloodTypeCounts[type] || 0;
+                const total = Object.values(stats.bloodTypeCounts).reduce((a, b) => a + b, 0);
+                const percent = total > 0 ? ((count / total) * 100).toFixed(0) : 0;
+                const isSelected = selectedBloodType === type;
 
-                  {/* Live Badge - Top Right Corner */}
-                  <div className="absolute top-2 right-2 bg-base-100 backdrop-blur-sm px-3 py-1 md:px-4 md:py-2 rounded-full border border-red-200/50 dark:border-base-300 shadow-lg">
-                    <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                      <span className="text-xs font-bold text-base-content/70 uppercase tracking-wider">Live</span>
-                    </div>
-                  </div>
-
-                  <div className="relative flex items-center gap-3 md:gap-4">
-                    <div className="relative">
-                      <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-red-500 via-red-600 to-rose-600 rounded-xl md:rounded-2xl flex items-center justify-center shadow-2xl shadow-red-200/50 dark:shadow-red-900/30 group-hover:scale-110 transition-transform duration-500">
-                        <Activity className="text-white" size={20} />
-                      </div>
-                      {/* Animated Ring */}
-                      <div className="absolute inset-0 rounded-xl md:rounded-2xl border-2 border-red-300/50 dark:border-red-700/50 animate-pulse"></div>
-                      {/* Live Indicator */}
-                      <div className="absolute -top-1 -right-1 w-4 h-4 md:w-5 md:h-5 bg-green-500 rounded-full border-2 border-white dark:border-base-200 shadow-lg">
-                        <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-white rounded-full mx-auto mt-0.5 animate-pulse"></div>
-                      </div>
-                    </div>
-                    <div>
-                      <h3 className="text-xl md:text-2xl font-black text-base-content">
-                        Request Analytics
-                      </h3>
-                      <p className="text-xs md:text-sm text-base-content/70 font-medium">Real-time blood type insights</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="p-6 md:p-8 flex-1 flex flex-col bg-gradient-to-b from-base-100 to-base-200/30">
-                  {/* Beautiful Enhanced Donut Chart */}
-                  <div className="flex justify-center mb-6 md:mb-8 flex-1 items-center">
-                    <div className="relative w-48 h-48 md:w-64 md:h-64 group/chart">
-                      {/* Multiple Background Layers for Depth */}
-                      <div className="absolute inset-4 bg-gradient-to-br from-red-50 via-rose-50 to-pink-50 dark:from-base-200 dark:via-base-100 dark:to-base-200 rounded-full opacity-40 animate-pulse"></div>
-                      <div className="absolute inset-8 bg-gradient-to-br from-white to-red-50/50 dark:from-base-100 dark:to-red-900/10 rounded-full shadow-inner"></div>
-
-                      <svg viewBox="0 0 240 240" className="-rotate-90 filter drop-shadow-lg">
-                        {(() => {
-                          const total = Object.values(stats.bloodTypeCounts).reduce((a, b) => a + b, 0);
-                          if (total === 0) return (
-                            <g>
-                              <circle cx="120" cy="120" r="85" fill="url(#emptyGradient)" stroke="#e5e7eb" strokeWidth="3" />
-                              <circle cx="120" cy="120" r="55" fill="white" filter="drop-shadow(0 4px 6px rgba(0,0,0,0.1))" />
-                              <defs>
-                                <linearGradient id="emptyGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                  <stop offset="0%" stopColor="#f9fafb" />
-                                  <stop offset="100%" stopColor="#f3f4f6" />
-                                </linearGradient>
-                              </defs>
-                              <text
-                                x="120"
-                                y="120"
-                                textAnchor="middle"
-                                className="text-sm font-bold fill-gray-400"
-                                transform="rotate(90 120 120)"
-                              >
-                                No Active Data
-                              </text>
-                            </g>
-                          );
-
-                          let angle = 0;
-                          const cx = 120;
-                          const cy = 120;
-                          const outerR = 95;
-                          const innerR = 65;
-                          const colors = {
-                            'O+': '#dc2626',
-                            'O-': '#ef4444',
-                            'A+': '#2563eb',
-                            'A-': '#3b82f6',
-                            'B+': '#16a34a',
-                            'B-': '#22c55e',
-                            'AB+': '#1d4ed8',
-                            'AB-': '#059669'
-                          };
-
-                          return (
-                            <>
-                              <defs>
-                                {Object.entries(colors).map(([type, color]) => (
-                                  <linearGradient key={type} id={`gradient-${type}`} x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" stopColor={color} stopOpacity="1" />
-                                    <stop offset="100%" stopColor={color} stopOpacity="0.8" />
-                                  </linearGradient>
-                                ))}
-                              </defs>
-                              {bloodTypes.map(type => {
-                                const value = stats.bloodTypeCounts[type] || 0;
-                                if (!value) return null;
-
-                                const slice = (value / total) * 360;
-                                const start = (angle * Math.PI) / 180;
-                                const end = ((angle + slice) * Math.PI) / 180;
-                                angle += slice;
-
-                                const largeArc = slice > 180 ? 1 : 0;
-                                const path = `M ${cx + outerR * Math.cos(start)} ${cy + outerR * Math.sin(start)}
-                                            A ${outerR} ${outerR} 0 ${largeArc} 1 ${cx + outerR * Math.cos(end)} ${cy + outerR * Math.sin(end)}
-                                            L ${cx + innerR * Math.cos(end)} ${cy + innerR * Math.sin(end)}
-                                            A ${innerR} ${innerR} 0 ${largeArc} 0 ${cx + innerR * Math.cos(start)} ${cy + innerR * Math.sin(start)}
-                                            Z`;
-
-                                const isSelected = selectedBloodType === type;
-
-                                return (
-                                  <g key={type}>
-                                    <path
-                                      d={path}
-                                      fill={`url(#gradient-${type})`}
-                                      stroke="white"
-                                      strokeWidth="4"
-                                      className={`cursor-pointer transition-all duration-500 ${isSelected
-                                          ? 'opacity-100 filter drop-shadow-2xl'
-                                          : 'opacity-90 hover:opacity-100 hover:drop-shadow-lg'
-                                        }`}
-                                      onClick={() => setSelectedBloodType(type)}
-                                      style={{
-                                        filter: isSelected ? 'brightness(1.15) saturate(1.3)' : 'brightness(1)',
-                                        transform: isSelected ? 'scale(1.05)' : 'scale(1)',
-                                        transformOrigin: 'center'
-                                      }}
-                                    />
-                                    {isSelected && (
-                                      <>
-                                        <circle
-                                          cx={cx + (outerR + 20) * Math.cos((start + end) / 2)}
-                                          cy={cy + (outerR + 20) * Math.sin((start + end) / 2)}
-                                          r="6"
-                                          fill="white"
-                                          stroke={colors[type]}
-                                          strokeWidth="3"
-                                          className="animate-pulse filter drop-shadow-lg"
-                                        />
-                                        <circle
-                                          cx={cx + (outerR + 20) * Math.cos((start + end) / 2)}
-                                          cy={cy + (outerR + 20) * Math.sin((start + end) / 2)}
-                                          r="10"
-                                          fill="none"
-                                          stroke={colors[type]}
-                                          strokeWidth="2"
-                                          opacity="0.5"
-                                          className="animate-ping"
-                                        />
-                                      </>
-                                    )}
-                                  </g>
-                                );
-                              })}
-                            </>
-                          );
-                        })()}
-                      </svg>
-
-                      {/* Beautiful Center Content */}
-                      <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-                        <div className="bg-base-100 backdrop-blur-sm rounded-full p-6 shadow-2xl border border-base-300">
-                          <p className="text-xs font-bold text-base-content/70 uppercase tracking-wider mb-2">Total Requests</p>
-                          <p className="text-5xl font-black bg-gradient-to-br from-base-content via-base-content/80 to-base-content/70 bg-clip-text text-transparent mb-2">
-                            {Object.values(stats.bloodTypeCounts).reduce((a, b) => a + b, 0)}
-                          </p>
-                          <p className="text-xs font-semibold text-base-content/70">Active Now</p>
-                          <div className="mt-2 flex justify-center">
-                            <div className="w-8 h-1 bg-gradient-to-r from-red-500 to-rose-500 rounded-full"></div>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Floating Tooltip */}
-                      <div className="absolute top-full left-1/2 transform -translate-x-1/2 bg-base-content/90 backdrop-blur-sm text-base-100 px-4 py-2 rounded-xl text-sm font-medium opacity-0 group-hover/chart:opacity-100 transition-all duration-300 pointer-events-none mt-2">
-                        <div className="flex items-center gap-2">
-                          <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                          Click segments to explore
-                        </div>
-                        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full w-0 h-0 border-l-4 border-r-4 border-b-4 border-transparent border-b-base-content/90"></div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Clean Legend */}
-                  <div className="space-y-3 md:space-y-4 mt-auto">
-                    <div className="flex items-center justify-between pb-3 md:pb-4 border-b border-base-300">
-                      <div className="flex items-center gap-2 md:gap-3">
-                        <div className="w-6 h-6 md:w-8 md:h-8 bg-gradient-to-br from-red-500 to-rose-500 rounded-lg flex items-center justify-center shadow-lg">
-                          <Droplet className="text-white" size={14} />
-                        </div>
-                        <span className="text-base md:text-lg font-black text-base-content">Distribution Breakdown</span>
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 md:gap-3">
-                      {bloodTypes.map(type => {
-                        const count = stats.bloodTypeCounts[type] || 0;
-                        if (!count) return null;
-
-                        const total = Object.values(stats.bloodTypeCounts).reduce((a, b) => a + b, 0);
-                        const percent = total > 0 ? ((count / total) * 100).toFixed(1) : 0;
-                        const colors = {
-                          'O+': '#dc2626',
-                          'O-': '#ef4444',
-                          'A+': '#2563eb',
-                          'A-': '#3b82f6',
-                          'B+': '#16a34a',
-                          'B-': '#22c55e',
-                          'AB+': '#1d4ed8',
-                          'AB-': '#059669'
-                        };
-
-                        const isSelected = selectedBloodType === type;
-
-                        return (
-                          <div
-                            key={type}
-                            onClick={() => setSelectedBloodType(type)}
-                            className={`flex items-center justify-between py-2 md:py-3 px-3 md:px-4 rounded-lg md:rounded-xl cursor-pointer transition-all duration-300 ${isSelected
-                                ? 'bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 shadow-sm'
-                                : 'hover:bg-base-200 border-l-4 border-transparent hover:border-base-300'
-                              }`}
-                          >
-                            <div className="flex items-center gap-2 md:gap-3">
-                              <div className="relative">
-                                <div
-                                  className={`w-3 h-3 md:w-4 md:h-4 rounded-full transition-all duration-300 ${isSelected ? 'ring-2 ring-red-300 dark:ring-red-700 ring-offset-2 dark:ring-offset-base-200' : ''
-                                    }`}
-                                  style={{ backgroundColor: colors[type] }}
-                                />
-                                {isSelected && (
-                                  <div
-                                    className="absolute inset-0 rounded-full animate-ping opacity-75"
-                                    style={{ backgroundColor: colors[type] }}
-                                  />
-                                )}
-                              </div>
-                              <div>
-                                <span className={`text-base md:text-lg font-bold transition-colors duration-300 ${isSelected ? 'text-red-700 dark:text-red-400' : 'text-base-content'
-                                  }`}>
-                                  {type}
-                                </span>
-                                <div className="text-xs text-base-content/70 font-medium">{count} req</div>
-                              </div>
-                            </div>
-
-                            <div className="text-right">
-                              <span className={`text-base md:text-lg font-black transition-colors duration-300 ${isSelected ? 'text-red-600 dark:text-red-400' : 'text-base-content'
-                                }`}>
-                                {percent}%
-                              </span>
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                </div>
-              </div>
+                return (
+                  <button
+                    key={type}
+                    onClick={() => setSelectedBloodType(type)}
+                    className={`px-2.5 py-1.5 rounded-lg border text-left flex items-center justify-between text-xs transition ${
+                      isSelected
+                        ? 'bg-base-100 border-red-500 shadow-sm ring-1 ring-red-500/20'
+                        : 'bg-base-100/60 border-base-300 hover:bg-base-100'
+                    }`}
+                  >
+                    <span className="flex items-center gap-1.5">
+                      <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: bloodColors[type] }}></span>
+                      <strong className="text-base-content font-bold">{type}</strong>
+                    </span>
+                    <span className="text-base-content/60 font-medium">
+                      {count} ({percent}%)
+                    </span>
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>

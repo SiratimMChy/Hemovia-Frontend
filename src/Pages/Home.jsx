@@ -4,6 +4,7 @@ import useAxios from '../Hooks/useAxios';
 import { AuthContext } from '../Provider/AuthProvider';
 import HeroBanner from '../Components/Home/HeroBanner';
 import HowItWorks from '../Components/Home/HowItWorks';
+import WhyDonateBlood from '../Components/Home/WhyDonateBlood';
 import FeaturedCenters from '../Components/Home/FeaturedCenters';
 import LiveImpact from '../Components/Home/LiveImpact';
 import BloodCompatibilitySection from './BloodCompatibilitySection';
@@ -15,7 +16,6 @@ const Home = () => {
 
   const getDashboardPath = () => {
     if (!user) return '/signup';
-
     const routes = {
       admin: '/dashboard/admindashboard',
       volunteer: '/dashboard/volunteerdashboard',
@@ -102,6 +102,7 @@ const Home = () => {
         formatCount={formatCount}
       />
       <HowItWorks />
+      <WhyDonateBlood />
       <FeaturedCenters centersData={centersData} />
       <LiveImpact
         livesSaved={livesSaved}

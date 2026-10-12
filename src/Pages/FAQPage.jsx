@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ChevronDown, Droplet, Users, Shield, Clock } from 'lucide-react';
+import { ChevronDown, Droplet, Users, Shield, Clock, HelpCircle } from 'lucide-react';
 
 const FAQPage = () => {
   const [activeCategory, setActiveCategory] = useState(null);
@@ -131,37 +131,35 @@ const FAQPage = () => {
   };
 
   return (
-    <div className="py-6 pb-6 bg-base-100 relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 bg-linear-to-br from-red-50 via-white to-rose-50 dark:from-base-200 dark:via-base-100 dark:to-base-200">
-        <div className="absolute inset-0" style={{
-          backgroundImage: 'radial-gradient(circle at 1px 1px, rgb(254 202 202 / 0.3) 1px, transparent 0)',
-          backgroundSize: '40px 40px'
-        }}></div>
-      </div>
-
-      {/* Decorative Blobs */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-red-200 dark:bg-red-900 rounded-full mix-blend-multiply filter blur-3xl opacity-30 dark:opacity-20 animate-pulse"></div>
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-rose-200 dark:bg-rose-900 rounded-full mix-blend-multiply filter blur-3xl opacity-30 dark:opacity-20 animate-pulse" style={{ animationDelay: '2s' }}></div>
+    <div className="py-12 md:py-16 bg-base-100 relative overflow-hidden">
+      {/* Subtle Professional Ambient Mesh */}
+      <div 
+        className="absolute top-16 -left-20 w-96 h-96 bg-gradient-to-tr from-red-500/5 to-rose-500/10 dark:from-red-950/20 dark:to-transparent rounded-full blur-3xl pointer-events-none animate-pulse" 
+        style={{ animationDuration: '7s' }}
+      ></div>
+      <div 
+        className="absolute bottom-16 -right-20 w-96 h-96 bg-gradient-to-bl from-rose-500/5 to-red-500/10 dark:from-rose-950/20 dark:to-transparent rounded-full blur-3xl pointer-events-none animate-pulse" 
+        style={{ animationDuration: '9s', animationDelay: '1.5s' }}
+      ></div>
 
       <div className="relative z-10">
         {/* Header Section */}
-        <div className="py-20 text-center">
+        <div className="text-center mb-12">
           <div className="container mx-auto px-4 max-w-7xl">
-            <div className="inline-flex items-center gap-2 bg-red-100 dark:bg-red-900/30 px-4 py-2 rounded-full mb-6">
-              <Droplet className="text-red-600 fill-red-600" size={16} />
-              <span className="text-red-600 font-bold text-sm">FREQUENTLY ASKED QUESTIONS</span>
+            <div className="inline-flex items-center gap-2 bg-base-200 border-2 border-red-100 dark:border-red-900/50 px-4 py-2 rounded-full mb-4 shadow-sm">
+              <HelpCircle className="text-red-600 dark:text-red-400" size={16} />
+              <span className="text-red-600 dark:text-red-400 font-bold text-sm">FREQUENTLY ASKED QUESTIONS</span>
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-base-content mb-6">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-base-content mb-4">
               How Can We Help You?
             </h1>
-            <p className="text-xl text-base-content/70 max-w-2xl mx-auto mb-8">
+            <p className="text-base sm:text-lg text-base-content/70 max-w-2xl mx-auto">
               Find answers to common questions about blood donation, eligibility, and our platform
             </p>
           </div>
         </div>
 
-        <div className="container mx-auto px-4 max-w-7xl pb-20">
+        <div className="container mx-auto px-4 max-w-7xl pb-8">
           {/* FAQ Categories - 4 Cards */}
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
             {categories.map((category, categoryIndex) => {

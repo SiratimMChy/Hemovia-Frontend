@@ -1,4 +1,4 @@
-import { Phone, Mail, MapPin, Clock } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, MessageSquare } from 'lucide-react';
 import ContactForm from './ContactForm';
 
 const ContactSection = () => {
@@ -6,7 +6,8 @@ const ContactSection = () => {
     <div className="py-24 bg-base-100">
       <div className="px-4 lg:px-30 mx-auto">
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 bg-red-100 dark:bg-red-900/30 px-4 py-2 rounded-full mb-4">
+          <div className="inline-flex items-center gap-2 bg-base-200 border-2 border-red-100 dark:border-red-900/50 px-4 py-2 rounded-full mb-4 shadow-sm">
+            <MessageSquare className="text-red-600 dark:text-red-400" size={16} />
             <span className="text-red-600 dark:text-red-400 font-bold text-sm">GET IN TOUCH</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-extrabold text-base-content mb-4">

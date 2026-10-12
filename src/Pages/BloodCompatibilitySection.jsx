@@ -56,8 +56,8 @@ const BloodCompatibilitySection = () => {
     <div className="py-12 md:py-16 bg-base-100 relative">
       <div className="px-4 lg:px-30 mx-auto">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-1.5 bg-red-100 dark:bg-red-900/30 px-3 py-1 rounded-full mb-3">
-            <Droplet className="text-red-600 fill-red-600" size={13} />
+          <div className="inline-flex items-center gap-2 bg-base-200 border-2 border-red-100 dark:border-red-900/50 px-4 py-1.5 rounded-full mb-3 shadow-sm">
+            <Droplet className="text-red-600 dark:text-red-400 fill-red-600" size={14} />
             <span className="text-red-600 dark:text-red-400 font-bold text-xs uppercase tracking-wider">
               Compatibility Checker
             </span>

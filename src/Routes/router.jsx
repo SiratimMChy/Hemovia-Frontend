@@ -25,6 +25,7 @@ import FAQPage from "../Pages/FAQPage";
 import DonationCentersPage from "../Pages/DonationCentersPage";
 import CenterDetails from "../Pages/CenterDetails";
 import About from "../Pages/About";
+import ForgetPassword from "../Pages/ForgetPassword";
 
 
 
@@ -45,6 +46,14 @@ const router = createBrowserRouter([
             {
                 path: '/Signup',
                 Component: Register
+            },
+            {
+                path: '/forgetpassword/:email',
+                Component: ForgetPassword
+            },
+            {
+                path: '/forgetpassword',
+                Component: ForgetPassword
             },
             {
                 path: '/donate',

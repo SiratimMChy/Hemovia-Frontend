@@ -31,7 +31,7 @@ const DonationCentersPage = () => {
 
   const divisions = ['All', 'Dhaka', 'Chittagong', 'Sylhet', 'Rajshahi', 'Khulna', 'Barisal', 'Rangpur', 'Mymensingh'];
 
-  // Fetch centers data from JSON file 
+ 
   useEffect(() => {
     setIsInitialLoading(true);
     axios.get('/centers.json')

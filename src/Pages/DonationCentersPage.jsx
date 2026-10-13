@@ -330,47 +330,55 @@ const DonationCentersPage = () => {
               </div>
               {/* Filter Buttons */}
               <div className="w-full lg:w-auto">
-                <div className="grid grid-cols-2 lg:flex gap-2 lg:gap-3">
+                <div className="grid grid-cols-2 sm:flex sm:flex-wrap lg:flex-nowrap items-center gap-2 lg:gap-3">
                   <button
                     onClick={() => setSelectedFilter('All')}
-                    className={`px-2 sm:px-3 lg:px-6 py-2 sm:py-3 rounded-lg sm:rounded-xl font-bold transition-all duration-300 shadow-lg transform hover:scale-105 text-xs sm:text-sm lg:text-base ${
+                    className={`h-11 sm:h-12 px-3 sm:px-4 lg:px-5 rounded-lg sm:rounded-xl font-bold transition-colors duration-200 shadow-md text-xs sm:text-sm border-2 whitespace-nowrap inline-flex items-center justify-center gap-1.5 shrink-0 ${
                       selectedFilter === 'All'
-                        ? 'bg-gradient-to-r from-red-600 to-rose-600 text-white'
-                        : 'bg-base-100 border-2 border-base-300 text-base-content hover:border-red-300 dark:hover:border-red-900/50 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400'
+                        ? 'bg-gradient-to-r from-red-600 to-rose-600 text-white border-transparent'
+                        : 'bg-base-100 border-base-300 text-base-content hover:border-red-300 dark:hover:border-red-900/50 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400'
                     }`}
                   >
-                    All Centers ({centers.length})
+                    <span>All Centers</span>
+                    <span className={`text-[11px] px-1.5 py-0.5 rounded-full font-bold ${selectedFilter === 'All' ? 'bg-white/20 text-white' : 'bg-base-200 text-base-content/70'}`}>
+                      {centers.length}
+                    </span>
                   </button>
                   <button
                     onClick={() => setSelectedFilter('Featured')}
-                    className={`px-2 sm:px-3 lg:px-6 py-2 sm:py-3 rounded-lg sm:rounded-xl font-bold transition-all duration-300 shadow-lg transform hover:scale-105 flex items-center justify-center gap-1 lg:gap-2 text-xs sm:text-sm lg:text-base ${
+                    className={`h-11 sm:h-12 px-3 sm:px-4 lg:px-5 rounded-lg sm:rounded-xl font-bold transition-colors duration-200 shadow-md inline-flex items-center justify-center gap-1.5 text-xs sm:text-sm border-2 whitespace-nowrap shrink-0 ${
                       selectedFilter === 'Featured'
-                        ? 'bg-gradient-to-r from-red-500 to-red-600 text-white'
-                        : 'bg-base-100 border-2 border-base-300 text-base-content hover:border-red-300 dark:hover:border-red-900/50 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400'
+                        ? 'bg-gradient-to-r from-red-500 to-red-600 text-white border-transparent'
+                        : 'bg-base-100 border-base-300 text-base-content hover:border-red-300 dark:hover:border-red-900/50 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400'
                     }`}
                   >
-                    <Star size={12} className={selectedFilter === 'Featured' ? 'fill-white' : 'fill-red-400'} />
-                    <span className="hidden sm:inline">Featured</span> ({centers.filter(c => c.featured).length})
+                    <Star size={13} className={selectedFilter === 'Featured' ? 'fill-white text-white' : 'fill-amber-400 text-amber-500'} />
+                    <span>Featured</span>
+                    <span className={`text-[11px] px-1.5 py-0.5 rounded-full font-bold ${selectedFilter === 'Featured' ? 'bg-white/20 text-white' : 'bg-base-200 text-base-content/70'}`}>
+                      {centers.filter(c => c.featured).length}
+                    </span>
                   </button>
                   <button
                     onClick={() => setSelectedFilter('24/7')}
-                    className={`px-2 sm:px-3 lg:px-6 py-2 sm:py-3 rounded-lg sm:rounded-xl font-bold transition-all duration-300 shadow-lg transform hover:scale-105 flex items-center justify-center gap-1 lg:gap-2 text-xs sm:text-sm lg:text-base ${
+                    className={`h-11 sm:h-12 px-3 sm:px-4 lg:px-5 rounded-lg sm:rounded-xl font-bold transition-colors duration-200 shadow-md inline-flex items-center justify-center gap-1.5 text-xs sm:text-sm border-2 whitespace-nowrap shrink-0 ${
                       selectedFilter === '24/7'
-                        ? 'bg-gradient-to-r from-red-600 to-red-700 text-white'
-                        : 'bg-base-100 border-2 border-base-300 text-base-content hover:border-red-300 dark:hover:border-red-900/50 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400'
+                        ? 'bg-gradient-to-r from-red-600 to-red-700 text-white border-transparent'
+                        : 'bg-base-100 border-base-300 text-base-content hover:border-red-300 dark:hover:border-red-900/50 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400'
                     }`}
                   >
-                    <Clock size={12} />
-                    <span className="hidden sm:inline">24/7 Available</span>
-                    <span className="sm:hidden">24/7</span> ({centers.filter(c => c.emergency && c.emergency.includes('24/7')).length})
+                    <Clock size={13} className={selectedFilter === '24/7' ? 'text-white' : 'text-emerald-600 dark:text-emerald-400'} />
+                    <span>24/7 Available</span>
+                    <span className={`text-[11px] px-1.5 py-0.5 rounded-full font-bold ${selectedFilter === '24/7' ? 'bg-white/20 text-white' : 'bg-base-200 text-base-content/70'}`}>
+                      {centers.filter(c => c.emergency && c.emergency.includes('24/7')).length}
+                    </span>
                   </button>
 
                   {/* Division Filter Dropdown */}
-                  <div className="relative">
+                  <div className="relative shrink-0">
                     <select
                       value={selectedDivision}
                       onChange={(e) => setSelectedDivision(e.target.value)}
-                      className="w-full px-2 sm:px-3 lg:px-6 py-2 sm:py-3 border-2 border-base-300 rounded-lg sm:rounded-xl focus:border-red-500 focus:outline-none appearance-none bg-base-100 transition-all duration-300 font-bold text-base-content hover:border-base-content/30 shadow-lg cursor-pointer text-xs sm:text-sm lg:text-base"
+                      className="h-11 sm:h-12 pl-3 sm:pl-4 pr-8 sm:pr-9 border-2 border-base-300 rounded-lg sm:rounded-xl focus:border-red-500 focus:outline-none appearance-none bg-base-100 font-bold text-base-content hover:border-base-content/30 shadow-md cursor-pointer text-xs sm:text-sm whitespace-nowrap"
                     >
                       {divisions.map(division => (
                         <option key={division} value={division}>
@@ -379,7 +387,7 @@ const DonationCentersPage = () => {
                         </option>
                       ))}
                     </select>
-                    <ChevronDown className="absolute right-1 sm:right-2 lg:right-4 top-1/2 transform -translate-y-1/2 text-base-content/40 pointer-events-none" size={14} />
+                    <ChevronDown className="absolute right-2.5 sm:right-3 top-1/2 transform -translate-y-1/2 text-base-content/40 pointer-events-none" size={14} />
                   </div>
                 </div>
               </div>

@@ -87,7 +87,6 @@
     "verified": true,
     "featured": false
   },
-
   {
     "id": 5,
     "name": "CMCH Blood Bank",
@@ -176,10 +175,9 @@
     "verified": true,
     "featured": false
   },
-
   {
     "id": 9,
-    "name": "MAG Osmani MCH",
+    "name": "MAG Osmani MCH Blood Bank",
     "division": "Sylhet",
     "district": "Sylhet",
     "address": "Medical Road, Kajolshah, Sylhet-3100",
@@ -199,10 +197,9 @@
     "verified": true,
     "featured": true
   },
-
   {
     "id": 10,
-    "name": "Jalalabad RRMC",
+    "name": "Jalalabad RRMC Blood Bank",
     "division": "Sylhet",
     "district": "Sylhet",
     "address": "Jalalabad, Sylhet-3100",
@@ -222,10 +219,9 @@
     "verified": true,
     "featured": false
   },
-
   {
     "id": 11,
-    "name": "Red Crescent Sylhet",
+    "name": "Mujib Jahan Red Crescent Blood Centre",
     "division": "Sylhet",
     "district": "Sylhet",
     "address": "Chowhatta, Sylhet-3100",
@@ -245,10 +241,9 @@
     "verified": true,
     "featured": false
   },
-
   {
     "id": 12,
-    "name": "Sandhani Sylhet",
+    "name": "Sandhani SOMCH Unit Blood Bank",
     "division": "Sylhet",
     "district": "Sylhet",
     "address": "MAG Osmani Medical College, Medical Road, Sylhet-3100",
@@ -268,7 +263,6 @@
     "verified": true,
     "featured": false
   },
-
   {
     "id": 13,
     "name": "RMCH Blood Bank",
@@ -291,7 +285,6 @@
     "verified": true,
     "featured": false
   },
-
   {
     "id": 14,
     "name": "Sandhani RMCH",
@@ -314,7 +307,6 @@
     "verified": true,
     "featured": true
   },
-
   {
     "id": 15,
     "name": "Red Crescent Rajshahi",
@@ -337,7 +329,6 @@
     "verified": true,
     "featured": false
   },
-
   {
     "id": 16,
     "name": "Sandhani RU",
@@ -360,7 +351,6 @@
     "verified": true,
     "featured": false
   },
-
   {
     "id": 17,
     "name": "KMCH Blood Bank",
@@ -383,7 +373,6 @@
     "verified": true,
     "featured": true
   },
-
   {
     "id": 18,
     "name": "Sandhani KMCH",
@@ -406,7 +395,6 @@
     "verified": true,
     "featured": false
   },
-
   {
     "id": 19,
     "name": "Gazi Medical College",
@@ -429,7 +417,6 @@
     "verified": true,
     "featured": false
   },
-
   {
     "id": 20,
     "name": "Khulna General Hospital",
@@ -452,7 +439,6 @@
     "verified": true,
     "featured": false
   },
-
   {
     "id": 21,
     "name": "SBMCH Blood Bank",
@@ -475,7 +461,6 @@
     "verified": true,
     "featured": true
   },
-
   {
     "id": 22,
     "name": "Sandhani SBMCH",
@@ -498,7 +483,6 @@
     "verified": true,
     "featured": false
   },
-
   {
     "id": 23,
     "name": "Barisal General Hospital",
@@ -521,7 +505,6 @@
     "verified": true,
     "featured": false
   },
-
   {
     "id": 24,
     "name": "Red Crescent Barisal",
@@ -544,7 +527,6 @@
     "verified": true,
     "featured": false
   },
-
   {
     "id": 25,
     "name": "RMCH Rangpur",
@@ -567,7 +549,6 @@
     "verified": true,
     "featured": false
   },
-
   {
     "id": 26,
     "name": "Sandhani RMCH Rangpur",
@@ -590,7 +571,6 @@
     "verified": true,
     "featured": false
   },
-
   {
     "id": 27,
     "name": "RCMCH Rangpur",
@@ -613,7 +593,6 @@
     "verified": true,
     "featured": true
   },
-
   {
     "id": 28,
     "name": "Red Crescent Dinajpur",
@@ -636,7 +615,6 @@
     "verified": true,
     "featured": false
   },
-
   {
     "id": 29,
     "name": "MMCH Blood Bank",
@@ -659,7 +637,6 @@
     "verified": true,
     "featured": true
   },
-
   {
     "id": 30,
     "name": "Sandhani MMCH",
@@ -682,7 +659,6 @@
     "verified": true,
     "featured": false
   },
-
   {
     "id": 31,
     "name": "Sandhani BAU",
@@ -705,7 +681,6 @@
     "verified": true,
     "featured": false
   },
-
   {
     "id": 32,
     "name": "CBMC Mymensingh",
@@ -728,7 +703,6 @@
     "verified": true,
     "featured": false
   },
-
   {
     "id": 33,
     "name": "Shaheed Suhrawardy MCH",
@@ -751,7 +725,6 @@
     "verified": true,
     "featured": false
   },
-
   {
     "id": 34,
     "name": "Popular Medical College",
@@ -774,7 +747,6 @@
     "verified": true,
     "featured": false
   },
-
   {
     "id": 35,
     "name": "Badhan Blood Bank",
@@ -797,7 +769,6 @@
     "verified": true,
     "featured": false
   },
-
   {
     "id": 36,
     "name": "Holy Family Red Crescent",
@@ -820,7 +791,6 @@
     "verified": true,
     "featured": false
   },
-
   {
     "id": 37,
     "name": "Bangladesh Medical College",
@@ -843,7 +813,6 @@
     "verified": true,
     "featured": false
   },
-
   {
     "id": 38,
     "name": "Sandhani Comilla MC",
@@ -866,7 +835,6 @@
     "verified": true,
     "featured": false
   },
-
   {
     "id": 39,
     "name": "Sandhani Cox's Bazar",
@@ -889,7 +857,6 @@
     "verified": true,
     "featured": false
   },
-
   {
     "id": 40,
     "name": "Sandhani Rangamati",
@@ -908,6 +875,182 @@
       "Student Volunteer Network",
       "Safe Blood Collection",
       "Community Outreach"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "id": 41,
+    "name": "Quantum Foundation Sylhet Blood Center",
+    "division": "Sylhet",
+    "district": "Sylhet",
+    "address": "201 Porshi, Kewapara, Mirer Moydan, Sylhet-3100",
+    "phone": "+880-1713-301522",
+    "email": "sylhet@quantummethod.org.bd",
+    "openDays": "All Days",
+    "openHours": "09:00 AM – 08:00 PM",
+    "emergency": "24/7 Voluntary Blood Donor Coordination",
+    "rating": 4.8,
+    "reviews": 142,
+    "facilities": [
+      "Voluntary Blood Donor Registry",
+      "Emergency Donor Dispatch",
+      "Free Health & Blood Grouping",
+      "Donor Recognition & Care"
+    ],
+    "verified": true,
+    "featured": true
+  },
+  {
+    "id": 42,
+    "name": "Green Life Blood Bank",
+    "division": "Sylhet",
+    "district": "Sylhet",
+    "address": "22 Modhushohid, New Medical Road (1st Floor), Sylhet-3100",
+    "phone": "+880-1711-000911",
+    "email": "greenlifebloodbank@gmail.com",
+    "openDays": "All Days",
+    "openHours": "24 Hours",
+    "emergency": "Round-the-Clock Emergency Transfusion Services",
+    "rating": 4.6,
+    "reviews": 98,
+    "facilities": [
+      "24/7 Blood Screening & Cross-matching",
+      "Component Separation (PRBC, Platelets)",
+      "Strict Cold Chain Storage",
+      "Patient Emergency Support"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "id": 43,
+    "name": "KIN Blood Sector (SUST)",
+    "division": "Sylhet",
+    "district": "Sylhet",
+    "address": "Shahjalal University of Science & Technology, Kumargaon, Sylhet-3114",
+    "phone": "+880-1975-467878",
+    "email": "kinsust03@gmail.com",
+    "openDays": "All Days",
+    "openHours": "09:00 AM – 06:00 PM",
+    "emergency": "24/7 Emergency Volunteer Hotline: +880-1615-467878",
+    "rating": 4.9,
+    "reviews": 215,
+    "facilities": [
+      "University Student Donor Network",
+      "Emergency Direct Matching",
+      "Voluntary Blood Donation Drives",
+      "Rapid Hospital Response"
+    ],
+    "verified": true,
+    "featured": true
+  },
+  {
+    "id": 44,
+    "name": "Badhan SAU Unit Blood Center",
+    "division": "Sylhet",
+    "district": "Sylhet",
+    "address": "Sylhet Agricultural University Campus, Tilagarh, Sylhet-3100",
+    "phone": "+880-1534-982674",
+    "email": "sau@badhan.org",
+    "openDays": "Sunday to Thursday",
+    "openHours": "10:00 AM – 05:00 PM",
+    "emergency": "Emergency Student Donor Helpline (+880-1534-982674)",
+    "rating": 4.7,
+    "reviews": 89,
+    "facilities": [
+      "Free Blood Grouping Camps",
+      "Student Volunteer Network",
+      "Direct Patient-Donor Linkage",
+      "Safe Blood Donation Awareness"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "id": 45,
+    "name": "Red Crescent Blood Center (Dorgah Mohollah)",
+    "division": "Sylhet",
+    "district": "Sylhet",
+    "address": "South Dorgah Mohollah Road, Sylhet-3100",
+    "phone": "+880-1937-591604",
+    "email": "sylhet.redcrescent@bdrcs.org",
+    "openDays": "All Days",
+    "openHours": "09:00 AM – 06:00 PM",
+    "emergency": "Emergency Line: +880-821-721103",
+    "rating": 4.6,
+    "reviews": 104,
+    "facilities": [
+      "Community Blood Collection",
+      "Donor Card Issuance",
+      "Certified Storage Facility",
+      "Donor Refreshments"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "id": 46,
+    "name": "Prime Diagnostic and Blood Bank",
+    "division": "Sylhet",
+    "district": "Moulvibazar",
+    "address": "Sreemangal Road, near 250 Bed Sadar Hospital, Moulvibazar-3200",
+    "phone": "+880-1711-477074",
+    "email": "primedx.moulvibazar@gmail.com",
+    "openDays": "All Days",
+    "openHours": "24 Hours",
+    "emergency": "24/7 Emergency Blood Bank & Testing",
+    "rating": 4.5,
+    "reviews": 76,
+    "facilities": [
+      "24/7 Blood Screening & Cross-matching",
+      "Cold Chain Blood Storage",
+      "Emergency Donor Coordination",
+      "Qualified Medical Technologists"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "id": 47,
+    "name": "Blood Bank Habiganj (BBH)",
+    "division": "Sylhet",
+    "district": "Habiganj",
+    "address": "Hospital Road, Quresh Nagar, Habiganj-3300",
+    "phone": "+880-1731-378848",
+    "email": "bbh.habiganj@gmail.com",
+    "openDays": "All Days",
+    "openHours": "09:00 AM – 08:00 PM",
+    "emergency": "24/7 Emergency Volunteer Helpline: +880-1731-574072",
+    "rating": 4.6,
+    "reviews": 84,
+    "facilities": [
+      "District Voluntary Donor Registry",
+      "Emergency Blood Matching",
+      "Community Outreach Camps",
+      "Quick Volunteer Dispatch"
+    ],
+    "verified": true,
+    "featured": false
+  },
+  {
+    "id": 48,
+    "name": "Blood Link Voluntary Blood Center",
+    "division": "Sylhet",
+    "district": "Sunamganj",
+    "address": "Hospital Road, Hason Nagar, Sunamganj-3002",
+    "phone": "+880-1730-324819",
+    "email": "bloodlink.sunamganj@gmail.com",
+    "openDays": "All Days",
+    "openHours": "09:00 AM – 06:00 PM",
+    "emergency": "24/7 Emergency Patient Blood Support",
+    "rating": 4.5,
+    "reviews": 68,
+    "facilities": [
+      "Volunteer Donor Network",
+      "Direct Emergency Donor Match",
+      "Free Blood Grouping Camps",
+      "Donor Recognition Program"
     ],
     "verified": true,
     "featured": false

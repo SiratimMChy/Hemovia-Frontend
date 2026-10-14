@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router';
 import { MapPin, Phone, Clock, Navigation, Search, Star, Award, Building, ChevronDown, ExternalLink, Droplet, Shield, CheckCircle, Globe, Users } from 'lucide-react';
-import axios from 'axios';
+import useAxios from '../Hooks/useAxios';
 import SkeletonLoader from '../Components/SkeletonLoader/SkeletonLoader';
 
 const DonationCentersPage = () => {
@@ -32,11 +32,13 @@ const DonationCentersPage = () => {
   const divisions = ['All', 'Dhaka', 'Chittagong', 'Sylhet', 'Rajshahi', 'Khulna', 'Barisal', 'Rangpur', 'Mymensingh'];
 
  
+  const axiosInstance = useAxios();
+
   useEffect(() => {
     setIsInitialLoading(true);
-    axios.get('/centers.json')
+    axiosInstance.get('/centers')
       .then(res => {
-        setCenters(res.data);
+        setCenters(res.data.centers);
         setIsInitialLoading(false);
       })
       .catch(err => {

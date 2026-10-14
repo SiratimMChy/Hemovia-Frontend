@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Heart, Users, Award, Shield, Clock, MapPin, Phone, Mail, Target, Eye, Droplet, Activity, CheckCircle } from 'lucide-react';
-import axios from 'axios';
 import useAxios from '../Hooks/useAxios';
 const About = () => {
   const [centersData, setCentersData] = useState([]);
@@ -20,9 +19,9 @@ const About = () => {
     return count.toString();
   };
   useEffect(() => {
-    axios.get('/centers.json')
+    axiosInstance.get('/centers')
       .then(res => {
-        setCentersData(res.data);
+        setCentersData(res.data.centers);
       });
   }, []);
   useEffect(() => {

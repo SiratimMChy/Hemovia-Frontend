@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router';
 import { MapPin, Phone, Clock, Star, Building, ChevronLeft, CheckCircle, Mail, Calendar } from 'lucide-react';
-import axios from 'axios';
+import useAxios from '../Hooks/useAxios';
 
 const CenterDetails = () => {
   const { id } = useParams();
@@ -9,16 +9,12 @@ const CenterDetails = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  // Fetch center data from JSON file
+  const axiosInstance = useAxios();
+
   useEffect(() => {
-    axios.get('/centers.json')
+    axiosInstance.get(`/centers/${id}`)
       .then(res => {
-        const foundCenter = res.data.find(c => c.id === parseInt(id));
-        if (foundCenter) {
-          setCenter(foundCenter);
-        } else {
-          setError(true);
-        }
+        setCenter(res.data);
         setLoading(false);
       })
       .catch(err => {

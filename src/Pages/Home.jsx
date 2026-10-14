@@ -1,5 +1,4 @@
 import { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
 import useAxios from '../Hooks/useAxios';
 import { AuthContext } from '../Provider/AuthProvider';
 import HeroBanner from '../Components/Home/HeroBanner';
@@ -45,7 +44,7 @@ const Home = () => {
   };
 
   useEffect(() => {
-    axios.get('/centers.json')
+    axiosInstance.get('/centers/featured/list')
       .then(res => {
         setCentersData(res.data);
       });

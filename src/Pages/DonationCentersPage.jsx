@@ -38,12 +38,24 @@ const DonationCentersPage = () => {
     setIsInitialLoading(true);
     axiosInstance.get('/centers')
       .then(res => {
-        setCenters(res.data.centers);
-        setIsInitialLoading(false);
+        const list = res.data?.centers || (Array.isArray(res.data) ? res.data : []);
+        if (list && list.length > 0) {
+          setCenters(list);
+          setIsInitialLoading(false);
+        } else {
+          throw new Error('Empty centers list from backend');
+        }
       })
-      .catch(err => {
-        console.error('Error loading centers:', err);
-        setIsInitialLoading(false);
+      .catch(() => {
+        fetch('/centers.json')
+          .then(r => r.json())
+          .then(data => {
+            setCenters(data);
+            setIsInitialLoading(false);
+          })
+          .catch(() => {
+            setIsInitialLoading(false);
+          });
       });
   }, []);
 
@@ -159,12 +171,14 @@ const DonationCentersPage = () => {
 
         <div className="relative container mx-auto px-4 pt-6 sm:pt-8 md:pt-12 lg:pt-16 pb-8 sm:pb-10 md:pb-12 lg:pb-16">
           <div className="text-center space-y-6 sm:space-y-8 max-w-5xl mx-auto">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 md:gap-3 bg-base-200 border-2 border-red-100 dark:border-red-900/50 px-3 sm:px-4 md:px-5 py-2 md:py-3 rounded-full shadow-sm">
-              <div className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center shrink-0">
-                <Building className="text-red-600 dark:text-red-400" size={12} />
+            {/* Badge matching Home theme */}
+            <div className="inline-flex items-center gap-2 sm:gap-2.5 bg-base-200 border-2 border-red-100 dark:border-red-900/50 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-sm hover:border-red-200 dark:hover:border-red-800 transition-colors">
+              <div className="w-5 h-5 sm:w-6 sm:h-6 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center shrink-0 shadow-sm">
+                <Building className="text-white" size={12} />
               </div>
-              <span className="text-red-600 dark:text-red-400 font-bold text-xs sm:text-sm">Donation Centers • Nationwide Network</span>
+              <span className="text-red-600 dark:text-red-400 font-bold text-xs sm:text-sm tracking-wide">
+                Donation Centers • Nationwide Network
+              </span>
             </div>
 
             {/* Main Heading */}
@@ -249,9 +263,13 @@ const DonationCentersPage = () => {
         <div className="container mx-auto px-4 max-w-7xl">
           {/* Section Header */}
           <div className="text-center mb-6 sm:mb-8 md:mb-12">
-            <div className="inline-flex items-center gap-2 bg-red-100 dark:bg-red-900/30 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full mb-3 sm:mb-4">
-              <Award className="text-red-600 dark:text-red-400" size={14} />
-              <span className="text-red-600 dark:text-red-400 font-bold text-xs sm:text-sm">NETWORK OVERVIEW</span>
+            <div className="inline-flex items-center gap-2 sm:gap-2.5 bg-base-200 border-2 border-red-100 dark:border-red-900/50 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full mb-3 sm:mb-4 shadow-sm hover:border-red-200 dark:hover:border-red-800 transition-colors">
+              <div className="w-5 h-5 sm:w-6 sm:h-6 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center shrink-0 shadow-sm">
+                <Award className="text-white" size={12} />
+              </div>
+              <span className="text-red-600 dark:text-red-400 font-bold text-xs sm:text-sm tracking-wide">
+                NETWORK OVERVIEW
+              </span>
             </div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-base-content mb-2 sm:mb-4">
               Our Network
@@ -571,12 +589,12 @@ const DonationCentersPage = () => {
       <div className="py-12 sm:py-16 md:py-20 lg:py-24 bg-gradient-to-br from-red-50 to-rose-50 dark:from-base-200 dark:to-base-200">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center space-y-6 sm:space-y-8">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 bg-base-200 border-2 border-red-100 dark:border-red-900/50 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-sm">
-              <div className="w-5 h-5 sm:w-6 sm:h-6 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center">
-                <Droplet className="text-red-600 dark:text-red-400 fill-red-600 dark:fill-red-400" size={12} />
+            {/* Badge matching Home theme */}
+            <div className="inline-flex items-center gap-2 sm:gap-2.5 bg-base-200 border-2 border-red-100 dark:border-red-900/50 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-sm hover:border-red-200 dark:hover:border-red-800 transition-colors">
+              <div className="w-5 h-5 sm:w-6 sm:h-6 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center shrink-0 shadow-sm">
+                <Droplet className="text-white fill-white" size={12} />
               </div>
-              <span className="text-red-600 dark:text-red-400 font-bold text-xs sm:text-sm">SAVE LIVES • MAKE IMPACT</span>
+              <span className="text-red-600 dark:text-red-400 font-bold text-xs sm:text-sm tracking-wide">SAVE LIVES • MAKE IMPACT</span>
             </div>
 
             {/* Main Heading */}
@@ -597,41 +615,43 @@ const DonationCentersPage = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-2 sm:pt-4">
-              <a
-                href="/signup"
-                className="group inline-flex items-center justify-center gap-2 sm:gap-3 bg-gradient-to-r from-red-600 to-red-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-bold text-sm sm:text-base lg:text-lg hover:from-red-700 hover:to-red-800 transition-all shadow-xl shadow-red-200 dark:shadow-red-900/30 hover:shadow-2xl hover:scale-105 w-full sm:w-auto"
+              <Link
+                to="/signup"
+                className="group inline-flex items-center justify-center gap-2 sm:gap-3 bg-gradient-to-r from-red-600 to-rose-600 text-white px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl font-bold text-sm sm:text-base lg:text-lg hover:from-red-700 hover:to-rose-700 transition-all shadow-md hover:shadow-lg hover:scale-[1.02] w-full sm:w-auto"
               >
-                <Droplet size={16} className="group-hover:scale-110 transition-transform fill-white" />
+                <Droplet size={18} className="group-hover:scale-110 transition-transform fill-white" />
                 <span>Register as Donor</span>
-              </a>
-              <a
-                href="/search"
-                className="group inline-flex items-center justify-center gap-2 sm:gap-3 bg-base-100 text-red-600 dark:text-red-400 px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-bold text-sm sm:text-base lg:text-lg border-2 border-base-300 hover:border-red-300 dark:hover:border-red-900/50 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all shadow-lg hover:shadow-xl hover:scale-105 w-full sm:w-auto"
+              </Link>
+              <Link
+                to="/search"
+                className="group inline-flex items-center justify-center gap-2 sm:gap-3 bg-base-100 text-red-600 dark:text-red-400 px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl font-bold text-sm sm:text-base lg:text-lg border-2 border-red-600/70 dark:border-red-500/80 hover:bg-red-600 hover:text-white dark:hover:bg-red-600 dark:hover:text-white transition-all shadow-sm hover:shadow-md hover:scale-[1.02] w-full sm:w-auto"
               >
-                <Search size={16} className="group-hover:scale-110 transition-transform" />
+                <Search size={18} className="group-hover:scale-110 transition-transform" />
                 <span>Find Donors</span>
-              </a>
+              </Link>
             </div>
 
             {/* Stats Cards */}
-            <div className="grid grid-cols-3 gap-3 sm:gap-4 pt-6 sm:pt-8 max-w-lg sm:max-w-2xl mx-auto">
-              <div className="bg-base-100 border-2 border-base-300 rounded-xl sm:rounded-2xl p-3 sm:p-4 hover:border-red-200 dark:hover:border-red-900/50 transition shadow-sm hover:shadow-lg">
-                <div className="flex items-center justify-center mb-1 sm:mb-2">
-                  <Users className="text-red-600 dark:text-red-400" size={16} />
+            <div className="grid grid-cols-3 gap-3 sm:gap-5 pt-6 sm:pt-8 max-w-lg sm:max-w-2xl mx-auto">
+              <div className="group bg-base-100 border-2 border-base-300 rounded-xl sm:rounded-2xl p-3.5 sm:p-5 hover:border-red-200 dark:hover:border-red-900/50 transition-all shadow-sm hover:shadow-md">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-red-500 to-red-600 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-2 sm:mb-3 shadow-md shadow-red-200 dark:shadow-red-900/30 group-hover:scale-110 transition-transform">
+                  <Users className="text-white" size={18} />
                 </div>
-                <p className="text-lg sm:text-xl md:text-2xl font-black text-base-content">{centers.length}+</p>
+                <p className="text-lg sm:text-xl md:text-2xl font-black text-base-content">{formatCount(centers.length > 0 ? centers.length : 120)}</p>
                 <p className="text-xs sm:text-sm text-base-content/70 font-semibold">Centers</p>
               </div>
-              <div className="bg-base-100 border-2 border-base-300 rounded-xl sm:rounded-2xl p-3 sm:p-4 hover:border-red-200 dark:hover:border-red-900/50 transition shadow-sm hover:shadow-lg">
-                <div className="flex items-center justify-center mb-1 sm:mb-2">
-                  <Shield className="text-red-600 dark:text-red-400" size={16} />
+
+              <div className="group bg-base-100 border-2 border-base-300 rounded-xl sm:rounded-2xl p-3.5 sm:p-5 hover:border-green-200 dark:hover:border-green-900/50 transition-all shadow-sm hover:shadow-md">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-2 sm:mb-3 shadow-md shadow-green-200 dark:shadow-green-900/30 group-hover:scale-110 transition-transform">
+                  <Shield className="text-white" size={18} />
                 </div>
                 <p className="text-lg sm:text-xl md:text-2xl font-black text-base-content">100%</p>
                 <p className="text-xs sm:text-sm text-base-content/70 font-semibold">Verified</p>
               </div>
-              <div className="bg-base-100 border-2 border-base-300 rounded-xl sm:rounded-2xl p-3 sm:p-4 hover:border-red-200 dark:hover:border-red-900/50 transition shadow-sm hover:shadow-lg">
-                <div className="flex items-center justify-center mb-1 sm:mb-2">
-                  <Clock className="text-red-600 dark:text-red-400" size={16} />
+
+              <div className="group bg-base-100 border-2 border-base-300 rounded-xl sm:rounded-2xl p-3.5 sm:p-5 hover:border-rose-200 dark:hover:border-rose-900/50 transition-all shadow-sm hover:shadow-md">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-rose-500 to-red-600 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-2 sm:mb-3 shadow-md shadow-red-200 dark:shadow-red-900/30 group-hover:scale-110 transition-transform">
+                  <Clock className="text-white" size={18} />
                 </div>
                 <p className="text-lg sm:text-xl md:text-2xl font-black text-base-content">24/7</p>
                 <p className="text-xs sm:text-sm text-base-content/70 font-semibold">Support</p>

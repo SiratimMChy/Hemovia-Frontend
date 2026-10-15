@@ -24,6 +24,11 @@ const Navbar = () => {
             const theme = newState ? "dark" : "light";
             localStorage.setItem("theme", theme);
             document.documentElement.setAttribute("data-theme", theme);
+            if (theme === "dark") {
+                document.documentElement.classList.add("dark");
+            } else {
+                document.documentElement.classList.remove("dark");
+            }
             
             // Dispatch custom event for other components to listen
             window.dispatchEvent(new CustomEvent('themeChange', { 
@@ -37,6 +42,13 @@ const Navbar = () => {
     useEffect(() => {
         const savedTheme = localStorage.getItem("theme") || "light";
         document.documentElement.setAttribute("data-theme", savedTheme);
+        if (savedTheme === "dark") {
+            document.documentElement.classList.add("dark");
+            setIsChecked(true);
+        } else {
+            document.documentElement.classList.remove("dark");
+            setIsChecked(false);
+        }
     }, []);
     
     const handleSignOut = () => {

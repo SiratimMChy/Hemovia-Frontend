@@ -6,6 +6,8 @@
   color-scheme: light dark;
 }
 
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *, .dark, .dark *));
+
 /* Blood Compatibility Section Animations */
 @keyframes fade-in {
   from { 

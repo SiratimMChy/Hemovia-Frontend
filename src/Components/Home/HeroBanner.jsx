@@ -9,6 +9,7 @@ const HeroBanner = ({
   apiStats,
   livesSaved,
   centersData,
+  totalCenters,
   formatCount
 }) => {
   return (
@@ -76,7 +77,7 @@ const HeroBanner = ({
                   <div className="flex items-center justify-center gap-1 mb-1">
                     <Activity className="text-red-600" size={14} />
                   </div>
-                  <p className="text-base font-black text-base-content leading-tight">{formatCount(centersData.length)}</p>
+                  <p className="text-base font-black text-base-content leading-tight">{formatCount(totalCenters || centersData.length)}</p>
                   <p className="text-[11px] text-base-content/70 font-semibold mt-0.5">Blood Banks</p>
                 </div>
               </div>

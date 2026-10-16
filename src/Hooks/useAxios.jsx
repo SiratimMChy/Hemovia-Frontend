@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-    baseURL: 'https://blood-donation-backend-theta.vercel.app',
+    baseURL: import.meta.env.VITE_LOCALHOST_URL || import.meta.env.VITE_API_URL,
 });
 
 const useAxios = () => {

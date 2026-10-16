@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../Provider/AuthProvider';
 import Swal from 'sweetalert2';
 
-// Demo user emails (these exist in the database)
+// Demo user emails 
 const DEMO_EMAILS = {
   DONOR: "donor@hemovia.com",
   ADMIN: "admin@hemovia.com"

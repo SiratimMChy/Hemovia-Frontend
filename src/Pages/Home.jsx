@@ -25,6 +25,7 @@ const Home = () => {
   };
 
   const [centersData, setCentersData] = useState([]);
+  const [totalCenters, setTotalCenters] = useState(0);
   const [livesSaved, setLivesSaved] = useState(0);
   const [isStatsLoading, setIsStatsLoading] = useState(true);
   const [apiStats, setApiStats] = useState({
@@ -47,6 +48,15 @@ const Home = () => {
     axiosInstance.get('/centers/featured/list')
       .then(res => {
         setCentersData(res.data);
+      });
+
+    axiosInstance.get('/centers')
+      .then(res => {
+        const count = res.data?.totalCenters || (res.data?.centers ? res.data.centers.length : (Array.isArray(res.data) ? res.data.length : 0));
+        setTotalCenters(count);
+      })
+      .catch(err => {
+        console.error(err);
       });
   }, []);
 
@@ -98,6 +108,7 @@ const Home = () => {
         apiStats={apiStats}
         livesSaved={livesSaved}
         centersData={centersData}
+        totalCenters={totalCenters}
         formatCount={formatCount}
       />
       <HowItWorks />

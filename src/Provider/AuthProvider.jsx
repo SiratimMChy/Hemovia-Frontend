@@ -46,7 +46,7 @@ const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         if (!user) return;
-        axios.get(`https://blood-donation-backend-theta.vercel.app/users/role/${user?.email}`)
+        axios.get(`${import.meta.env.VITE_LOCALHOST_URL || import.meta.env.VITE_API_URL}/users/role/${user?.email}`)
             .then(res => {
                 setRole(res.data.role);
             })

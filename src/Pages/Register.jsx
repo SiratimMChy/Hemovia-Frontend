@@ -85,7 +85,7 @@ const Register = () => {
                     updateProfile(auth.currentUser, {
                         displayName: name, photoURL: imageUrl
                     }).then(() => {
-                        axios.post('https://blood-donation-backend-theta.vercel.app/users', formData)
+                        axios.post(`${import.meta.env.VITE_LOCALHOST_URL || import.meta.env.VITE_API_URL}/users`, formData)
                             .then(res => {
                                 console.log(res.data);
                             })

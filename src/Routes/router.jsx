@@ -19,7 +19,7 @@ import DonationRequests from "../Pages/DonationRequests/DonationRequests";
 import EditRequest from "../Pages/EditRequest";
 import ViewRequest from "../Pages/ViewRequest";
 import VolunteerDashboard from "../Dashboard/VolunteerDashboard/VolunteerDashboard";
-import Search from "../Pages/search";
+import Search from "../Pages/Search";
 import BloodCompatibilitySection from "../Pages/BloodCompatibilitySection";
 import FAQPage from "../Pages/FAQPage";
 import DonationCentersPage from "../Pages/DonationCentersPage";

@@ -10,7 +10,7 @@
 [![TailwindCSS](https://img.shields.io/badge/Tailwind-4.0-38B2AC?style=flat&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![DaisyUI](https://img.shields.io/badge/DaisyUI-5.5-5A0EF8?style=flat&logo=daisyui&logoColor=white)](https://daisyui.com/)
 [![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?style=flat&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](#-license--contributions)
+[![License](https://img.shields.io/badge/License-Custom-dc2626.svg)](#-license--usage-guidelines)
 
 <div align="center">
 <a href="https://blooddonation-f6367.web.app" target="_blank">
@@ -43,7 +43,7 @@
 - [Deployment](#-deployment)
 - [Future Roadmap](#-future-roadmap)
 - [Acknowledgments](#-acknowledgments)
-- [License & Contributions](#-license--contributions)
+- [License & Usage Guidelines](#-license--usage-guidelines)
 
 ---
 
@@ -279,8 +279,8 @@ Before you begin, ensure you have the following:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/SiratimMChy/BloodDonation.git
-   cd BloodDonation
+   git clone https://github.com/SiratimMChy/Hemovia-Frontend.git
+   cd Hemovia-Frontend
    ```
 
 2. **Install dependencies**
@@ -614,20 +614,24 @@ firebase deploy
 
 ---
 
-## 📄 License & Contributions
+## 📄 License & Usage Guidelines
 
-This project is open-source and welcoming. Anyone is free to view, explore, and contribute to this repository. However, proper credit and attribution must be given to the original creator.
+This project is protected under the [License & Usage Guidelines](LICENSE).
 
-Distributed under the **MIT License**. See the license details for more information.
+- 🔒 **Permission First:** Please ask for permission from **Siratim Mustakim Chowdhury** before hosting, deploying, or using this project.
+- 👤 **Give Credit:** If permitted to use, always credit the author by name and link back to this original repository: [SiratimMChy/Hemovia-Frontend](https://github.com/SiratimMChy/Hemovia-Frontend).
+- 🧩 **Keep Original & No Copying:** The project should be used as-is. Please do not modify the code, rebrand it, or extract parts for other projects without prior approval.
 
-*Copyright © 2026 Hemovia Management Platform. All rights reserved.*
+For permission requests or questions, feel free to message the author on [LinkedIn](https://www.linkedin.com/in/siratim-mustakim-chowdhury/) or check the [LICENSE](LICENSE) file.
+
+*Copyright © 2026 Siratim Mustakim Chowdhury. All rights reserved.*
 
 <div align="center">
 
-**Made by Siratim Mustakim Chowdhury**
+**Created by Siratim Mustakim Chowdhury**
 
-[![GitHub](https://img.shields.io/badge/GitHub-SiratimMChy-181717?style=flat&logo=github)](https://github.com/SiratimMChy)
+[![Repository](https://img.shields.io/badge/Repository-SiratimMChy%2FHemovia--Frontend-181717?style=flat&logo=github)](https://github.com/SiratimMChy/Hemovia-Frontend)
+[![GitHub Profile](https://img.shields.io/badge/GitHub-SiratimMChy-181717?style=flat&logo=github)](https://github.com/SiratimMChy)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Siratim%20Mustakim-0077B5?style=flat&logo=linkedin)](https://www.linkedin.com/in/siratim-mustakim-chowdhury/)
-[![Email](https://img.shields.io/badge/Email-chowdhurysiratimmustakim@gmail.com-D14836?style=flat&logo=gmail&logoColor=white)](mailto:chowdhurysiratimmustakim@gmail.com)
 
 </div>

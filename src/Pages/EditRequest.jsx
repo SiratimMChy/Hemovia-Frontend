@@ -38,6 +38,11 @@ const EditRequest = () => {
             .then(res => setDistricts(res.data.districts));
     }, []);
 
+    const selectedDistrictObj = districts.find(d => d.name === district);
+    const filteredUpazilas = selectedDistrictObj
+        ? upazilas.filter(u => u.district_id === selectedDistrictObj.id)
+        : [];
+
     // load request data
     useEffect(() => {
         if (!id || !user?.email || !userRole) return;
@@ -190,7 +195,10 @@ const EditRequest = () => {
                                 required
                                 name='recipientDistrict'
                                 value={district}
-                                onChange={(e) => setDistrict(e.target.value)}
+                                onChange={(e) => {
+                                    setDistrict(e.target.value);
+                                    setUpazila('');
+                                }}
                                 className="select w-full rounded-lg border border-base-300 bg-base-100 text-base-content px-3 sm:px-4 py-2 focus:ring-2 focus:ring-red-500 text-sm"
                             >
                                 <option value="">Select district</option>
@@ -211,11 +219,12 @@ const EditRequest = () => {
                                 name='recipientUpazila'
                                 value={upazila}
                                 onChange={(e) => setUpazila(e.target.value)}
-                                className="select w-full rounded-lg border border-base-300 bg-base-100 text-base-content px-3 sm:px-4 py-2 focus:ring-2 focus:ring-red-500 text-sm"
+                                disabled={!district}
+                                className="select w-full rounded-lg border border-base-300 bg-base-100 text-base-content px-3 sm:px-4 py-2 focus:ring-2 focus:ring-red-500 text-sm disabled:opacity-60 disabled:cursor-not-allowed"
                             >
-                                <option value="">Select upazila</option>
+                                <option value="">{district ? 'Select upazila' : 'Select district first'}</option>
                                 {
-                                    upazilas.map(u => (
+                                    filteredUpazilas.map(u => (
                                         <option key={u.id} value={u.name}>
                                             {u.name}
                                         </option>

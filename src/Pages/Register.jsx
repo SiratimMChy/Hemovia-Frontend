@@ -30,6 +30,11 @@ const Register = () => {
             });
     }, []);
 
+    const selectedDistrictObj = districts.find(d => d.name === district);
+    const filteredUpazilas = selectedDistrictObj
+        ? upazilas.filter(u => u.district_id === selectedDistrictObj.id)
+        : [];
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const email = e.target.email.value;
@@ -205,7 +210,10 @@ const Register = () => {
                                 <select 
                                     id="district"
                                     value={district} 
-                                    onChange={(e) => setDistrict(e.target.value)} 
+                                    onChange={(e) => {
+                                        setDistrict(e.target.value);
+                                        setUpazila('');
+                                    }} 
                                     className="w-full px-4 py-3 border-2 border-base-300 rounded-xl bg-base-100 text-base-content focus:border-red-500 focus:outline-none transition-all duration-300"
                                     required
                                 >
@@ -228,12 +236,13 @@ const Register = () => {
                                     id="upazila"
                                     value={upazila} 
                                     onChange={(e) => setUpazila(e.target.value)} 
-                                    className="w-full px-4 py-3 border-2 border-base-300 rounded-xl bg-base-100 text-base-content focus:border-red-500 focus:outline-none transition-all duration-300"
+                                    disabled={!district}
+                                    className="w-full px-4 py-3 border-2 border-base-300 rounded-xl bg-base-100 text-base-content focus:border-red-500 focus:outline-none transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
                                     required
                                 >
-                                    <option disabled value="">Choose Upazila</option>
+                                    <option disabled value="">{district ? 'Choose Upazila' : 'Select district first'}</option>
                                     {
-                                        upazilas.map(upazila => (
+                                        filteredUpazilas.map(upazila => (
                                             <option key={upazila.id} value={upazila.name}>
                                                 {upazila.name}
                                             </option>

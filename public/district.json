@@ -16,7 +16,6 @@
       "lat": "23.6070822",
       "long": "89.8429406"
     },
-    
     {
       "id": "3",
       "division_id": "3",
@@ -25,7 +24,6 @@
       "lat": "24.0022858",
       "long": "90.4264283"
     },
-
     {
       "id": "4",
       "division_id": "3",
@@ -173,8 +171,8 @@
     {
       "id": "22",
       "division_id": "5",
-      "name": "Nawabganj",
-      "bn_name": "নবাবগঞ্জ",
+      "name": "Chapainawabganj",
+      "bn_name": "চাঁপাইনবাবগঞ্জ",
       "lat": "24.5965034",
       "long": "88.2775122"
     },
@@ -197,7 +195,7 @@
     {
       "id": "25",
       "division_id": "5",
-      "name": "Sirajgonj",
+      "name": "Sirajganj",
       "bn_name": "সিরাজগঞ্জ",
       "lat": "24.4533978",
       "long": "89.7006815"
@@ -341,7 +339,7 @@
     {
       "id": "43",
       "division_id": "2",
-      "name": "Chattogram",
+      "name": "Chittagong",
       "bn_name": "চট্টগ্রাম",
       "lat": "22.335109",
       "long": "91.834073"
@@ -373,7 +371,7 @@
     {
       "id": "47",
       "division_id": "2",
-      "name": "Khagrachari",
+      "name": "Khagrachhari",
       "bn_name": "খাগড়াছড়ি",
       "lat": "23.119285",
       "long": "91.984663"
@@ -413,7 +411,7 @@
     {
       "id": "52",
       "division_id": "7",
-      "name": "Maulvibazar",
+      "name": "Moulvibazar",
       "bn_name": "মৌলভীবাজার",
       "lat": "24.482934",
       "long": "91.777417"

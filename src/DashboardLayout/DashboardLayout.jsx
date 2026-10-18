@@ -34,7 +34,7 @@ const DashboardLayout = () => {
     return (
         <div className='min-h-screen flex bg-base-100 relative'>
             <Aside />
-           <div className='flex-1 p-3 sm:p-5 md:p-6 bg-base-100 min-w-0 overflow-x-hidden'>
+           <div className='flex-1 p-2 sm:p-4 md:p-5 bg-base-100 min-w-0 overflow-x-hidden'>
              <Outlet />
            </div>
            <DemoUserBadge />

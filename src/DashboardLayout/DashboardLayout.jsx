@@ -32,9 +32,9 @@ const DashboardLayout = () => {
     }, []);
 
     return (
-        <div className='min-h-screen flex bg-base-100 overflow-hidden'>
+        <div className='min-h-screen flex bg-base-100 relative'>
             <Aside />
-           <div className='flex-1 p-5 bg-base-100'>
+           <div className='flex-1 p-3 sm:p-5 md:p-6 bg-base-100 min-w-0 overflow-x-hidden'>
              <Outlet />
            </div>
            <DemoUserBadge />

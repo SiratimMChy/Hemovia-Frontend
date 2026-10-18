@@ -248,7 +248,7 @@ const Search = () => {
                                     return (
                                         <div
                                             key={donor._id}
-                                            className="bg-base-200 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 border border-base-300 overflow-hidden flex flex-col justify-between min-h-[440px] h-full"
+                                            className="bg-base-200 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 border border-base-300 overflow-hidden flex flex-col justify-between min-h-[390px] h-full"
                                         >
                                             {/* Card Header */}
                                             <div className="pt-5 sm:pt-6 px-4 sm:px-5 pb-3.5 sm:pb-4 border-b border-base-300 flex items-center justify-between gap-3 bg-base-200">

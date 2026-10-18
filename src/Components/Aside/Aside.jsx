@@ -4,12 +4,12 @@ import {
   Users, 
   FileText, 
   ChevronLeft, 
-  ChevronRight,
-  User,
-  Plus,
-  Heart,
-  Activity,
-  Sun,
+  ChevronRight, 
+  User, 
+  Plus, 
+  Heart, 
+  Activity, 
+  Sun, 
   Moon
 } from 'lucide-react';
 import { NavLink, useNavigate, Link } from 'react-router';
@@ -20,7 +20,11 @@ import { VscRequestChanges } from 'react-icons/vsc';
 const Aside = () => {
   const { role } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  
+  // Auto-collapse on small screens (< 768px)
+  const [isCollapsed, setIsCollapsed] = useState(() => {
+    return typeof window !== 'undefined' ? window.innerWidth < 768 : false;
+  });
   
   // Theme state management
   const [isDark, setIsDark] = useState(() => {
@@ -46,7 +50,6 @@ const Aside = () => {
 
   // Listen for theme changes from other components
   useEffect(() => {
-    // Set initial theme
     const savedTheme = localStorage.getItem("theme") || "light";
     document.documentElement.setAttribute("data-theme", savedTheme);
     
@@ -70,6 +73,17 @@ const Aside = () => {
     };
   }, []);
 
+  // Listen for window resize to collapse on mobile
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setIsCollapsed(true);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const getDashboardTitle = () => {
     switch (role) {
       case 'admin':
@@ -81,186 +95,148 @@ const Aside = () => {
       default:
         return 'Dashboard';
     }
-  }
+  };
 
-  const navLinkClass = ({ isActive }) =>
-    `flex items-center gap-2 sm:gap-3 px-2 sm:px-4 py-3 rounded-xl transition-all duration-200 ${isActive
-      ? 'bg-red-500 hover:bg-red-600 text-white shadow-md'
-      : 'text-base-content hover:bg-red-50 dark:hover:bg-base-300 hover:text-red-600'
-    } ${isCollapsed ? 'justify-center' : ''}`;
+  const getNavLinks = () => {
+    switch (role) {
+      case 'admin':
+        return [
+          { to: '/dashboard/admindashboard', icon: Activity, label: 'Dashboard' },
+          { to: '/dashboard/profile', icon: User, label: 'Profile' },
+          { to: '/dashboard/all-users', icon: Users, label: 'All Users' },
+          { to: '/dashboard/allRequest', icon: VscRequestChanges, label: 'All Requests' },
+        ];
+      case 'volunteer':
+        return [
+          { to: '/dashboard/volunteerdashboard', icon: Heart, label: 'Dashboard' },
+          { to: '/dashboard/profile', icon: User, label: 'Profile' },
+          { to: '/dashboard/all-users', icon: Users, label: 'All Users' },
+          { to: '/dashboard/allRequest', icon: VscRequestChanges, label: 'All Requests' },
+        ];
+      case 'donor':
+        return [
+          { to: '/dashboard/donordashboard', icon: Home, label: 'Dashboard' },
+          { to: '/dashboard/profile', icon: User, label: 'Profile' },
+          { to: '/dashboard/addRequest', icon: Plus, label: 'Add Requests' },
+          { to: '/dashboard/myRequest', icon: FileText, label: 'My Requests' },
+        ];
+      default:
+        return [];
+    }
+  };
+
+  const navLinks = getNavLinks();
+  const activeClass = 'bg-red-500 hover:bg-red-600 text-white shadow-md';
+  const inactiveClass = 'text-base-content hover:bg-red-50 dark:hover:bg-base-300 hover:text-red-600';
+
+  const handleNavClick = () => {
+    // If on mobile screen, auto-collapse after clicking a navigation link
+    if (window.innerWidth < 768) {
+      setIsCollapsed(true);
+    }
+  };
 
   return (
-    <aside className={`min-h-screen ${isCollapsed ? 'w-16 sm:w-20' : 'w-48 sm:w-56 md:w-64 lg:w-72'} bg-base-200 border-r-2 border-base-300 flex flex-col shadow-lg transition-all duration-300 relative`}>
-      {/* Toggle Button */}
-      <button
-        onClick={() => setIsCollapsed(!isCollapsed)}
-        className={`absolute top-1 ${isCollapsed ? 'left-1/2 -translate-x-1/2' : 'right-4'} bg-base-100 border-2 border-base-300 rounded-full p-1.5 shadow-md hover:bg-red-50 dark:hover:bg-base-300 hover:border-red-200 transition-all duration-200 z-10`}
-      >
-        {isCollapsed ? <ChevronRight size={16} className="text-base-content/60" /> : <ChevronLeft size={16} className="text-base-content/60" />}
-      </button>
+    <>
+      {/* Mobile Backdrop Overlay when expanded */}
+      {!isCollapsed && (
+        <div
+          className="md:hidden fixed inset-0 bg-black/40 backdrop-blur-xs z-40 transition-opacity duration-300"
+          onClick={() => setIsCollapsed(true)}
+        />
+      )}
 
-      <div className="px-3 sm:px-6 pt-8 pb-6 border-b-2 border-base-300 bg-base-100">
-        <Link
-          to="/"
-          className={`flex items-center gap-2 sm:gap-3 mb-2 ${isCollapsed ? 'justify-center' : ''}`}
-          title="Go to Home"
+      {/* Unified Single Aside Sidebar */}
+      <aside
+        className={`min-h-screen bg-base-200 border-r-2 border-base-300 flex flex-col shadow-lg transition-all duration-300 shrink-0 ${
+          isCollapsed
+            ? 'w-16 sticky top-0 z-30'
+            : 'w-64 max-w-[85vw] fixed md:sticky top-0 left-0 h-screen z-50 shadow-2xl md:shadow-lg'
+        }`}
+      >
+        {/* Single Circular Toggle Button on the border edge beside the logo */}
+        <button
+          onClick={() => setIsCollapsed(!isCollapsed)}
+          className="absolute -right-3.5 top-7 w-7 h-7 bg-base-100 border-2 border-base-300 rounded-full flex items-center justify-center shadow-md hover:border-red-400 hover:text-red-500 text-base-content/70 transition-all duration-200 z-50 cursor-pointer"
+          title={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
         >
-          <div className="mt-1.5 w-6 h-6 sm:w-8 sm:h-8 lg:w-12 lg:h-12 bg-red-500 rounded-lg flex items-center justify-center shadow-md shrink-0">
-            <MdBloodtype className="text-white" size={14} />
-          </div>
-          {!isCollapsed && (
-            <div>
-              <h1 className="text-sm sm:text-lg font-bold tracking-tight text-base-content">
+          {isCollapsed ? <ChevronRight size={14} /> : <ChevronLeft size={14} />}
+        </button>
+
+        {/* Brand Header */}
+        <div className="px-4 py-6 border-b-2 border-base-300 bg-base-100 shrink-0">
+          <Link
+            to="/"
+            onClick={handleNavClick}
+            className={`flex items-center gap-2.5 ${isCollapsed ? 'justify-center' : ''}`}
+            title="Go to Home"
+          >
+            <div className="w-8 h-8 sm:w-9 sm:h-9 bg-red-500 rounded-lg flex items-center justify-center shadow-md shrink-0">
+              <MdBloodtype className="text-white" size={18} />
+            </div>
+            {!isCollapsed && (
+              <h1 className="text-sm sm:text-base font-bold tracking-tight text-base-content truncate">
                 {getDashboardTitle()}
               </h1>
-            </div>
-          )}
-        </Link>
-      </div>
+            )}
+          </Link>
+        </div>
 
-      {/* Navigation */}
-      <nav className="flex-1 flex flex-col gap-1.5 px-2 sm:px-4 py-6">
+        {/* Navigation Links */}
+        <nav className="flex-1 flex flex-col gap-1.5 px-2.5 py-6 overflow-y-auto">
+          {navLinks.map(({ to, icon: Icon, label }) => (
+            <NavLink
+              key={to}
+              to={to}
+              onClick={handleNavClick}
+              className={({ isActive }) =>
+                `flex items-center gap-3 px-3 py-3 rounded-xl transition-all duration-200 ${
+                  isActive ? activeClass : inactiveClass
+                } ${isCollapsed ? 'justify-center' : ''}`
+              }
+              title={isCollapsed ? label : ''}
+            >
+              <Icon className="w-5 h-5 shrink-0" />
+              {!isCollapsed && (
+                <span className="font-medium text-sm whitespace-nowrap">{label}</span>
+              )}
+            </NavLink>
+          ))}
+        </nav>
 
-        {
-          role === 'admin' && (
-            <>
-              <NavLink
-                to="/dashboard/admindashboard"
-                className={navLinkClass}
-                title={isCollapsed ? 'Dashboard' : ''}
-              >
-                <Activity className='w-4 h-4 sm:w-5 sm:h-5' />
-                {!isCollapsed && <span className="font-medium text-xs sm:text-sm">Dashboard</span>}
-              </NavLink>
-              <NavLink
-                to="/dashboard/profile"
-                className={navLinkClass}
-                title={isCollapsed ? 'Profile' : ''}
-              >
-                <User className='w-4 h-4 sm:w-5 sm:h-5' />
-                {!isCollapsed && <span className="font-medium text-xs sm:text-sm">Profile</span>}
-              </NavLink>
-              <NavLink
-                to="/dashboard/all-users"
-                className={navLinkClass}
-                title={isCollapsed ? 'All Users' : ''}
-              >
-                <Users className='w-4 h-4 sm:w-5 sm:h-5' />
-                {!isCollapsed && <span className="font-medium text-xs sm:text-sm">All Users</span>}
-              </NavLink>
-              <NavLink
-                to="/dashboard/allRequest"
-                className={navLinkClass}
-                title={isCollapsed ? 'All Requests' : ''}
-              >
-                <VscRequestChanges className='w-4 h-4 sm:w-5 sm:h-5' />
-                {!isCollapsed && <span className="font-medium text-xs sm:text-sm">All Requests</span>}
-              </NavLink>
-            </>
-          )}
+        {/* Footer / Theme Toggle & Home */}
+        <div className="p-3 border-t-2 border-base-300 bg-base-100 space-y-2 shrink-0">
+          <button
+            onClick={handleThemeToggle}
+            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs sm:text-sm font-medium text-base-content hover:bg-base-200 hover:text-red-600 border-2 border-base-300 hover:border-red-200 transition-all duration-200 ${
+              isCollapsed ? 'justify-center' : ''
+            }`}
+            title={isCollapsed ? (isDark ? 'Switch to Light' : 'Switch to Dark') : ''}
+          >
+            {isDark ? (
+              <Sun size={17} className="shrink-0" />
+            ) : (
+              <Moon size={17} className="shrink-0" />
+            )}
+            {!isCollapsed && <span>{isDark ? 'Light Mode' : 'Dark Mode'}</span>}
+          </button>
 
-        {
-          role === 'volunteer' && (
-            <>
-              <NavLink
-                to="/dashboard/volunteerdashboard"
-                className={navLinkClass}
-                title={isCollapsed ? 'Dashboard' : ''}
-              >
-                <Heart className='w-4 h-4 sm:w-5 sm:h-5' />
-                {!isCollapsed && <span className="font-medium text-xs sm:text-sm">Dashboard</span>}
-              </NavLink>
-              <NavLink
-                to="/dashboard/profile"
-                className={navLinkClass}
-                title={isCollapsed ? 'Profile' : ''}
-              >
-                <User className='w-4 h-4 sm:w-5 sm:h-5' />
-                {!isCollapsed && <span className="font-medium text-xs sm:text-sm">Profile</span>}
-              </NavLink>
-              <NavLink
-                to="/dashboard/all-users"
-                className={navLinkClass}
-                title={isCollapsed ? 'All Users' : ''}
-              >
-                <Users className='w-4 h-4 sm:w-5 sm:h-5' />
-                {!isCollapsed && <span className="font-medium text-xs sm:text-sm">All Users</span>}
-              </NavLink>
-              <NavLink
-                to="/dashboard/allRequest"
-                className={navLinkClass}
-                title={isCollapsed ? 'All Requests' : ''}
-              >
-                <VscRequestChanges className='w-4 h-4 sm:w-5 sm:h-5' />
-                {!isCollapsed && <span className="font-medium text-xs sm:text-sm">All Requests</span>}
-              </NavLink>
-            </>
-          )}
-
-        {
-          role === 'donor' && (
-            <>
-              <NavLink
-                to="/dashboard/donordashboard"
-                className={navLinkClass}
-                title={isCollapsed ? 'Dashboard' : ''}
-              >
-                <Home className='w-4 h-4 sm:w-5 sm:h-5' />
-                {!isCollapsed && <span className="font-medium text-xs sm:text-sm">Dashboard</span>}
-              </NavLink>
-              <NavLink
-                to="/dashboard/profile"
-                className={navLinkClass}
-                title={isCollapsed ? 'Profile' : ''}
-              >
-                <User className='w-4 h-4 sm:w-5 sm:h-5' />
-                {!isCollapsed && <span className="font-medium text-xs sm:text-sm">Profile</span>}
-              </NavLink>
-              <NavLink
-                to="/dashboard/addRequest"
-                className={navLinkClass}
-                title={isCollapsed ? 'Add Requests' : ''}
-              >
-                <Plus className='w-4 h-4 sm:w-5 sm:h-5' />
-                {!isCollapsed && <span className="font-medium text-xs sm:text-sm">Add Requests</span>}
-              </NavLink>
-              <NavLink
-                to="/dashboard/myRequest"
-                className={navLinkClass}
-                title={isCollapsed ? 'My Requests' : ''}
-              >
-                <FileText className='w-4 h-4 sm:w-5 sm:h-5' />
-                {!isCollapsed && <span className="font-medium text-xs sm:text-sm">My Requests</span>}
-              </NavLink>
-            </>
-          )
-        }
-
-      </nav>
-
-      {/* Footer / Theme Toggle & Home */}
-      <div className="p-2 sm:p-4 border-t-2 border-base-300 bg-base-100 space-y-2">
-        {/* Theme Toggle */}
-        <button
-          onClick={handleThemeToggle}
-          className={`w-full flex items-center gap-2 sm:gap-3 px-2 sm:px-4 py-3 rounded-xl text-xs sm:text-sm font-medium text-base-content hover:bg-base-200 hover:text-red-600 border-2 border-base-300 hover:border-red-200 transition-all duration-200 ${isCollapsed ? 'justify-center' : ''}`}
-          title={isCollapsed ? (isDark ? 'Switch to Light' : 'Switch to Dark') : ''}
-        >
-          {isDark ? <Sun size={16} className="sm:w-[18px] sm:h-[18px]" /> : <Moon size={16} className="sm:w-[18px] sm:h-[18px]" />}
-          {!isCollapsed && <span>{isDark ? 'Light Mode' : 'Dark Mode'}</span>}
-        </button>
-        
-        {/* Home Button */}
-        <button
-          onClick={() => navigate('/')}
-          className={`w-full flex items-center gap-2 sm:gap-3 px-2 sm:px-4 py-3 rounded-xl text-xs sm:text-sm font-medium text-base-content hover:bg-red-50 dark:hover:bg-base-300 hover:text-red-600 border-2 border-base-300 hover:border-red-200 transition-all duration-200 ${isCollapsed ? 'justify-center' : ''}`}
-          title={isCollapsed ? 'Go to Home' : ''}
-        >
-          <Home size={16} className="sm:w-[18px] sm:h-[18px]" />
-          {!isCollapsed && <span>Go to Home</span>}
-        </button>
-      </div>
-    </aside>
+          <button
+            onClick={() => {
+              handleNavClick();
+              navigate('/');
+            }}
+            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs sm:text-sm font-medium text-base-content hover:bg-red-50 dark:hover:bg-base-300 hover:text-red-600 border-2 border-base-300 hover:border-red-200 transition-all duration-200 ${
+              isCollapsed ? 'justify-center' : ''
+            }`}
+            title={isCollapsed ? 'Go to Home' : ''}
+          >
+            <Home size={17} className="shrink-0" />
+            {!isCollapsed && <span>Go to Home</span>}
+          </button>
+        </div>
+      </aside>
+    </>
   );
 };
 

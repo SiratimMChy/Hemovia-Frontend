@@ -180,14 +180,14 @@ const Navbar = () => {
                         </li>
                     </ul>
                 </div>
-                <div className="flex items-center gap-2">
+                <Link to="/" className="flex items-center gap-2 select-none">
                     <div className="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center shadow-md">
                         <MdBloodtype className="text-white" size={18} />
                     </div>
                     <span className="text-lg md:text-xl font-extrabold tracking-tight text-base-content">
                         Hemovia
                     </span>
-                </div>
+                </Link>
             </div>
             
             <div className="navbar-center hidden lg:flex">

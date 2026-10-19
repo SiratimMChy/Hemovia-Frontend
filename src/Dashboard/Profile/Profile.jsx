@@ -6,6 +6,8 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useDemoRestriction } from "../../Hooks/useDemoRestriction";
+import ProfileHeader from "./ProfileHeader";
+import ProfileFormFields from "./ProfileFormFields";
 
 const Profile = () => {
     const { setUser, user } = useContext(AuthContext);
@@ -31,21 +33,28 @@ const Profile = () => {
         }
     }, [user?.email, axiosSecure]);
 
-    const handleEdit = () => {
+    const handleEdit = (e) => {
+        if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
         setIsEditing(true);
     };
 
-    const handleCancel = () => {
+    const handleCancel = (e) => {
+        if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
         setIsEditing(false);
     };
 
     const handleUpdate = async (e) => {
         e.preventDefault();
+        if (!isEditing) return;
         
         // Check if user is demo user and restrict action
-        if (checkDemoRestriction()) {
-            return;
-        }
+        if (checkDemoRestriction()) return;
 
         setUploading(true);
         const form = e.target;
@@ -73,33 +82,15 @@ const Profile = () => {
             }
 
             // Update Firebase profile
-            await updateProfile(auth.currentUser, {
-                displayName: name,
-                photoURL: imageUrl
-            });
+            await updateProfile(auth.currentUser, { displayName: name, photoURL: imageUrl });
 
             // Update database
-            const updatedData = {
-                name,
-                imageUrl,
-                district,
-                upazila,
-                bloodGroup
-            };
-
-            await axiosSecure.put(`/users/${user.email}`, updatedData);
+            const updatedData = { name, imageUrl, district, upazila, bloodGroup };
+            await axiosSecure.patch('/users/update/profile', updatedData);
 
             // Update local state
-            setUser({
-                ...user,
-                displayName: name,
-                photoURL: imageUrl
-            });
-
-            setProfileData({
-                ...profileData,
-                ...updatedData
-            });
+            setUser({ ...user, displayName: name, photoURL: imageUrl });
+            setProfileData({ ...profileData, ...updatedData });
 
             setIsEditing(false);
             toast.success("Profile updated successfully!");
@@ -114,192 +105,83 @@ const Profile = () => {
 
     if (loading) {
         return (
-            <div className="flex justify-center items-center min-h-screen">
+            <div className="flex justify-center items-center min-h-[50vh] py-12">
                 <span className="loading loading-spinner loading-lg text-red-600"></span>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-base-100 p-4 md:p-6">
-            <div className="max-w-4xl mx-auto">
-                {/* Header */}
-                <div className="text-center mb-8">
-                    <h1 className="text-3xl md:text-4xl font-bold text-base-content mb-2">
-                        My Profile
-                    </h1>
-                    <p className="text-base-content/70">
-                        Manage your account information and preferences
-                    </p>
-                </div>
+        <div className="w-full max-w-4xl mx-auto py-1 sm:py-4 md:py-6 px-0 sm:px-2 md:px-0 min-w-0">
+            {/* Header */}
+            <div className="text-center mb-4 sm:mb-8">
+                <h1 className="text-xl sm:text-3xl md:text-4xl font-bold text-base-content mb-1 sm:mb-2">
+                    My Profile
+                </h1>
+                <p className="text-base-content/70 text-xs sm:text-sm md:text-base">
+                    Manage your account information and preferences
+                </p>
+            </div>
 
-                {/* Profile Card */}
-                <div className="bg-base-200 border-2 border-base-300 rounded-xl shadow-lg p-6 md:p-8">
-                    {/* Profile Header */}
-                    <div className="flex flex-col md:flex-row items-center gap-6 mb-8">
-                        <div className="avatar">
-                            <div className="w-24 h-24 md:w-32 md:h-32 rounded-full ring ring-red-500 ring-offset-base-100 ring-offset-2">
-                                <img 
-                                    src={user?.photoURL || profileData?.imageUrl || '/default-avatar.png'} 
-                                    alt="Profile"
-                                    className="rounded-full object-cover"
-                                />
-                            </div>
-                        </div>
-                        <div className="text-center md:text-left">
-                            <h2 className="text-2xl md:text-3xl font-bold text-base-content">
-                                {user?.displayName || profileData?.name || 'User'}
-                            </h2>
-                            <p className="text-base-content/70 text-lg">
-                                {user?.email}
-                            </p>
-                            <div className="badge badge-lg bg-red-600 text-white font-bold mt-2">
-                                {profileData?.role?.toUpperCase() || 'USER'}
-                            </div>
-                        </div>
-                    </div>
+            {/* Profile Card */}
+            <div className="bg-base-200 border border-base-300 rounded-xl sm:rounded-2xl shadow-sm sm:shadow-lg p-3 sm:p-5 md:p-8 min-w-0 w-full">
+                {/* Profile Header */}
+                <ProfileHeader user={user} profileData={profileData} />
 
-                    {/* Profile Form */}
-                    <form onSubmit={handleUpdate} className="space-y-6">
-                        <div className="grid md:grid-cols-2 gap-6">
-                            {/* Name Field */}
-                            <div>
-                                <label className="label">
-                                    <span className="label-text text-base-content font-semibold">Full Name</span>
-                                </label>
-                                <input
-                                    defaultValue={user?.displayName || profileData?.name}
-                                    name="name"
-                                    type="text"
-                                    placeholder="Enter your name"
-                                    className={`input input-bordered w-full rounded-lg bg-base-100 text-base-content border-base-300 ${isEditing ? 'focus:ring-2 focus:ring-red-500 focus:border-transparent' : 'bg-base-300 cursor-not-allowed'}`}
-                                    disabled={!isEditing}
-                                    required
-                                />
-                            </div>
+                {/* Profile Form */}
+                <form
+                    onSubmit={(e) => {
+                        e.preventDefault();
+                        if (isEditing) handleUpdate(e);
+                    }}
+                    className="space-y-3.5 sm:space-y-6 w-full min-w-0"
+                >
+                    <ProfileFormFields
+                        user={user}
+                        profileData={profileData}
+                        isEditing={isEditing}
+                    />
 
-                            {/* Email Field */}
-                            <div>
-                                <label className="label">
-                                    <span className="label-text text-base-content font-semibold">Email Address</span>
-                                </label>
-                                <input
-                                    defaultValue={user?.email}
-                                    type="email"
-                                    className="input input-bordered w-full rounded-lg bg-base-300 text-base-content border-base-300 cursor-not-allowed"
-                                    disabled
-                                />
-                            </div>
-
-                            {/* Blood Group Field */}
-                            <div>
-                                <label className="label">
-                                    <span className="label-text text-base-content font-semibold">Blood Group</span>
-                                </label>
-                                <select
-                                    name="bloodGroup"
-                                    defaultValue={profileData?.bloodGroup}
-                                    className={`select select-bordered w-full rounded-lg bg-base-100 text-base-content border-base-300 ${isEditing ? 'focus:ring-2 focus:ring-red-500 focus:border-transparent' : 'bg-base-300 cursor-not-allowed'}`}
-                                    disabled={!isEditing}
-                                    required
-                                >
-                                    <option value="">Select Blood Group</option>
-                                    <option value="A+">A+</option>
-                                    <option value="A-">A-</option>
-                                    <option value="B+">B+</option>
-                                    <option value="B-">B-</option>
-                                    <option value="AB+">AB+</option>
-                                    <option value="AB-">AB-</option>
-                                    <option value="O+">O+</option>
-                                    <option value="O-">O-</option>
-                                </select>
-                            </div>
-
-                            {/* District Field */}
-                            <div>
-                                <label className="label">
-                                    <span className="label-text text-base-content font-semibold">District</span>
-                                </label>
-                                <input
-                                    defaultValue={profileData?.district}
-                                    name="district"
-                                    type="text"
-                                    placeholder="Enter your district"
-                                    className={`input input-bordered w-full rounded-lg bg-base-100 text-base-content border-base-300 ${isEditing ? 'focus:ring-2 focus:ring-red-500 focus:border-transparent' : 'bg-base-300 cursor-not-allowed'}`}
-                                    disabled={!isEditing}
-                                    required
-                                />
-                            </div>
-
-                            {/* Upazila Field */}
-                            <div>
-                                <label className="label">
-                                    <span className="label-text text-base-content font-semibold">Upazila</span>
-                                </label>
-                                <input
-                                    defaultValue={profileData?.upazila}
-                                    name="upazila"
-                                    type="text"
-                                    placeholder="Enter your upazila"
-                                    className={`input input-bordered w-full rounded-lg bg-base-100 text-base-content border-base-300 ${isEditing ? 'focus:ring-2 focus:ring-red-500 focus:border-transparent' : 'bg-base-300 cursor-not-allowed'}`}
-                                    disabled={!isEditing}
-                                    required
-                                />
-                            </div>
-
-                            {/* Photo Upload Field */}
-                            <div>
-                                <label className="label">
-                                    <span className="label-text text-base-content font-semibold">Profile Photo</span>
-                                </label>
-                                <input
-                                    name="photoUrl"
-                                    type="file"
-                                    accept="image/*"
-                                    className={`file-input file-input-bordered w-full rounded-lg bg-base-100 text-base-content border-base-300 ${isEditing ? 'focus:ring-2 focus:ring-red-500 focus:border-transparent' : 'bg-base-300 cursor-not-allowed'}`}
-                                    disabled={!isEditing}
-                                />
-                            </div>
-                        </div>
-
-                        {/* Action Buttons */}
-                        <div className="flex flex-col sm:flex-row gap-4 pt-6">
-                            {!isEditing ? (
+                    {/* Action Buttons */}
+                    <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-4 pt-3 sm:pt-6 w-full min-w-0">
+                        {!isEditing ? (
+                            <button
+                                key="btn-edit"
+                                type="button"
+                                onClick={handleEdit}
+                                className="btn bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white border-0 rounded-lg sm:rounded-xl shadow-md hover:shadow-lg transition-all duration-300 w-full flex-1 h-10 sm:h-12 min-h-[2.5rem] sm:min-h-[3rem] py-2 sm:py-3 px-3 sm:px-6 text-sm sm:text-base font-bold"
+                            >
+                                Edit Profile
+                            </button>
+                        ) : (
+                            <>
                                 <button
-                                    type="button"
-                                    onClick={handleEdit}
-                                    className="btn bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white border-0 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex-1 min-h-[4rem] py-4 px-8 text-lg font-semibold"
+                                    key="btn-save"
+                                    type="submit"
+                                    disabled={uploading}
+                                    className="btn bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white border-0 rounded-lg sm:rounded-xl shadow-md hover:shadow-lg transition-all duration-300 w-full flex-1 h-10 sm:h-12 min-h-[2.5rem] sm:min-h-[3rem] py-2 sm:py-3 px-3 sm:px-6 text-sm sm:text-base font-bold"
                                 >
-                                    Edit Profile
+                                    {uploading ? (
+                                        <>
+                                            <span className="loading loading-spinner loading-xs sm:loading-sm"></span>
+                                            Updating...
+                                        </>
+                                    ) : (
+                                        'Save Changes'
+                                    )}
                                 </button>
-                            ) : (
-                                <>
-                                    <button
-                                        type="submit"
-                                        disabled={uploading}
-                                        className="btn bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white border-0 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex-1 min-h-[4rem] py-4 px-8 text-lg font-semibold"
-                                    >
-                                        {uploading ? (
-                                            <>
-                                                <span className="loading loading-spinner loading-sm"></span>
-                                                Updating...
-                                            </>
-                                        ) : (
-                                            'Save Changes'
-                                        )}
-                                    </button>
-                                    <button
-                                        type="button"
-                                        onClick={handleCancel}
-                                        className="btn bg-base-300 hover:bg-base-400 text-base-content border-0 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex-1 min-h-[4rem] py-4 px-8 text-lg font-semibold"
-                                    >
-                                        Cancel
-                                    </button>
-                                </>
-                            )}
-                        </div>
-                    </form>
-                </div>
+                                <button
+                                    key="btn-cancel"
+                                    type="button"
+                                    onClick={handleCancel}
+                                    className="btn bg-base-300 hover:bg-base-400 text-base-content border-0 rounded-lg sm:rounded-xl shadow-md hover:shadow-lg transition-all duration-300 w-full flex-1 h-10 sm:h-12 min-h-[2.5rem] sm:min-h-[3rem] py-2 sm:py-3 px-3 sm:px-6 text-sm sm:text-base font-bold"
+                                >
+                                    Cancel
+                                </button>
+                            </>
+                        )}
+                    </div>
+                </form>
             </div>
         </div>
     );

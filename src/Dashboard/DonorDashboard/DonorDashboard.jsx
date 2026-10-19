@@ -3,9 +3,9 @@ import { Link } from 'react-router';
 import { AuthContext } from '../../Provider/AuthProvider';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { Plus } from 'lucide-react';
-import DonorStatCards from './components/DonorStatCards';
-import DonorAnalytics from './components/DonorAnalytics';
-import DonorRecentRequests from './components/DonorRecentRequests';
+import DonorStatCards from './DonorStatCards';
+import DonorAnalytics from './DonorAnalytics';
+import DonorRecentRequests from './DonorRecentRequests';
 
 const DonorDashboard = () => {
   const { user } = useContext(AuthContext);

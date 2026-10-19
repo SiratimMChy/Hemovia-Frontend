@@ -64,9 +64,10 @@ export const SPACING = {
 };
 
 export const BORDER_RADIUS = {
-  default: 'rounded-xl',
-  small: 'rounded-lg',
-  large: 'rounded-2xl',
+  default: 'rounded-lg',
+  button: 'rounded-lg',
+  small: 'rounded-md',
+  large: 'rounded-xl',
   full: 'rounded-full'
 };
 
@@ -92,14 +93,14 @@ export const COMPONENT_STYLES = {
     interactive: `${COLORS.neutral.surface} border border-base-300/50 ${BORDER_RADIUS.default} p-4 sm:p-5 md:p-6 lg:p-8 ${SHADOWS.default} ${SHADOWS.hover} ${TRANSITIONS.default} w-full max-w-full min-h-[200px] sm:min-h-[220px]`
   },
 
-  // Button styles
+  // Button styles - Universal rounded-lg across the whole project
   button: {
-    primary: `bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-6 py-4 ${BORDER_RADIUS.default} font-semibold ${SHADOWS.default} ${SHADOWS.hover} ${TRANSITIONS.default} min-h-[3rem]`,
-    secondary: `${COLORS.neutral.surface} border border-base-300/50 ${COLORS.neutral.text} px-6 py-4 ${BORDER_RADIUS.default} font-semibold ${SHADOWS.small} hover:${COLORS.neutral.elevated} ${TRANSITIONS.default} min-h-[3rem]`,
-    success: `${COLORS.secondary[600]} hover:${COLORS.secondary[700]} text-white px-6 py-4 ${BORDER_RADIUS.default} font-semibold ${SHADOWS.default} ${TRANSITIONS.default} min-h-[3rem]`,
-    accent: `${COLORS.accent[600]} hover:${COLORS.accent[700]} text-white px-6 py-4 ${BORDER_RADIUS.default} font-semibold ${SHADOWS.default} ${TRANSITIONS.default} min-h-[3rem]`,
-    large: `bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-8 py-5 ${BORDER_RADIUS.default} font-semibold ${SHADOWS.default} ${SHADOWS.hover} ${TRANSITIONS.default} min-h-[4rem] text-lg`,
-    cancel: `bg-base-300 hover:bg-base-400 text-base-content px-6 py-4 ${BORDER_RADIUS.default} font-semibold ${SHADOWS.small} hover:shadow-xl ${TRANSITIONS.default} min-h-[3rem]`
+    primary: `bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-6 py-4 rounded-lg font-semibold ${SHADOWS.default} ${SHADOWS.hover} ${TRANSITIONS.default} min-h-[3rem]`,
+    secondary: `${COLORS.neutral.surface} border border-base-300/50 ${COLORS.neutral.text} px-6 py-4 rounded-lg font-semibold ${SHADOWS.small} hover:${COLORS.neutral.elevated} ${TRANSITIONS.default} min-h-[3rem]`,
+    success: `bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white px-6 py-4 rounded-lg font-semibold ${SHADOWS.default} ${SHADOWS.hover} ${TRANSITIONS.default} min-h-[3rem]`,
+    accent: `bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-6 py-4 rounded-lg font-semibold ${SHADOWS.default} ${SHADOWS.hover} ${TRANSITIONS.default} min-h-[3rem]`,
+    large: `bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-8 py-5 rounded-lg font-semibold ${SHADOWS.default} ${SHADOWS.hover} ${TRANSITIONS.default} min-h-[4rem] text-lg`,
+    cancel: `bg-base-300 hover:bg-base-400 text-base-content px-6 py-4 rounded-lg font-semibold ${SHADOWS.small} hover:shadow-xl ${TRANSITIONS.default} min-h-[3rem]`
   },
 
   // Input styles

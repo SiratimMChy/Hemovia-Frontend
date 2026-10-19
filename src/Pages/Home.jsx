@@ -7,7 +7,7 @@ import WhyDonateBlood from '../Components/Home/WhyDonateBlood';
 import FeaturedCenters from '../Components/Home/FeaturedCenters';
 import LiveImpact from '../Components/Home/LiveImpact';
 import BloodCompatibilitySection from './BloodCompatibilitySection';
-import FAQPage from './FAQPage';
+import FAQPage from './FAQ/FAQPage';
 import ContactSection from '../Components/Home/ContactSection';
 
 const Home = () => {

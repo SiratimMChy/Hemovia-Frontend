@@ -1,21 +1,15 @@
 import { useContext, useState, useEffect } from 'react';
 import { 
   Home, 
-  Users, 
-  FileText, 
   ChevronLeft, 
   ChevronRight, 
-  User, 
-  Plus, 
-  Heart, 
-  Activity, 
   Sun, 
   Moon
 } from 'lucide-react';
 import { NavLink, useNavigate, Link } from 'react-router';
 import { AuthContext } from '../../Provider/AuthProvider';
 import { MdBloodtype } from 'react-icons/md';
-import { VscRequestChanges } from 'react-icons/vsc';
+import { getDashboardTitle, getNavLinks } from './asideConfig';
 
 const Aside = () => {
   const { role } = useContext(AuthContext);
@@ -84,48 +78,7 @@ const Aside = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const getDashboardTitle = () => {
-    switch (role) {
-      case 'admin':
-        return 'Admin Dashboard';
-      case 'donor':
-        return 'Donor Dashboard';
-      case 'volunteer':
-        return 'Volunteer Dashboard';
-      default:
-        return 'Dashboard';
-    }
-  };
-
-  const getNavLinks = () => {
-    switch (role) {
-      case 'admin':
-        return [
-          { to: '/dashboard/admindashboard', icon: Activity, label: 'Dashboard' },
-          { to: '/dashboard/profile', icon: User, label: 'Profile' },
-          { to: '/dashboard/all-users', icon: Users, label: 'All Users' },
-          { to: '/dashboard/allRequest', icon: VscRequestChanges, label: 'All Requests' },
-        ];
-      case 'volunteer':
-        return [
-          { to: '/dashboard/volunteerdashboard', icon: Heart, label: 'Dashboard' },
-          { to: '/dashboard/profile', icon: User, label: 'Profile' },
-          { to: '/dashboard/all-users', icon: Users, label: 'All Users' },
-          { to: '/dashboard/allRequest', icon: VscRequestChanges, label: 'All Requests' },
-        ];
-      case 'donor':
-        return [
-          { to: '/dashboard/donordashboard', icon: Home, label: 'Dashboard' },
-          { to: '/dashboard/profile', icon: User, label: 'Profile' },
-          { to: '/dashboard/addRequest', icon: Plus, label: 'Add Requests' },
-          { to: '/dashboard/myRequest', icon: FileText, label: 'My Requests' },
-        ];
-      default:
-        return [];
-    }
-  };
-
-  const navLinks = getNavLinks();
+  const navLinks = getNavLinks(role);
   const activeClass = 'bg-red-500 hover:bg-red-600 text-white shadow-md';
   const inactiveClass = 'text-base-content hover:bg-red-50 dark:hover:bg-base-300 hover:text-red-600';
 
@@ -157,7 +110,7 @@ const Aside = () => {
         {/* Single Circular Toggle Button on the border edge beside the logo */}
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
-          className="absolute -right-3.5 top-7 w-7 h-7 bg-base-100 border-2 border-base-300 rounded-full flex items-center justify-center shadow-md hover:border-red-400 hover:text-red-500 text-base-content/70 transition-all duration-200 z-50 cursor-pointer"
+          className="absolute -right-2 top-17 w-7 h-7 bg-base-100 border-2 border-base-300 rounded-full flex items-center justify-center shadow-md hover:border-red-400 hover:text-red-500 text-base-content/70 transition-all duration-200 z-50 cursor-pointer"
           title={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
         >
           {isCollapsed ? <ChevronRight size={14} /> : <ChevronLeft size={14} />}
@@ -176,7 +129,7 @@ const Aside = () => {
             </div>
             {!isCollapsed && (
               <h1 className="text-sm sm:text-base font-bold tracking-tight text-base-content truncate">
-                {getDashboardTitle()}
+                {getDashboardTitle(role)}
               </h1>
             )}
           </Link>

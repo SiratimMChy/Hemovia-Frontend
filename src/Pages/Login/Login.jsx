@@ -1,14 +1,16 @@
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router';
-import auth from '../Firebase/firebase.config';
-import { AuthContext } from '../Provider/AuthProvider';
+import auth from '../../Firebase/firebase.config';
+import { AuthContext } from '../../Provider/AuthProvider';
 import { useLocation } from 'react-router';
 import { toast } from 'react-toastify';
-import { FaEnvelope, FaLock, FaEye, FaEyeSlash, FaUser, FaUserShield } from 'react-icons/fa';
-import useAxiosSecure from '../Hooks/useAxiosSecure';
-import { Card, Button, Input } from '../Components/UI';
-import { COLORS, SPACING, BORDER_RADIUS, TYPOGRAPHY, LAYOUT } from '../styles/designSystem';
+import { FaEnvelope, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
+import { Card, Button, Input } from '../../Components/UI';
+import DemoLoginModal from './DemoLoginModal';
+import { COLORS, SPACING, BORDER_RADIUS, TYPOGRAPHY, LAYOUT } from '../../styles/designSystem';
+
 const Login = () => {
     const { setUser } = useContext(AuthContext);
     const location = useLocation();
@@ -19,6 +21,7 @@ const Login = () => {
     const [demoUsers, setDemoUsers] = useState([]);
     const [loadingDemo, setLoadingDemo] = useState(false);
     const axiosSecure = useAxiosSecure();
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const email = e.target.email.value;
@@ -26,7 +29,7 @@ const Login = () => {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
-                setUser(user)
+                setUser(user);
                 toast.success('Login successful!');
                 navigate(path);
             })
@@ -34,7 +37,8 @@ const Login = () => {
                 console.log(error);
                 toast.error(error.message);
             });
-    }
+    };
+
     const fetchDemoUsers = async () => {
         setLoadingDemo(true);
         try {
@@ -54,10 +58,12 @@ const Login = () => {
             setLoadingDemo(false);
         }
     };
+
     const handleDemoButtonClick = () => {
         setShowDemoModal(true);
         fetchDemoUsers();
     };
+
     const handleDemoLogin = (demoUser) => {
         const emailInput = document.querySelector('input[name="email"]');
         const passwordInput = document.querySelector('input[name="password"]');
@@ -74,6 +80,7 @@ const Login = () => {
         }
         setShowDemoModal(false);
     };
+
     const hanldeforget = (e) => {
         e.preventDefault();
         const emailInput = e.target.form.email.value;
@@ -82,12 +89,12 @@ const Login = () => {
             return;
         }
         navigate(`/forgetpassword/${emailInput}`);
-    }
+    };
+
     return (
         <div className='min-h-screen bg-base-100 flex items-center justify-center px-4 py-10'>
             <title>Login</title>
             <div className="w-full max-w-lg">
-                {}
                 <div className="text-center mb-8">
                     <h1 className={`${TYPOGRAPHY.heading.h1} ${SPACING.marginMd} tracking-tight`}>
                         Welcome <span className="bg-gradient-to-r from-red-500 to-red-600 bg-clip-text text-transparent">Back</span>
@@ -99,7 +106,6 @@ const Login = () => {
                 <Card variant="elevated">
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <fieldset className="space-y-6">
-                            {}
                             <Input
                                 id="email"
                                 name="email"
@@ -110,7 +116,6 @@ const Login = () => {
                                 autoComplete="email"
                                 required
                             />
-                            {}
                             <div>
                                 <label className="block text-sm font-semibold text-base-content mb-2">
                                     <FaLock className="inline mr-2 text-base-content/60" /> Password
@@ -135,7 +140,6 @@ const Login = () => {
                                     </button>
                                 </div>
                             </div>
-                            {}
                             <div className="text-right">
                                 <button 
                                     type="button" 
@@ -145,11 +149,9 @@ const Login = () => {
                                     Forgot password?
                                 </button>
                             </div>
-                            {}
                             <Button type="submit" className="w-full">
                                 Sign In
                             </Button>
-                            {}
                             <Button 
                                 type="button"
                                 variant="secondary"
@@ -159,7 +161,6 @@ const Login = () => {
                                 Try Demo Login
                             </Button>
                         </fieldset>
-                        {}
                         <div className="text-center mt-6 pt-6 border-t border-base-300">
                             <p className="text-base-content/60">
                                 Don't have an account?{' '}
@@ -174,75 +175,15 @@ const Login = () => {
                     </form>
                 </Card>
             </div>
-            {}
-            {showDemoModal && (
-                <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-                    <Card variant="elevated" className="w-full max-w-md">
-                        <div className="text-center mb-6">
-                            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl shadow-lg mb-4">
-                                <FaUser className="w-8 h-8 text-white" />
-                            </div>
-                            <h3 className={TYPOGRAPHY.heading.h3}>
-                                Choose Demo Login Type
-                            </h3>
-                            <p className={`${TYPOGRAPHY.body.default} mt-2`}>
-                                Select which type of demo user you want to login as
-                            </p>
-                        </div>
-                        {loadingDemo ? (
-                            <div className="text-center py-8">
-                                <div className="loading loading-spinner loading-lg text-red-500"></div>
-                                <p className="text-base-content/70 mt-2">Loading demo users...</p>
-                            </div>
-                        ) : (
-                            <div className="space-y-4 mb-6">
-                                {demoUsers.map((demoUser) => (
-                                    <Button
-                                        key={demoUser._id}
-                                        onClick={() => handleDemoLogin(demoUser)}
-                                        variant={(demoUser.role === 'admin' || demoUser.role === 'demoadmin') ? 'accent' : 'secondary'}
-                                        className="w-full justify-start"
-                                    >
-                                        {(demoUser.role === 'admin' || demoUser.role === 'demoadmin') ? 
-                                            <FaUserShield className="w-5 h-5" /> : 
-                                            <FaUser className="w-5 h-5" />
-                                        }
-                                        <div className="text-left">
-                                            <div className="font-bold">Demo {(demoUser.role === 'admin' || demoUser.role === 'demoadmin') ? 'Admin' : 'Donor'}</div>
-                                            <div className="text-xs opacity-90">{demoUser.email}</div>
-                                        </div>
-                                    </Button>
-                                ))}
-                            </div>
-                        )}
-                        {}
-                        <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-900/50 rounded-xl p-4 mb-6">
-                            <div className="flex items-start gap-3">
-                                <div className="w-5 h-5 bg-yellow-500 rounded-full flex items-center justify-center mt-0.5">
-                                    <span className="text-white text-xs font-bold">!</span>
-                                </div>
-                                <div>
-                                    <h4 className="text-sm font-semibold text-yellow-800 dark:text-yellow-400 mb-1">
-                                        Demo User Limitations
-                                    </h4>
-                                    <p className="text-xs text-yellow-700 dark:text-yellow-300 leading-relaxed">
-                                        As a demo user, you can view all features but cannot make any changes or add new data.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        {}
-                        <Button
-                            onClick={() => setShowDemoModal(false)}
-                            variant="secondary"
-                            className="w-full"
-                        >
-                            Cancel
-                        </Button>
-                    </Card>
-                </div>
-            )}
+            <DemoLoginModal
+                isOpen={showDemoModal}
+                onClose={() => setShowDemoModal(false)}
+                loadingDemo={loadingDemo}
+                demoUsers={demoUsers}
+                onDemoLogin={handleDemoLogin}
+            />
         </div>
     );
 };
+
 export default Login;

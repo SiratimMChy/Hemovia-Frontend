@@ -1,8 +1,8 @@
 import { createBrowserRouter } from "react-router";
 import RootLayout from "../RootLayout/RootLayout";
 import Home from "../Pages/Home";
-import Login from "../Pages/Login";
-import Register from "../Pages/Register";
+import Login from "../Pages/Login/Login";
+import Register from "../Pages/Register/Register";
 import DashboardLayout from "../DashboardLayout/DashboardLayout";
 import AddRequest from "../Dashboard/AddRequest/AddRequest";
 import AllUsers from "../Dashboard/AllUsers/AllUsers";
@@ -16,15 +16,15 @@ import Donate from "../Donate/Donate";
 import PaymentSuccess from "../Pages/PaymentSuccess/PaymentSuccess";
 import PaymentCancelled from "../Pages/PaymentCancelled/PaymentCancelled";
 import DonationRequests from "../Pages/DonationRequests/DonationRequests";
-import EditRequest from "../Pages/EditRequest";
-import ViewRequest from "../Pages/ViewRequest";
+import EditRequest from "../Pages/EditRequest/EditRequest";
+import ViewRequest from "../Pages/ViewRequest/ViewRequest";
 import VolunteerDashboard from "../Dashboard/VolunteerDashboard/VolunteerDashboard";
-import Search from "../Pages/Search";
+import Search from "../Pages/Search/Search";
 import BloodCompatibilitySection from "../Pages/BloodCompatibilitySection";
-import FAQPage from "../Pages/FAQPage";
-import DonationCentersPage from "../Pages/DonationCentersPage";
-import CenterDetails from "../Pages/CenterDetails";
-import About from "../Pages/About";
+import FAQPage from "../Pages/FAQ/FAQPage";
+import DonationCentersPage from "../Pages/DonationCenters/DonationCentersPage";
+import CenterDetails from "../Pages/CenterDetails/CenterDetails";
+import About from "../Pages/About/About";
 import ForgetPassword from "../Pages/ForgetPassword";
 
 

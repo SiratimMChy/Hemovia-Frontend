@@ -222,33 +222,39 @@ Real account? → Action proceeds normally
 ```
 App
 ├── RootLayout
-│   ├── Navbar
+│   ├── Navbar (NavbarNavLinks, NavbarUserMenu, ThemeToggle)
 │   ├── Public Routes
-│   │   ├── Home (Hero, HowItWorks, Centers, Compatibility, FAQ, Contact)
-│   │   ├── Login (+ Demo auto-fill)
-│   │   ├── Register
-│   │   ├── Search
-│   │   ├── DonationRequests
-│   │   ├── ViewRequest
-│   │   ├── DonationCentersPage / CenterDetails
-│   │   ├── BloodCompatibilitySection
-│   │   ├── FAQPage
-│   │   └── About
+│   │   ├── Home (HeroBanner, HowItWorks, FeaturedCenters, LiveImpact, WhyDonateBlood, ContactSection)
+│   │   ├── Login (LoginForm, DemoLoginBox)
+│   │   ├── Register (RegisterForm, RegisterAvatarUpload)
+│   │   ├── ForgetPassword (Password reset view)
+│   │   ├── Search (SearchForm, SearchResultsGrid)
+│   │   ├── DonationRequests (DonationRequestCard)
+│   │   ├── ViewRequest (RequestDetailsCard, DonateModal)
+│   │   ├── EditRequest (EditRequestForm)
+│   │   ├── DonationCentersPage (DonationCentersGrid, Search, Stats, CTA)
+│   │   ├── CenterDetails (CenterHeader, CenterInfoCards, CenterMapPlaceholder)
+│   │   ├── BloodCompatibilitySection (CompatibilityMatches, CompatibilityChart)
+│   │   ├── FAQPage (FAQAccordion, FAQContactBox)
+│   │   ├── About (AboutImpactStats, AboutTeamSection, AboutValuesGrid)
+│   │   ├── Donate (Stripe Checkout Form + Public Ledger)
+│   │   ├── PaymentSuccess (Stripe confirmation)
+│   │   └── PaymentCancelled (Stripe cancellation)
 │   └── Footer
 └── PrivateRoute
     └── DashboardLayout
-        ├── Aside (Collapsible Sidebar + Theme Toggle)
+        ├── Aside (Collapsible Sidebar, asideConfig, ThemeToggle)
         ├── DemoUserBadge (Floating overlay)
         └── Dashboard Routes
-            ├── AdminDashboard   (Stats, Charts, Recent Activity)
-            ├── DonorDashboard
-            ├── VolunteerDashboard
-            ├── AddRequest
-            ├── MyRequest
-            ├── AllRequest
-            ├── AllUsers
-            ├── Profile
-            └── Donate (Stripe Ledger)
+            ├── AdminDashboard (AdminStatCards, AdminAnalytics, AdminRecentActivities)
+            ├── DonorDashboard (DonorStatCards, DonorAnalytics, DonorRecentRequests)
+            ├── VolunteerDashboard (VolunteerStatCards, VolunteerAnalytics, VolunteerRecentActivity)
+            ├── AddRequest (AddRequestForm)
+            ├── MyRequest (MyRequestHeader, MyRequestStatCards, MyRequestDesktopTable, MyRequestMobileCards, MyRequestPagination)
+            ├── AllRequest (RequestHeader, RequestDesktopTable, RequestMobileCards, RequestPagination)
+            ├── AllUsers (UserDesktopTable, UserMobileCards, UserPagination, UserRoleModal)
+            ├── Profile (ProfileHeader, ProfileFormFields)
+            └── utils (requestHelpers for status badges and modal actions)
 ```
 
 ### Design Patterns Used
@@ -379,23 +385,29 @@ VITE_IMGBB_API_KEY=your_imgbb_api_key
 
 | Route | Description |
 |---|---|
-| `/` | Landing page with hero, features, and contact form |
-| `/login` | Login with email/password, Google, or Demo credentials |
+| `/` | Landing page with hero, live impact, featured centers, and contact form |
+| `/login` | Login with email/password, Google SSO, or one-click Demo credentials |
 | `/Signup` | New user registration with blood group and location |
+| `/forgetpassword` | Password reset request with optional `:email` parameter |
 | `/search` | Live donor search by blood group, district, and upazila |
-| `/donation-requests` | Public paginated list of all pending requests |
-| `/donate` | Stripe fundraising form and public donation ledger |
-| `/center` | Blood donation centers directory |
-| `/BloodCom` | Blood type compatibility reference guide |
-| `/faq` | Frequently asked questions |
-| `/dashboard/donordashboard` | Donor personal overview |
-| `/dashboard/admindashboard` | Admin stats, charts, and activity tables |
-| `/dashboard/volunteerdashboard` | Volunteer coordination overview |
-| `/dashboard/addRequest` | Create a new donation request |
-| `/dashboard/myRequest` | View and manage personal requests |
-| `/dashboard/allRequest` | Platform-wide request directory |
-| `/dashboard/all-users` | User account management |
-| `/dashboard/profile` | Edit profile, blood group, and avatar |
+| `/donation-requests` | Public paginated directory of all open requests |
+| `/request/:id` | Individual donation request details and donor acceptance modal |
+| `/donate` | Stripe fundraising checkout form and public verified contribution ledger |
+| `/payment-success` | Stripe payment confirmation and transaction receipt view |
+| `/payment-cancelled` | Stripe payment cancellation handler with retry prompt |
+| `/center` | Blood donation centers directory with filtering |
+| `/center/:id` | Individual donation center details with contact info and map view |
+| `/BloodCom` | Interactive blood type compatibility matrix and guide |
+| `/faq` | Frequently asked questions with interactive accordion |
+| `/about` | Platform mission, impact statistics, and core values |
+| `/dashboard/donordashboard` | Donor personal overview and recent request list |
+| `/dashboard/admindashboard` | Admin stats, distribution charts, and recent activity tables |
+| `/dashboard/volunteerdashboard` | Volunteer platform coordination overview |
+| `/dashboard/addRequest` | Create and publish a new blood donation request |
+| `/dashboard/myRequest` | View, manage, edit, or delete personal requests |
+| `/dashboard/allRequest` | Platform-wide request directory with status filters and pagination |
+| `/dashboard/all-users` | User account management (block/unblock, role promotion) |
+| `/dashboard/profile` | Edit user profile, blood group, location, and ImgBB avatar |
 
 ---
 
@@ -414,57 +426,68 @@ Blood Donation/
 │   ├── district.json             # Bangladesh districts data
 │   └── upazila.json              # Bangladesh upazilas data
 └── src/
-    ├── assets/                   # Local image and icon assets
-    ├── Components/               # Reusable UI components
-    │   ├── Aside/                # Collapsible dashboard sidebar
+    ├── assets/                   # Local image and brand assets
+    ├── Components/               # Reusable UI component modules
+    │   ├── Aside/                # Collapsible dashboard sidebar (Aside.jsx, asideConfig.js)
+    │   ├── BloodCompatibility/   # Compatibility matrix (Matches, Chart, Data)
     │   ├── DemoUserBadge/        # Floating demo session indicator
-    │   ├── Navbar/               # Responsive top navigation
     │   ├── Footer/               # Shared site footer
+    │   ├── Home/                 # Modular home sections (Hero, HowItWorks, Centers, Impact, Contact)
+    │   ├── Navbar/               # Responsive top navigation (NavLinks, UserMenu, ThemeToggle)
     │   ├── SkeletonLoader/       # Loading state card placeholders
-    │   └── UI/                   # Design system components (Card, Button, Input, Badge)
+    │   └── UI/                   # Design system atoms (Button, Card, Input, Badge)
     ├── config/
     │   └── emailjs.js            # EmailJS config wrapper and validator
-    ├── Dashboard/                # Protected dashboard modules
-    │   ├── AddRequest/           # Blood request creation form
-    │   ├── AdminDashboard/       # System stats, charts, user/request tables
-    │   ├── AllRequest/           # Platform-wide requests directory
-    │   ├── AllUsers/             # User management (block, promote)
-    │   ├── DonorDashboard/       # Donor personal stats and request list
-    │   ├── MyRequest/            # Individual request logs and controls
-    │   ├── Profile/              # Profile editor with ImgBB avatar upload
-    │   └── VolunteerDashboard/   # Volunteer coordination overview
-    ├── DashboardLayout/          # Protected layout wrapper
-    ├── Donate/                   # Stripe checkout + public payment ledger
+    ├── Dashboard/                # Protected dashboard modules (< 200 lines each)
+    │   ├── AddRequest/           # Blood request creation form (AddRequest, AddRequestForm)
+    │   ├── AdminDashboard/       # System stats, charts, recent activities (Stats, Analytics, Activity)
+    │   ├── AllRequest/           # Platform requests directory (Header, DesktopTable, MobileCards, Pagination)
+    │   ├── AllUsers/             # User management (DesktopTable, MobileCards, Pagination, RoleModal)
+    │   ├── DonorDashboard/       # Donor personal stats and requests (StatCards, Analytics, RecentRequests)
+    │   ├── MyRequest/            # Personal request logs (Header, Stats, Table, Cards, Pagination, EmptyState)
+    │   ├── Profile/              # Profile editor with ImgBB upload (Profile, Header, FormFields)
+    │   ├── VolunteerDashboard/   # Volunteer platform coordination (StatCards, Analytics, Activity)
+    │   └── utils/                # Shared dashboard helpers (requestHelpers.jsx)
+    ├── DashboardLayout/          # Protected dashboard layout wrapper
+    ├── Donate/                   # Stripe checkout form + public payment ledger
     ├── Firebase/
     │   └── firebase.config.js    # Firebase SDK initialization
     ├── Hooks/
     │   ├── useAxios.jsx          # Base Axios instance
     │   ├── useAxiosSecure.jsx    # JWT-injecting secure Axios instance
     │   └── useDemoRestriction.js # Demo user write-block interceptor
-    ├── Pages/                    # Public-facing pages
-    │   ├── Home.jsx              # Landing page (Hero, Stats, Centers, Contact)
-    │   ├── Login.jsx             # Auth form + Demo auto-fill
-    │   ├── Register.jsx          # Registration + ImgBB avatar upload
-    │   ├── Search.jsx            # Donor search engine
-    │   ├── ViewRequest.jsx       # Request detail + donation confirmation
-    │   ├── EditRequest.jsx       # Request editing form
-    │   ├── DonationRequests/     # Paginated public requests list
-    │   ├── DonationCentersPage.jsx  # Blood bank directory
-    │   ├── CenterDetails.jsx     # Individual center details
-    │   ├── BloodCompatibilitySection.jsx  # Blood type guide
-    │   ├── FAQPage.jsx           # Accordion FAQ
-    │   ├── About.jsx             # Platform mission and stats
-    │   └── PaymentSuccess/       # Stripe success callback
+    ├── Pages/                    # Modular public-facing feature modules
+    │   ├── About/                # Platform mission and stats (About, ImpactStats, Team, Values)
+    │   ├── BloodCompatibilitySection.jsx # Blood type compatibility matrix
+    │   ├── CenterDetails/        # Individual center details (CenterDetails, Header, InfoCards, Map)
+    │   ├── DonationCenters/      # Blood bank directory (Page, Grid, Search, Stats, CTA)
+    │   ├── DonationRequests/     # Paginated public requests list (Page, RequestCard)
+    │   ├── EditRequest/          # Request editing form (EditRequest, EditRequestForm)
+    │   ├── FAQ/                  # Accordion FAQ (FAQPage, FAQAccordion, FAQContactBox)
+    │   ├── ForgetPassword.jsx    # Password reset view with email prefill
+    │   ├── Home.jsx              # Landing page root
+    │   ├── Login/                # Auth form + Demo auto-fill (Login, LoginForm, DemoLoginBox)
+    │   ├── PaymentCancelled/     # Stripe payment cancellation view
+    │   ├── PaymentSuccess/       # Stripe payment success confirmation
+    │   ├── Register/             # Registration + avatar upload (Register, Form, AvatarUpload)
+    │   ├── Search/               # Donor search engine (Search, SearchForm, ResultsGrid)
+    │   ├── ViewRequest/          # Request detail + donation modal (ViewRequest, DetailsCard, DonateModal)
+    │   └── utils/                # Shared page helpers (centerHelpers.js, faqData.js)
     ├── Provider/
     │   └── AuthProvider.jsx      # Global auth state + role fetching
     ├── RootLayout/               # App shell (Navbar, Footer, theme init)
     ├── Routes/
     │   ├── PrivateRoute.jsx      # Auth guard for protected routes
     │   └── router.jsx            # React Router v7 route config
-    └── styles/
-        ├── designSystem.js       # Color, spacing, typography, layout tokens
-        └── globals.css           # Base CSS variables and resets
+    ├── styles/
+    │   ├── designSystem.js       # Color, spacing, typography, layout tokens
+    │   └── globals.css           # Base CSS variables and design tokens
+    ├── App.jsx                   # Root application component
+    ├── index.css                 # Tailwind CSS v4 & DaisyUI v5 styling entry point
+    └── main.jsx                  # React DOM root mounting
 ```
+
+> **Clean Architecture & Maintainability**: Every feature is decomposed into focused subcomponents with dedicated `utils/` helpers. Every source file across the frontend is strictly kept under **200 lines of code** for maximum readability, clean git diffs, and architectural maintainability.
 
 ---
 

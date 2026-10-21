@@ -77,7 +77,7 @@ const CompatibilityMatches = ({
           <div className="inline-flex bg-base-100 p-1 rounded-xl border border-base-300 text-xs font-bold self-start sm:self-auto">
             <button onClick={() => setViewMode('donate')} className={`px-3 py-1.5 rounded-lg border transition ${viewMode === 'donate' ? 'bg-green-600 border-green-600 text-white shadow-sm' : 'border-transparent text-base-content/70 hover:text-base-content'}`}>Give Blood</button>
             <button onClick={() => setViewMode('receive')} className={`px-3 py-1.5 rounded-lg border transition ${viewMode === 'receive' ? 'bg-red-600 border-red-600 text-white shadow-sm' : 'border-transparent text-base-content/70 hover:text-base-content'}`}>Receive Blood</button>
-            <button onClick={() => setViewMode('all')} className={`px-3 py-1.5 rounded-lg border transition ${viewMode === 'all' ? 'bg-slate-900 text-white border-slate-900 dark:bg-slate-100 dark:text-slate-900 dark:border-slate-100 shadow-sm' : 'border-transparent text-base-content/70 hover:text-base-content'}`}>Both</button>
+            <button onClick={() => setViewMode('all')} className={`px-3 py-1.5 rounded-lg border transition ${viewMode === 'all' ? 'bg-gradient-to-r from-gray-600 to-gray-700 text-white border-gray-600 shadow-sm' : 'border-transparent text-base-content/70 hover:text-base-content'}`}>Both</button>
           </div>
         </div>
 

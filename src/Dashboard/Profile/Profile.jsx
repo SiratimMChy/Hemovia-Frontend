@@ -143,13 +143,13 @@ const Profile = () => {
                     />
 
                     {/* Action Buttons */}
-                    <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-4 pt-3 sm:pt-6 w-full min-w-0">
+                    <div className="flex flex-col sm:flex-row sm:justify-end gap-2.5 sm:gap-4 pt-3 sm:pt-6 w-full min-w-0">
                         {!isEditing ? (
                             <button
                                 key="btn-edit"
                                 type="button"
                                 onClick={handleEdit}
-                                className="btn bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white border-0 rounded-lg sm:rounded-xl shadow-md hover:shadow-lg transition-all duration-300 w-full flex-1 h-10 sm:h-12 min-h-[2.5rem] sm:min-h-[3rem] py-2 sm:py-3 px-3 sm:px-6 text-sm sm:text-base font-bold"
+                                className="btn bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white border-0 rounded-lg sm:rounded-xl shadow-md hover:shadow-lg transition-all duration-300 w-full sm:w-auto sm:min-w-[180px] h-10 sm:h-12 min-h-[2.5rem] sm:min-h-[3rem] py-2 sm:py-3 px-5 sm:px-8 text-sm sm:text-base font-bold"
                             >
                                 Edit Profile
                             </button>
@@ -159,7 +159,7 @@ const Profile = () => {
                                     key="btn-save"
                                     type="submit"
                                     disabled={uploading}
-                                    className="btn bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white border-0 rounded-lg sm:rounded-xl shadow-md hover:shadow-lg transition-all duration-300 w-full flex-1 h-10 sm:h-12 min-h-[2.5rem] sm:min-h-[3rem] py-2 sm:py-3 px-3 sm:px-6 text-sm sm:text-base font-bold"
+                                    className="btn bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white border-0 rounded-lg sm:rounded-xl shadow-md hover:shadow-lg transition-all duration-300 w-full sm:w-auto sm:min-w-[160px] h-10 sm:h-12 min-h-[2.5rem] sm:min-h-[3rem] py-2 sm:py-3 px-4 sm:px-6 text-sm sm:text-base font-bold"
                                 >
                                     {uploading ? (
                                         <>
@@ -174,7 +174,7 @@ const Profile = () => {
                                     key="btn-cancel"
                                     type="button"
                                     onClick={handleCancel}
-                                    className="btn bg-base-300 hover:bg-base-400 text-base-content border-0 rounded-lg sm:rounded-xl shadow-md hover:shadow-lg transition-all duration-300 w-full flex-1 h-10 sm:h-12 min-h-[2.5rem] sm:min-h-[3rem] py-2 sm:py-3 px-3 sm:px-6 text-sm sm:text-base font-bold"
+                                    className="btn bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800 text-white border-0 rounded-lg sm:rounded-xl shadow-md hover:shadow-lg transition-all duration-300 w-full sm:w-auto sm:min-w-[140px] h-10 sm:h-12 min-h-[2.5rem] sm:min-h-[3rem] py-2 sm:py-3 px-4 sm:px-6 text-sm sm:text-base font-bold"
                                 >
                                     Cancel
                                 </button>

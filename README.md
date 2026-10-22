@@ -482,9 +482,8 @@ Blood Donation/
     ├── styles/
     │   ├── designSystem.js       # Color, spacing, typography, layout tokens
     │   └── globals.css           # Base CSS variables and design tokens
-    ├── App.jsx                   # Root application component
     ├── index.css                 # Tailwind CSS v4 & DaisyUI v5 styling entry point
-    └── main.jsx                  # React DOM root mounting
+    └── main.jsx                  # React DOM root mounting & RouterProvider
 ```
 
 > **Clean Architecture & Maintainability**: Every feature is decomposed into focused subcomponents with dedicated `utils/` helpers. Every source file across the frontend is strictly kept under **200 lines of code** for maximum readability, clean git diffs, and architectural maintainability.

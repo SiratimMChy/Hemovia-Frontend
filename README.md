@@ -2,7 +2,7 @@
 
 <div align="center">
 
-**A modern, full-stack platform connecting blood donors, volunteers, and administrators to save lives faster**
+**Hemovia is a blood donation management platform built for Bangladesh. It helps users find compatible donors by blood group, district, and upazila, track donation requests through every stage, and gives admins and volunteers the tools to coordinate the entire process from one place.**
 
 [![React](https://img.shields.io/badge/React-19.0-61DAFB?style=flat&logo=react&logoColor=white)](https://react.dev/)
 [![Vite](https://img.shields.io/badge/Vite-7.0-646CFF?style=flat&logo=vite&logoColor=white)](https://vitejs.dev/)
@@ -10,12 +10,12 @@
 [![TailwindCSS](https://img.shields.io/badge/Tailwind-4.0-38B2AC?style=flat&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![DaisyUI](https://img.shields.io/badge/DaisyUI-5.5-5A0EF8?style=flat&logo=daisyui&logoColor=white)](https://daisyui.com/)
 [![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?style=flat&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
-[![License](https://img.shields.io/badge/License-Custom-dc2626.svg)](#-license--usage-guidelines)
+[![License](https://img.shields.io/badge/License-Custom-dc2626.svg)](#-license)
 
 <div align="center">
-<a href="https://blooddonation-f6367.web.app" target="_blank">
+<a href="https://your-app.vercel.app" target="_blank">
 
-![Live Demo](https://img.shields.io/badge/HEMOVIA-LIVE%20DEMO-dc2626?style=for-the-badge&logo=firefox-browser&logoColor=white&labelColor=111827)
+![Live Demo](https://img.shields.io/badge/HEMOVIA-LIVE%20DEMO-dc2626?style=for-the-badge&logo=vercel&logoColor=white&labelColor=111827)
 
 </a>
 </div>
@@ -24,52 +24,14 @@
 
 ---
 
-## 📋 Table of Contents
-
-- [About The Project](#-about-the-project)
-- [Real-World Problem & Solution](#-real-world-problem--solution)
-- [Key Features](#-key-features)
-- [Tech Stack](#️-tech-stack)
-- [Software Architecture](#️-software-architecture)
-- [Getting Started](#-getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-  - [Environment Variables](#environment-variables)
-- [Usage](#-usage)
-- [Project Structure](#-project-structure)
-- [Authentication & Security](#-authentication--security)
-- [Database Schema](#-database-schema)
-- [Performance & Responsive Design](#-performance--responsive-design)
-- [Deployment](#-deployment)
-- [Future Roadmap](#-future-roadmap)
-- [Acknowledgments](#-acknowledgments)
-- [License & Usage Guidelines](#-license--usage-guidelines)
-
----
-
-## 🎯 About The Project
-
-**Hemovia** is a comprehensive blood donation management platform that digitizes and accelerates every step of the donation pipeline — from donor onboarding and geographic matching to emergency request tracking, volunteer coordination, and transparent fundraising.
-
-### Why Hemovia?
-
-- **Emergency-Ready**: Geographic donor search by blood group, district, and upazila cuts response times dramatically
-- **Full Lifecycle Tracking**: Donation requests move through real-time status states from creation to completion
-- **Role-Based Control**: Separate, purpose-built dashboards for donors, volunteers, and administrators
-- **Transparent Fundraising**: Stripe-backed fundraising with a public, verified transaction ledger
-- **Secure by Design**: Firebase Authentication combined with JWT-protected API endpoints and client-side RBAC
-- **Safe Demo Mode**: Visitors can explore every dashboard feature without affecting real data
-
----
-
 ## 🧠 Real-World Problem & Solution
 
 ### The Problem
 During medical emergencies (surgeries, trauma care, chronic illnesses like thalassemia), finding compatible blood donors is a critical and time-sensitive bottleneck. Traditional sourcing methods suffer from:
 
-1. **Inefficient Sourcing** — No location-based filtering means requests reach donors who are too far away
-2. **Coordination Overhead** — No request tracking leads to duplicate signups or unanswered calls
-3. **Transparency Issues** — No consolidated ledger for donations, volunteer roles, or charity funding
+1. **Inefficient Sourcing** - No location-based filtering means requests reach donors who are too far away
+2. **Coordination Overhead** - No request tracking leads to duplicate signups or unanswered calls
+3. **Transparency Issues** - No consolidated ledger for donations, volunteer roles, or charity funding
 
 ### The Solution
 Hemovia digitizes the entire donation pipeline:
@@ -82,190 +44,44 @@ Hemovia digitizes the entire donation pipeline:
 
 ## ✨ Key Features
 
-### 🏠 Role-Based Dashboards
-
-#### 🩸 Donor Dashboard
-- Create and submit blood donation requests with full recipient details
-- Track the live status of personal requests
-- Manage profile, blood group, and location information
-
-#### 🛡️ Admin Dashboard
-- System-wide statistics: total donors, lives saved, total funding, and all request counts
-- Visual request status distribution with animated progress bars
-- Toggle user account status (Active / Blocked) and escalate roles (Donor → Volunteer → Admin)
-- View recent requests and new user activity at a glance
-
-#### 🤝 Volunteer Dashboard
-- Overview of platform activity and requests needing coordination
-- Manage and moderate all platform-wide donation requests
+- **Role-Based Dashboards** - Separate dashboards for Donors, Volunteers, and Admins with purpose-built views
+- **Donation Request Management** - Full CRUD with four-stage lifecycle tracking (`pending` → `inprogress` → `done` / `canceled`)
+- **Live Donor Search** - Multi-field filtering by blood group, district, and upazila against the live database
+- **Stripe Fundraising** - Secure checkout with a public verified transaction ledger
+- **Blood Donation Centers** - Directory of verified centers with hours, contact info, and ratings
+- **Blood Compatibility Guide** - Full blood type compatibility reference built into the platform
+- **Demo Mode** - One-click demo login (Donor / Admin) with all write operations safely blocked
+- **Contact Support** - EmailJS-powered contact form for direct messages to the support team
+- **Dark Mode** - Persistent light/dark theme toggle synced across all views
+- **Responsive Design** - Fully adaptive layout from mobile to large desktop screens
 
 ---
 
-### 💉 Donation Request Management
-- **Create Requests**: Structured form capturing recipient name, hospital, address, blood group, date, time, and an urgency message
-- **Edit & Delete**: Full CRUD controls across all request records
-- **Status Tracking**: Four-stage lifecycle — `pending`, `inprogress`, `done`, `canceled`
-- **Paginated Directory**: Browse all platform requests with pagination for performance
+## 🧪 Demo Accounts
 
-### 🔍 Live Donor Search Engine
-- Multi-field filtering by blood group, district, and upazila
-- Instant results queried against the live database
+To test the platform without registering, use the one-click demo login on the login page or enter these credentials:
 
-### 💰 Stripe Fundraising & Public Ledger
-- Secure Stripe Checkout redirect for monetary donations to the platform
-- Transparent public ledger displaying donor name, amount, date, and verified Stripe transaction ID
+| Role | Email | Password | Permissions |
+|---|---|---|---|
+| **Donor** | `donor@hemovia.com` | `Demo@123` | Donor Dashboard, request creation, profile views |
+| **Admin** | `admin@hemovia.com` | `Demo@123` | Admin Dashboard, user management, request moderation |
 
-### 📖 Blood Donation Centers Directory
-- Browse geo-coded blood banks and donation centers with operating hours, contact, and ratings
-- Featured centers highlighted on the landing page
-
-### 🩺 Blood Compatibility Guide
-- Full blood type compatibility reference built into the platform
-
-### 📬 Contact Support via EmailJS
-- Functional contact form on the home page dispatching messages directly to the support team
-
-### 🎭 Read-Only Demo Playground
-- One-click demo login with auto-filled credentials (Demo Donor / Demo Admin)
-- All write operations blocked for demo accounts via a custom `useDemoRestriction` hook
-- Floating badge clearly identifies demo sessions
-
-### 🌙 Dark Mode Support
-- Persistent light/dark theme toggle synced across all views via localStorage and custom event dispatchers
-
-### 📱 Responsive Design
-- Fully adaptive layout from mobile to large desktop screens
-- Collapsible sidebar, touch-friendly components, and fluid grid layouts
+> **Note:** Demo mode is read-only. Create, edit, and delete actions are safely blocked to protect existing data.
 
 ---
 
 ## 🛠️ Tech Stack
 
-### Frontend
-- **[React 19.0](https://react.dev/)** — Latest concurrent rendering features and state hooks
-- **[Vite 7.0](https://vitejs.dev/)** — Lightning-fast build tool with HMR
-- **[React Router 7.10](https://reactrouter.com/)** — Client-side routing, nested layouts, and private route guards
-- **[Tailwind CSS 4.0](https://tailwindcss.com/)** — Utility-first CSS via the new `@tailwindcss/vite` plugin
-- **[DaisyUI 5.5](https://daisyui.com/)** — Accessible component library with automatic light/dark theme support
-
-### Backend & Services
-- **[Node.js & Express.js](https://expressjs.com/)** — REST API gateway hosted on Vercel
-- **[MongoDB Atlas](https://www.mongodb.com/)** — Cloud-hosted document store for users, requests, and payments
-
-### Cloud Integrations
-- **[Firebase Authentication 12.6](https://firebase.google.com/)** — Email/password sign-up, Google SSO, and session tokens
-- **[Stripe API](https://stripe.com/)** — Secure checkout sessions and transaction verification
-- **[EmailJS SDK](https://www.emailjs.com/)** — Serverless email dispatch from the contact form
-- **[ImgBB API](https://imgbb.com/)** — CDN for user avatar uploads
-
-### UI & Feedback
-- **[Lucide React](https://lucide.dev/)** — Consistent icon library
-- **[React Icons](https://react-icons.github.io/react-icons/)** — Additional icon sets
-- **[SweetAlert2 11.26](https://sweetalert2.github.io/)** — Rich animated alert modals
-- **[React-Toastify 11.0](https://fkhadra.github.io/react-toastify/)** — Non-blocking toast notifications
-
-### Development Tools
-- **[ESLint](https://eslint.org/)** — Code linting and quality enforcement
-
----
-
-## 🏗️ Software Architecture
-
-### Architecture Overview
-
-Hemovia follows a **Component-Based Architecture** with clear separation of concerns, built on modern React patterns.
-
-<img width="1440" height="1240" alt="image" src="https://github.com/user-attachments/assets/92ae2606-2e1d-441d-b583-38d68778e101" />
-
-
-### Key Data Flows
-
-#### User Authentication Flow
-```
-User Input (Login / Google SSO)
-    ↓
-Firebase Authentication Service
-    ↓
-AuthProvider Context — fetches role from API
-    ↓
-PrivateRoute Guard validates session
-    ↓
-Role-specific Dashboard rendered
-```
-
-#### Donation Request Lifecycle Flow
-```
-Donor submits request form
-    ↓
-useAxiosSecure — injects JWT Bearer token
-    ↓
-POST /requests → MongoDB
-    ↓
-Request visible in public directory (status: pending)
-    ↓
-Donor accepts → status: inprogress → done / canceled
-```
-
-#### Security Interceptor Flow
-```
-Any write action (POST / PUT / DELETE)
-    ↓
-useDemoRestriction hook checks user email
-    ↓
-Demo account? → SweetAlert2 block modal shown
-    ↓
-Real account? → Action proceeds normally
-```
-
-### Component Hierarchy
-
-```
-App
-├── RootLayout
-│   ├── Navbar (NavbarNavLinks, NavbarUserMenu, ThemeToggle)
-│   ├── Public Routes
-│   │   ├── Home (HeroBanner, HowItWorks, FeaturedCenters, LiveImpact, WhyDonateBlood, ContactSection)
-│   │   ├── Login (LoginForm, DemoLoginBox)
-│   │   ├── Register (RegisterForm, RegisterAvatarUpload)
-│   │   ├── ForgetPassword (Password reset view)
-│   │   ├── Search (SearchForm, SearchResultsGrid)
-│   │   ├── DonationRequests (DonationRequestCard)
-│   │   ├── ViewRequest (RequestDetailsCard, DonateModal)
-│   │   ├── EditRequest (EditRequestForm)
-│   │   ├── DonationCentersPage (DonationCentersGrid, Search, Stats, CTA)
-│   │   ├── CenterDetails (CenterHeader, CenterInfoCards, CenterMapPlaceholder)
-│   │   ├── BloodCompatibilitySection (CompatibilityMatches, CompatibilityChart)
-│   │   ├── FAQPage (FAQAccordion, FAQContactBox)
-│   │   ├── About (AboutImpactStats, AboutTeamSection, AboutValuesGrid)
-│   │   ├── Donate (Stripe Checkout Form + Public Ledger)
-│   │   ├── PaymentSuccess (Stripe confirmation)
-│   │   └── PaymentCancelled (Stripe cancellation)
-│   └── Footer
-└── PrivateRoute
-    └── DashboardLayout
-        ├── Aside (Collapsible Sidebar, asideConfig, ThemeToggle)
-        ├── DemoUserBadge (Floating overlay)
-        └── Dashboard Routes
-            ├── AdminDashboard (AdminStatCards, AdminAnalytics, AdminRecentActivities)
-            ├── DonorDashboard (DonorStatCards, DonorAnalytics, DonorRecentRequests)
-            ├── VolunteerDashboard (VolunteerStatCards, VolunteerAnalytics, VolunteerRecentActivity)
-            ├── AddRequest (AddRequestForm)
-            ├── MyRequest (MyRequestHeader, MyRequestStatCards, MyRequestDesktopTable, MyRequestMobileCards, MyRequestPagination)
-            ├── AllRequest (RequestHeader, RequestDesktopTable, RequestMobileCards, RequestPagination)
-            ├── AllUsers (UserDesktopTable, UserMobileCards, UserPagination, UserRoleModal)
-            ├── Profile (ProfileHeader, ProfileFormFields)
-            └── utils (requestHelpers for status badges and modal actions)
-```
-
-### Design Patterns Used
-
-| Pattern | Usage |
+| Layer | Technologies |
 |---|---|
-| **Context Provider** | `AuthProvider` manages global auth state and role |
-| **Higher-Order Component** | `PrivateRoute` wraps protected dashboard routes |
-| **Custom Hook** | `useAxiosSecure` injects JWT; `useDemoRestriction` blocks writes |
-| **Controlled Components** | All forms use controlled state with `useState` |
-| **Compound Components** | Admin Dashboard composed of independent stat card units |
+| **Frontend** | React 19, Vite 7, React Router 7, Tailwind CSS 4, DaisyUI 5 |
+| **Backend** | Node.js, Express.js (hosted on Vercel) |
+| **Database** | MongoDB Atlas |
+| **Auth** | Firebase Authentication (Email/Password + Google SSO) |
+| **Payments** | Stripe API |
+| **Email** | EmailJS SDK |
+| **Image Hosting** | ImgBB API |
+| **UI Libraries** | Lucide React, React Icons, SweetAlert2, React-Toastify |
 
 ---
 
@@ -273,46 +89,21 @@ App
 
 ### Prerequisites
 
-Before you begin, ensure you have the following:
-
-- **Node.js** (v18.0.0 or higher)
-- **npm** (v9.0.0 or higher)
-- A **Firebase account** (for Authentication and Hosting)
-- An **EmailJS account** (for the contact form)
-- An **ImgBB account** (for profile avatar uploads)
+- **Node.js** v18+ and **npm** v9+
+- Firebase, EmailJS, and ImgBB accounts
 
 ### Installation
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/SiratimMChy/Hemovia-Frontend.git
-   cd Hemovia-Frontend
-   ```
+```bash
+git clone https://github.com/SiratimMChy/Hemovia-Frontend.git
+cd Hemovia-Frontend
+npm install
+```
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Configure environment variables**
-
-   Create a `.env.local` file in the root directory (see [Environment Variables](#environment-variables) below).
-
-4. **Start the development server**
-   ```bash
-   npm run dev
-   ```
-
-5. **Open your browser**
-
-   Navigate to `http://localhost:5173` to view the application.
-
-### Environment Variables
-
-Create a `.env.local` file in the root directory with the following:
+Create a `.env.local` in the root:
 
 ```env
-# Firebase Configuration
+# Firebase
 VITE_APIKEY=your_firebase_api_key
 VITE_AUTHDOMAIN=your_firebase_auth_domain
 VITE_PROJECTID=your_firebase_project_id
@@ -320,331 +111,62 @@ VITE_STORAGEBUCKET=your_firebase_storage_bucket
 VITE_MESSAGINGSENDERID=your_firebase_messaging_sender_id
 VITE_APPID=your_firebase_app_id
 
-# EmailJS Configuration
+# EmailJS
 VITE_EMAILJS_SERVICE_ID=your_emailjs_service_id
 VITE_EMAILJS_TEMPLATE_ID=your_emailjs_template_id
 VITE_EMAILJS_PUBLIC_KEY=your_emailjs_public_key
 
-# ImgBB Configuration
+# ImgBB
 VITE_IMGBB_API_KEY=your_imgbb_api_key
 ```
 
-| Variable | Description | Required |
-|---|---|:---:|
-| `VITE_APIKEY` | Firebase Web API key | ✅ |
-| `VITE_AUTHDOMAIN` | Firebase Authentication domain | ✅ |
-| `VITE_PROJECTID` | Firebase project identifier | ✅ |
-| `VITE_STORAGEBUCKET` | Firebase storage bucket URL | ✅ |
-| `VITE_MESSAGINGSENDERID` | Firebase Cloud Messaging sender ID | ✅ |
-| `VITE_APPID` | Firebase application ID | ✅ |
-| `VITE_EMAILJS_SERVICE_ID` | EmailJS service identifier | ✅ |
-| `VITE_EMAILJS_TEMPLATE_ID` | EmailJS email template ID | ✅ |
-| `VITE_EMAILJS_PUBLIC_KEY` | EmailJS public key for SDK init | ✅ |
-| `VITE_IMGBB_API_KEY` | ImgBB API key for avatar uploads | ✅ |
-
----
-
-## 📖 Usage
-
-### Getting Started with Hemovia
-
-1. **Create an Account**
-   - Navigate to `/Signup`
-   - Register with your email, blood group, district, and upazila
-   - Or use **Google Sign-In** for one-click authentication
-
-2. **Explore with Demo Mode**
-   - On the login page, click **"Try Demo Login"**
-   - Choose **Demo Donor** or **Demo Admin**
-   - Credentials are auto-filled — click Sign In to explore safely
-
-3. **Create a Blood Donation Request** *(Donor)*
-   - From your dashboard, go to **Add Request**
-   - Fill in recipient details, hospital name, blood group, and urgency message
-   - Submit to publish the request publicly
-
-4. **Search for Donors**
-   - Navigate to `/search`
-   - Filter by blood group, district, and upazila to find matching donors instantly
-
-5. **Manage Requests**
-   - Go to **My Requests** to view, edit, or delete your submitted requests
-   - Track the live status of each request
-
-6. **Admin Controls** *(Admin only)*
-   - Access **All Users** to block, unblock, or promote accounts
-   - Access **All Requests** to oversee and moderate all platform requests
-   - View system-wide stats on the Admin Dashboard
-
-7. **Fundraise for the Platform**
-   - Navigate to `/donate`
-   - Enter an amount and complete the Stripe-secured checkout
-   - View the verified public ledger of all platform contributions
-
-### Key Routes
-
-| Route | Description |
-|---|---|
-| `/` | Landing page with hero, live impact, featured centers, and contact form |
-| `/login` | Login with email/password, Google SSO, or one-click Demo credentials |
-| `/Signup` | New user registration with blood group and location |
-| `/forgetpassword` | Password reset request with optional `:email` parameter |
-| `/search` | Live donor search by blood group, district, and upazila |
-| `/donation-requests` | Public paginated directory of all open requests |
-| `/request/:id` | Individual donation request details and donor acceptance modal |
-| `/donate` | Stripe fundraising checkout form and public verified contribution ledger |
-| `/payment-success` | Stripe payment confirmation and transaction receipt view |
-| `/payment-cancelled` | Stripe payment cancellation handler with retry prompt |
-| `/center` | Blood donation centers directory with filtering |
-| `/center/:id` | Individual donation center details with contact info and map view |
-| `/BloodCom` | Interactive blood type compatibility matrix and guide |
-| `/faq` | Frequently asked questions with interactive accordion |
-| `/about` | Platform mission, impact statistics, and core values |
-| `/dashboard/donordashboard` | Donor personal overview and recent request list |
-| `/dashboard/admindashboard` | Admin stats, distribution charts, and recent activity tables |
-| `/dashboard/volunteerdashboard` | Volunteer platform coordination overview |
-| `/dashboard/addRequest` | Create and publish a new blood donation request |
-| `/dashboard/myRequest` | View, manage, edit, or delete personal requests |
-| `/dashboard/allRequest` | Platform-wide request directory with status filters and pagination |
-| `/dashboard/all-users` | User account management (block/unblock, role promotion) |
-| `/dashboard/profile` | Edit user profile, blood group, location, and ImgBB avatar |
-
----
-
-## 📁 Project Structure
-
-```
-Blood Donation/
-├── .firebase/                    # Local Firebase configuration cache
-├── .firebaserc                   # Firebase project mapping
-├── firebase.json                 # Firebase Hosting config (SPA rewrites)
-├── vite.config.js                # Vite + Tailwind CSS v4 plugin settings
-├── eslint.config.js              # ESLint rules
-├── package.json                  # Dependencies and npm scripts
-├── public/                       # Static assets (served directly)
-│   ├── centers.json              # Geo-coded blood banks registry
-│   ├── district.json             # Bangladesh districts data
-│   └── upazila.json              # Bangladesh upazilas data
-└── src/
-    ├── assets/                   # Local image and brand assets
-    ├── Components/               # Reusable UI component modules
-    │   ├── Aside/                # Collapsible dashboard sidebar (Aside.jsx, asideConfig.js)
-    │   ├── BloodCompatibility/   # Compatibility matrix (Matches, Chart, Data)
-    │   ├── DemoUserBadge/        # Floating demo session indicator
-    │   ├── Footer/               # Shared site footer
-    │   ├── Home/                 # Modular home sections (Hero, HowItWorks, Centers, Impact, Contact)
-    │   ├── Navbar/               # Responsive top navigation (NavLinks, UserMenu, ThemeToggle)
-    │   ├── SkeletonLoader/       # Loading state card placeholders
-    │   └── UI/                   # Design system atoms (Button, Card, Input, Badge)
-    ├── config/
-    │   └── emailjs.js            # EmailJS config wrapper and validator
-    ├── Dashboard/                # Protected dashboard modules (< 200 lines each)
-    │   ├── AddRequest/           # Blood request creation form (AddRequest, AddRequestForm)
-    │   ├── AdminDashboard/       # System stats, charts, recent activities (Stats, Analytics, Activity)
-    │   ├── AllRequest/           # Platform requests directory (Header, DesktopTable, MobileCards, Pagination)
-    │   ├── AllUsers/             # User management (DesktopTable, MobileCards, Pagination, RoleModal)
-    │   ├── DonorDashboard/       # Donor personal stats and requests (StatCards, Analytics, RecentRequests)
-    │   ├── MyRequest/            # Personal request logs (Header, Stats, Table, Cards, Pagination, EmptyState)
-    │   ├── Profile/              # Profile editor with ImgBB upload (Profile, Header, FormFields)
-    │   ├── VolunteerDashboard/   # Volunteer platform coordination (StatCards, Analytics, Activity)
-    │   └── utils/                # Shared dashboard helpers (requestHelpers.jsx)
-    ├── DashboardLayout/          # Protected dashboard layout wrapper
-    ├── Donate/                   # Stripe checkout form + public payment ledger
-    ├── Firebase/
-    │   └── firebase.config.js    # Firebase SDK initialization
-    ├── Hooks/
-    │   ├── useAxios.jsx          # Base Axios instance
-    │   ├── useAxiosSecure.jsx    # JWT-injecting secure Axios instance
-    │   └── useDemoRestriction.js # Demo user write-block interceptor
-    ├── Pages/                    # Modular public-facing feature modules
-    │   ├── About/                # Platform mission and stats (About, ImpactStats, Team, Values)
-    │   ├── BloodCompatibilitySection.jsx # Blood type compatibility matrix
-    │   ├── CenterDetails/        # Individual center details (CenterDetails, Header, InfoCards, Map)
-    │   ├── DonationCenters/      # Blood bank directory (Page, Grid, Search, Stats, CTA)
-    │   ├── DonationRequests/     # Paginated public requests list (Page, RequestCard)
-    │   ├── EditRequest/          # Request editing form (EditRequest, EditRequestForm)
-    │   ├── FAQ/                  # Accordion FAQ (FAQPage, FAQAccordion, FAQContactBox)
-    │   ├── ForgetPassword.jsx    # Password reset view with email prefill
-    │   ├── Home.jsx              # Landing page root
-    │   ├── Login/                # Auth form + Demo auto-fill (Login, LoginForm, DemoLoginBox)
-    │   ├── PaymentCancelled/     # Stripe payment cancellation view
-    │   ├── PaymentSuccess/       # Stripe payment success confirmation
-    │   ├── Register/             # Registration + avatar upload (Register, Form, AvatarUpload)
-    │   ├── Search/               # Donor search engine (Search, SearchForm, ResultsGrid)
-    │   ├── ViewRequest/          # Request detail + donation modal (ViewRequest, DetailsCard, DonateModal)
-    │   └── utils/                # Shared page helpers (centerHelpers.js, faqData.js)
-    ├── Provider/
-    │   └── AuthProvider.jsx      # Global auth state + role fetching
-    ├── RootLayout/               # App shell (Navbar, Footer, theme init)
-    ├── Routes/
-    │   ├── PrivateRoute.jsx      # Auth guard for protected routes
-    │   └── router.jsx            # React Router v7 route config
-    ├── styles/
-    │   ├── designSystem.js       # Color, spacing, typography, layout tokens
-    │   └── globals.css           # Base CSS variables and design tokens
-    ├── index.css                 # Tailwind CSS v4 & DaisyUI v5 styling entry point
-    └── main.jsx                  # React DOM root mounting & RouterProvider
-```
-
-> **Clean Architecture & Maintainability**: Every feature is decomposed into focused subcomponents with dedicated `utils/` helpers. Every source file across the frontend is strictly kept under **200 lines of code** for maximum readability, clean git diffs, and architectural maintainability.
-
----
-
-## 🔒 Authentication & Security
-
-### Authentication Flow
-
-```
-[Client] → Firebase Auth (Email / Google SSO) → JWT Access Token
-    ↓
-AuthProvider fetches role from API → sets role in context
-    ↓
-PrivateRoute checks auth state → redirects unauthenticated users
-    ↓
-Role-specific dashboard and navigation rendered
-```
-
-### Security Layers
-
-1. **Firebase Authentication** — Manages user credentials, session tokens, and Google OAuth
-2. **JWT Bearer Tokens via Axios Interceptor** — `useAxiosSecure.jsx` attaches the Firebase access token to every protected API request:
-   ```javascript
-   config.headers.Authorization = `Bearer ${user?.accessToken}`;
-   ```
-3. **Role-Based Access Control (RBAC)** — Dashboard menus and routes dynamically render based on `donor`, `volunteer`, or `admin` role from context
-4. **Demo User Write Guard** — `useDemoRestriction.js` intercepts all write actions for demo accounts and shows a SweetAlert2 block modal:
-   ```javascript
-   if (isDemoUser(user.email)) {
-     Swal.fire({ title: "Demo User Restriction!", icon: "warning", ... });
-     return true; // block the action
-   }
-   ```
-5. **Environment Variable Isolation** — All sensitive keys are stored in `.env.local` and never committed to version control
-
----
-
-## 💾 Database Schema
-
-### Users Collection
-```json
-{
-  "_id": "ObjectId",
-  "name": "Jane Doe",
-  "email": "jane@hemovia.com",
-  "role": "donor",         // donor | volunteer | admin
-  "status": "active",      // active | blocked
-  "district": "Dhaka",
-  "upazila": "Dhanmondi",
-  "bloodGroup": "O+",
-  "imageUrl": "https://i.ibb.co/avatar.jpg"
-}
-```
-
-### Requests Collection
-```json
-{
-  "_id": "ObjectId",
-  "requesterName": "Jane Doe",
-  "requesterEmail": "jane@hemovia.com",
-  "recipientName": "John Connor",
-  "recipientDistrict": "Dhaka",
-  "recipientUpazila": "Mirpur",
-  "hospitalName": "Dhaka Medical College Hospital",
-  "fullAddress": "Zahir Raihan Rd, Dhaka",
-  "bloodGroup": "A+",
-  "donationDate": "2026-06-15",
-  "donationTime": "10:30",
-  "requestMessage": "Urgent donor needed for cardiac surgery.",
-  "mobile": "017XXXXXXXX",
-  "donation_status": "pending",  // pending | inprogress | done | canceled
-  "donorName": "John Doe",       // Populated when inprogress or done
-  "donorEmail": "donor@hemovia.com"
-}
-```
-
-### Payments Collection
-```json
-{
-  "_id": "ObjectId",
-  "donorName": "Sarah Lee",
-  "donorEmail": "sarah@example.com",
-  "amount": 50.00,
-  "paidAt": "2026-05-24T18:23:26Z",
-  "transactionId": "pi_3MtwMQ2eZvKYlo2C1OBxxxxx"
-}
-```
-
----
-
-## ⚡ Performance & Responsive Design
-
-### Performance Optimizations
-- **Static Geographic Data Offloading**: `district.json` (12KB), `upazila.json` (67KB), and `centers.json` (25KB) are served from the `public/` directory, eliminating redundant API calls for static reference data
-- **Skeleton Loaders**: `SkeletonLoader.jsx` renders animated card placeholders across all data-loading views to reduce perceived latency and prevent layout shifts
-- **Centralized Axios Instances**: Reusable `useAxios` and `useAxiosSecure` hooks prevent redundant client configurations and manage connection pooling
-- **Server-Side Aggregation**: The `/public-stats` endpoint uses MongoDB aggregate pipelines, keeping response payloads minimal even at scale
-
-### Responsive Design
-- **Mobile-First Grid System**: Tailwind responsive breakpoints (sm / md / lg / xl) with fluid card grids
-- **Collapsible Sidebar**: Dashboard aside collapses to icon-only mode on smaller screens
-- **DaisyUI v5 Theme Engine**: Light/dark toggle persisted in localStorage and synchronized across components via custom `themeChange` events
-- **Accessibility (a11y)**: Semantic HTML, labeled form controls, visible focus states, and WCAG AA color contrast ratios
-
----
-
-## 🌐 Deployment
-
-The frontend is deployed on **Firebase Hosting**, with SPA rewrites ensuring React Router routes are handled correctly.
+Start the dev server:
 
 ```bash
-# Install Firebase CLI
-npm install -g firebase-tools
-
-# Authenticate and set project
-firebase login
-firebase use default
-
-# Build and deploy
-npm run build
-firebase deploy
+npm run dev
 ```
 
-> The `firebase.json` configuration rewrites all routes to `index.html`, enabling full client-side SPA routing.
+Open `http://localhost:5173` in your browser.
 
 ---
 
-## 📈 Future Roadmap
+## 🌐 Deployment (Vercel)
 
-1. **Geographic Database Indexing** — Compound indexes on `bloodGroup`, `recipientDistrict`, `recipientUpazila` to optimize search as data volume grows
-2. **Real-Time Donor Matching** — Socket.io integration for instant push notifications to compatible donors when a nearby emergency request is created
-3. **Automated Request Expiry** — Background cron jobs to automatically mark expired requests as `canceled` once the donation date has passed
-4. **SMS Alerts** — Twilio or local SMS gateway integration to reach donors who are offline on the web platform
+1. Push your code to GitHub
+2. Go to [vercel.com](https://vercel.com) and import your repository
+3. Set the **Framework Preset** to `Vite`
+4. Add all environment variables from `.env.local` under **Settings → Environment Variables**
+5. Add a `vercel.json` in the project root for SPA routing:
+
+```json
+{
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
+```
+
+6. Click **Deploy**
+
+> Every push to `main` will trigger an automatic redeployment.
 
 ---
 
-## 🙏 Acknowledgments
+## 📐 Architecture
 
-- [React Documentation](https://react.dev/) — Comprehensive modern React guides
-- [Vite Documentation](https://vitejs.dev/) — Fast build tooling and HMR
-- [Firebase Documentation](https://firebase.google.com/docs) — Auth and Hosting
-- [Tailwind CSS](https://tailwindcss.com/) — Utility-first CSS framework
-- [DaisyUI](https://daisyui.com/) — Beautiful Tailwind component library
-- [Lucide Icons](https://lucide.dev/) — Clean, consistent icon set
-- [React Router](https://reactrouter.com/) — Client-side routing
-- [SweetAlert2](https://sweetalert2.github.io/) — Elegant alert modals
-- [Recharts](https://recharts.org/) — Composable React chart library
+For detailed technical documentation covering software architecture, component hierarchy, project structure, auth flow, and database schema, see **[ARCHITECTURE.md](ARCHITECTURE.md)**.
 
 ---
 
-## 📄 License & Usage Guidelines
+## 📄 License
 
 This project is protected under the [License & Usage Guidelines](LICENSE).
 
-- 🔒 **Permission First:** Please ask for permission from **Siratim Mustakim Chowdhury** before hosting, deploying, or using this project.
-- 👤 **Give Credit:** If permitted to use, always credit the author by name and link back to this original repository: [SiratimMChy/Hemovia-Frontend](https://github.com/SiratimMChy/Hemovia-Frontend).
-- 🧩 **Keep Original & No Copying:** The project should be used as-is. Please do not modify the code, rebrand it, or extract parts for other projects without prior approval.
+- Please ask for permission from **Siratim Mustakim Chowdhury** before hosting or deploying this project.
+- If permitted, always credit the author and link back to this repository.
+- Do not modify, rebrand, or extract parts without prior approval.
 
-For permission requests or questions, feel free to message the author on [LinkedIn](https://www.linkedin.com/in/siratim-mustakim-chowdhury/) or check the [LICENSE](LICENSE) file.
+For permission requests, message the author on [LinkedIn](https://www.linkedin.com/in/siratim-mustakim-chowdhury/) or check the [LICENSE](LICENSE) file.
 
 *Copyright © 2026 Siratim Mustakim Chowdhury. All rights reserved.*
 

@@ -1,5 +1,5 @@
 import { Link } from 'react-router';
-import { Heart, Search, Droplet, Users, Activity, Shield, Clock } from 'lucide-react';
+import { Heart, Search, Droplet, Users, Activity, Shield, CheckCircle2 } from 'lucide-react';
 import { Button } from '../UI';
 
 const HeroBanner = ({
@@ -84,8 +84,8 @@ const HeroBanner = ({
             )}
           </div>
 
-          <div className="relative mt-4 md:mt-0 block">
-            <div className="relative max-w-md mx-auto md:max-w-none">
+          <div className="relative mt-4 md:mt-0 max-w-md mx-auto md:max-w-xl lg:max-w-2xl md:ml-auto md:mr-3 lg:mr-3.5 xl:mr-4">
+            <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-br from-red-500 to-rose-500 rounded-3xl transform rotate-1 md:rotate-2 shadow-lg"></div>
               <div className="relative rounded-3xl overflow-hidden shadow-2xl transform hover:rotate-0 transition-transform duration-500">
                 <img src="https://images.unsplash.com/photo-1615461066159-fea0960485d5?q=80&w=2016&auto=format&fit=crop" alt="Blood Donation" className="w-full h-[240px] sm:h-[280px] md:h-[320px] lg:h-[390px] object-cover" />
@@ -93,15 +93,25 @@ const HeroBanner = ({
               </div>
             </div>
 
-            <div className="absolute -bottom-3 left-2 md:-bottom-3 md:left-0 lg:-bottom-4 lg:-left-4 bg-base-200/95 backdrop-blur-md border-2 border-base-300 rounded-2xl p-2.5 sm:p-3.5 shadow-xl max-w-[170px] sm:max-w-[190px] hover:border-red-200 dark:hover:border-red-900/50 transition-all">
-              <div className="flex items-center gap-2 mb-1">
-                <div className="w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-br from-red-500 to-red-600 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg shrink-0"><Shield className="text-white" size={14} /></div>
-                <div><p className="text-sm sm:text-base font-black text-base-content">24/7</p><p className="text-[11px] sm:text-xs text-base-content/70 font-semibold">Emergency Support</p></div>
+            <div className="absolute -bottom-2 -left-2 sm:-bottom-3 sm:-left-3 md:-bottom-3 md:-left-6 lg:-bottom-3 lg:-left-8 bg-base-200/95 backdrop-blur-md border-2 border-base-300 rounded-2xl p-2 sm:p-2.5 md:p-2.5 lg:p-3.5 shadow-xl w-max max-w-[185px] sm:max-w-[200px] md:max-w-[200px] lg:max-w-[215px] hover:border-red-200 dark:hover:border-red-900/50 transition-all z-10">
+              <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5">
+                <div className="w-6 h-6 sm:w-7 sm:h-7 md:w-7 md:h-7 lg:w-8 lg:h-8 bg-gradient-to-br from-red-500 to-red-600 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg shrink-0">
+                  <Shield className="text-white w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                </div>
+                <div>
+                  <p className="text-xs sm:text-sm md:text-sm lg:text-base font-black text-base-content leading-tight">24/7</p>
+                  <p className="text-[10px] sm:text-[11px] md:text-[11px] lg:text-xs text-base-content/70 font-semibold leading-tight">Emergency Support</p>
+                </div>
               </div>
-              <div className="flex items-center gap-1 text-[11px] sm:text-xs text-green-600 dark:text-green-400 font-medium"><Clock size={10} /><span>Always ready to help</span></div>
+              <div className="flex items-center gap-1.5 sm:gap-2 text-[9px] sm:text-[10px] md:text-[11px] lg:text-xs text-emerald-600 dark:text-emerald-400 font-semibold">
+                <div className="w-6 sm:w-7 md:w-7 lg:w-8 flex items-center justify-center shrink-0">
+                  <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-600 dark:text-emerald-400 shrink-0" strokeWidth={2.75} />
+                </div>
+                <span className="whitespace-nowrap">Verified donor network</span>
+              </div>
             </div>
 
-            <div className="absolute top-3 right-2 md:top-4 md:right-0 lg:top-6 lg:-right-3 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl p-2.5 shadow-xl">
+            <div className="absolute -top-2 -right-2 sm:-top-3 sm:-right-3 md:-top-3 md:-right-3 lg:-top-3 lg:-right-3.5 xl:-right-4 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl p-2 sm:p-2.5 shadow-xl z-10">
               <Droplet className="text-white fill-white mb-0.5 sm:mb-1" size={14} />
               <p className="text-white font-bold text-[11px] sm:text-xs">Every Drop</p>
               <p className="text-white/90 text-[10px] sm:text-xs">Counts</p>

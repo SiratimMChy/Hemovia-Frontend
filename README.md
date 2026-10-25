@@ -13,7 +13,7 @@
 [![License](https://img.shields.io/badge/License-Custom-dc2626.svg)](#-license)
 
 <div align="center">
-<a href="https://your-app.vercel.app" target="_blank">
+<a href="https://hemovia.vercel.app" target="_blank">
 
 ![Live Demo](https://img.shields.io/badge/HEMOVIA-LIVE%20DEMO-dc2626?style=for-the-badge&logo=vercel&logoColor=white&labelColor=111827)
 
@@ -136,19 +136,9 @@ Open `http://localhost:5173` in your browser.
 2. Go to [vercel.com](https://vercel.com) and import your repository
 3. Set the **Framework Preset** to `Vite`
 4. Add all environment variables from `.env.local` under **Settings → Environment Variables**
-5. Add a `vercel.json` in the project root for SPA routing:
+5. Click **Deploy**
 
-```json
-{
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
-  ]
-}
-```
-
-6. Click **Deploy**
-
-> Every push to `main` will trigger an automatic redeployment.
+> SPA routing rewrites are pre-configured in `vercel.json`. Every push to `main` triggers an automatic redeployment.
 
 ---
 

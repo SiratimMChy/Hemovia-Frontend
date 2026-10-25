@@ -8,7 +8,7 @@ const AboutStats = ({ displayStats }) => {
 
   return (
     <div className="py-16 bg-base-100">
-      <div className="container mx-auto px-4 max-w-7xl">
+      <div className="px-4 lg:px-30 mx-auto">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
           {displayStats.map((stat, index) => (
             <div key={index} className="bg-base-200 border-2 border-base-300 rounded-2xl p-6 text-center hover:border-red-200 dark:hover:border-red-900/50 transition-all shadow-sm hover:shadow-lg">

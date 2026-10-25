@@ -51,7 +51,7 @@ const DonationCentersStats = ({ isInitialLoading, centers }) => {
 
   return (
     <div className="py-8 sm:py-12 md:py-16 lg:py-20 bg-base-100">
-      <div className="container mx-auto px-4 max-w-7xl">
+      <div className="px-4 lg:px-30 mx-auto">
         {/* Section Header */}
         <div className="text-center mb-6 sm:mb-8 md:mb-12">
           <div className="inline-flex items-center gap-2 sm:gap-2.5 bg-base-200 border-2 border-red-100 dark:border-red-900/50 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full mb-3 sm:mb-4 shadow-sm hover:border-red-200 dark:hover:border-red-800 transition-colors">

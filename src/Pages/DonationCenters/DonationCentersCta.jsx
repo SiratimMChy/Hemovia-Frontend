@@ -5,7 +5,7 @@ import { formatCount } from '../utils/centerHelpers';
 const DonationCentersCta = ({ centers }) => {
   return (
     <div className="py-12 sm:py-16 md:py-20 lg:py-24 bg-gradient-to-br from-red-50 to-rose-50 dark:from-base-200 dark:to-base-200">
-      <div className="container mx-auto px-4 max-w-6xl">
+      <div className="px-4 lg:px-30 mx-auto">
         <div className="text-center space-y-6 sm:space-y-8">
           {/* Badge matching Home theme */}
           <div className="inline-flex items-center gap-2 sm:gap-2.5 bg-base-200 border-2 border-red-100 dark:border-red-900/50 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-sm hover:border-red-200 dark:hover:border-red-800 transition-colors">

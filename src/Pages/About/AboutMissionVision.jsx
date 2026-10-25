@@ -3,7 +3,7 @@ import { Target, Eye } from 'lucide-react';
 const AboutMissionVision = ({ stats }) => {
   return (
     <div className="py-20 bg-gradient-to-br from-red-50 via-white to-rose-50 dark:from-base-200 dark:via-base-100 dark:to-base-200">
-      <div className="container mx-auto px-4 max-w-7xl">
+      <div className="px-4 lg:px-30 mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Mission */}
           <div className="bg-base-200 rounded-2xl shadow-xl border border-base-300 p-8 hover:shadow-2xl transition-all">

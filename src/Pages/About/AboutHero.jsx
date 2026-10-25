@@ -11,7 +11,7 @@ const AboutHero = ({ stats }) => {
       {/* Glow blobs */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-red-200 dark:bg-red-900/20 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-rose-200 dark:bg-rose-900/20 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse" style={{ animationDelay: '2s' }}></div>
-      <div className="relative container mx-auto px-4 max-w-7xl">
+      <div className="relative px-4 lg:px-30 mx-auto w-full">
         <div className="text-center">
           <div className="inline-flex items-center gap-2 bg-base-200 border-2 border-red-100 dark:border-red-900/50 px-5 py-3 rounded-full shadow-sm mb-8">
             <div className="w-8 h-8 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center shadow-sm">

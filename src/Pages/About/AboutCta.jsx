@@ -3,7 +3,7 @@ import { Heart, Activity, Phone, Mail, MapPin } from 'lucide-react';
 const AboutCta = ({ stats }) => {
   return (
     <div className="py-20 bg-base-100">
-      <div className="container mx-auto px-4 max-w-7xl">
+      <div className="px-4 lg:px-30 mx-auto">
         <div className="bg-gradient-to-r from-red-600 to-red-700 rounded-3xl p-8 md:p-12 text-white text-center">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-black mb-4">

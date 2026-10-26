@@ -1,4 +1,4 @@
-// UI Components Export
+// Export all shared UI components from one place
 export { default as Card } from './Card';
 export { default as Button } from './Button';
 export { default as Badge } from './Badge';

@@ -1,6 +1,5 @@
-// EmailJS Configuration
-// This configuration uses environment variables for security
-// Make sure to set up your EmailJS credentials in .env.local
+// Email settings for sending contact form messages
+// Uses environment variables to keep secret keys safe
 
 export const EMAILJS_CONFIG = {
   SERVICE_ID: import.meta.env.VITE_EMAILJS_SERVICE_ID || 'your_service_id',
@@ -8,7 +7,7 @@ export const EMAILJS_CONFIG = {
   PUBLIC_KEY: import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'your_public_key'
 };
 
-// Check if EmailJS is properly configured
+// Check if email keys are set up
 export const isEmailJSConfigured = () => {
   const { SERVICE_ID, TEMPLATE_ID, PUBLIC_KEY } = EMAILJS_CONFIG;
   return (
@@ -18,7 +17,7 @@ export const isEmailJSConfigured = () => {
   );
 };
 
-// Get configuration status for debugging
+// Check if email is ready to send messages
 export const getConfigStatus = () => {
   const { SERVICE_ID, TEMPLATE_ID, PUBLIC_KEY } = EMAILJS_CONFIG;
   return {
@@ -29,14 +28,14 @@ export const getConfigStatus = () => {
   };
 };
 
-// Example Email Template Variables (use these in your EmailJS template):
+// Variables available in the email template:
 // {{from_name}} - Sender's name
 // {{from_email}} - Sender's email
 // {{message}} - Message content
 // {{to_name}} - Recipient name (Hemovia Support Team)
 // {{reply_to}} - Reply-to email address
 
-// Sample EmailJS Template:
+// Example email message format:
 /*
 Subject: New Contact Form Message from {{from_name}}
 

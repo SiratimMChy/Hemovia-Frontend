@@ -23,12 +23,12 @@ const ViewRequest = () => {
         if (!id) return;
 
         let isMounted = true;
-        
+
         const fetchRequestData = () => {
             if (isMounted) {
                 setLoading(true);
             }
-            
+
             axiosSecure.get(`/requests/${id}`)
                 .then(res => {
                     if (isMounted) {
@@ -53,11 +53,11 @@ const ViewRequest = () => {
     }, [id, axiosSecure]);
 
     const handleConfirmDonate = async () => {
-        // Check if user is demo user and restrict action
+        // Don't let demo users confirm a donation
         if (checkDemoRestriction()) {
             return;
         }
-        
+
         try {
             await axiosSecure.put(`/requests/${id}`, {
                 donation_status: 'inprogress',
@@ -130,7 +130,7 @@ const ViewRequest = () => {
     return (
         <div className="min-h-screen bg-base-100 py-4 sm:py-6 lg:py-8 px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto">
-                {/* Header */}
+                {/* Back button and page title */}
                 <div className="mb-6 sm:mb-8">
                     <button
                         onClick={() => navigate(-1)}
@@ -139,7 +139,7 @@ const ViewRequest = () => {
                         <ArrowLeft className="w-4 h-4 mr-2" />
                         <span className="hidden sm:inline">Back</span>
                     </button>
-                    
+
                     <div className="text-center">
                         <div className="inline-flex items-center gap-2 sm:gap-3  px-3 sm:px-4 py-2 rounded-full mb-4 add border-2 border-red-600">
                             <Droplet className="text-red-600 dark:text-red-500 fill-red-600 dark:fill-red-400" size={16} />
@@ -154,7 +154,7 @@ const ViewRequest = () => {
                     </div>
                 </div>
 
-                {/* Status Badge */}
+                {/* Donation status (pending, in progress, done) */}
                 <div className="mb-6 sm:mb-8 flex justify-center">
                     <div className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 rounded-xl sm:rounded-2xl border-2 border-base-300 font-bold text-sm sm:text-base text-green-600 dark:text-green-400">
                         {getStatusIcon(requestData.donation_status)}
@@ -162,7 +162,7 @@ const ViewRequest = () => {
                     </div>
                 </div>
 
-                {/* Main Content Grid */}
+                {/* Patient request info and donor contact card */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 mb-6 sm:mb-8">
                     <ViewRequestDetails requestData={requestData} />
                     <ViewRequestSidebar
@@ -175,7 +175,7 @@ const ViewRequest = () => {
                     />
                 </div>
 
-                {/* Donate Modal */}
+                {/* Popup to confirm blood donation */}
                 <DonateConfirmModal
                     showDonateModal={showDonateModal}
                     setShowDonateModal={setShowDonateModal}

@@ -29,7 +29,7 @@ const NavbarUserMenu = ({ user, handleSignOut, getDashboardPath }) => {
             </div>
             <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-72 p-4 shadow-xl border border-base-300 dark:border-base-content/10">
+                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1000] mt-3 w-72 p-4 shadow-xl border border-base-300 dark:border-base-content/10">
                 <li className="menu-title px-0 py-2 mb-2">
                     <div className="flex flex-col gap-1 w-full">
                         <span className="text-base font-bold text-red-600 dark:text-red-400 truncate">{user?.displayName || user?.name || 'User'}</span>

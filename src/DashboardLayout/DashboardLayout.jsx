@@ -4,20 +4,20 @@ import Aside from '../Components/Aside/Aside';
 import DemoUserBadge from '../Components/DemoUserBadge/DemoUserBadge';
 
 const DashboardLayout = () => {
-    // Initialize theme on component mount and listen for changes
+    // Remember the user's theme when the dashboard opens
     useEffect(() => {
         // Set initial theme from localStorage
         const savedTheme = localStorage.getItem("theme") || "light";
         document.documentElement.setAttribute("data-theme", savedTheme);
 
-        // Listen for theme changes in localStorage (from other components)
+        // Update theme if changed in another tab
         const handleStorageChange = (e) => {
             if (e.key === 'theme') {
                 document.documentElement.setAttribute("data-theme", e.newValue);
             }
         };
 
-        // Listen for custom theme change events
+        // Update theme when user clicks the theme button
         const handleThemeChange = (e) => {
             document.documentElement.setAttribute("data-theme", e.detail.theme);
         };
@@ -34,10 +34,10 @@ const DashboardLayout = () => {
     return (
         <div className='min-h-screen flex bg-base-100 relative'>
             <Aside />
-           <div className='flex-1 p-2 sm:p-4 md:p-5 bg-base-100 min-w-0 overflow-x-hidden'>
-             <Outlet />
-           </div>
-           <DemoUserBadge />
+            <div className='flex-1 p-2 sm:p-4 md:p-5 bg-base-100 min-w-0 overflow-x-hidden'>
+                <Outlet />
+            </div>
+            <DemoUserBadge />
         </div>
     );
 };

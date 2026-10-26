@@ -59,7 +59,7 @@ const DonationRequests = () => {
   return (
     <div className="min-h-screen bg-base-100 py-8 px-4">
       <div className="container mx-auto max-w-7xl">
-        {/* Header */}
+        {/* Page title and count of active requests */}
         <div className="text-center mb-10">
           <h2 className="text-4xl md:text-5xl font-bold text-base-content mb-3">
             Pending Donation Requests
@@ -76,12 +76,12 @@ const DonationRequests = () => {
           )}
         </div>
 
-        {/* Loading State */}
+        {/* Loading placeholders */}
         {loading ? (
           <SkeletonLoader type="card" count={8} />
         ) : (
           <>
-            {/* Cards Grid */}
+            {/* List of blood request cards */}
             {pendingRequests.length === 0 ? (
               <div className="bg-base-200 rounded-2xl shadow-lg border border-base-300 p-12 text-center">
                 <div className="text-base-content/40 mb-4">
@@ -104,7 +104,7 @@ const DonationRequests = () => {
               </div>
             )}
 
-            {/* Pagination */}
+            {/* Page buttons */}
             {pendingRequests.length > 0 && (
               <div className="flex justify-center items-center mt-12 gap-4">
                 <button

@@ -44,7 +44,7 @@ const EditRequest = () => {
         ? upazilas.filter(u => u.district_id === selectedDistrictObj.id)
         : [];
 
-    // load request data
+    // Load request and check if user owns it or is an admin
     useEffect(() => {
         if (!id || !user?.email || !userRole) return;
 
@@ -80,7 +80,7 @@ const EditRequest = () => {
             });
     }, [id, user, userRole, axiosSecure, navigate]);
 
-    // update request
+    // Save updated info and go back to requests list
     const handleUpdateRequest = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -120,7 +120,7 @@ const EditRequest = () => {
             });
     };
 
-    // loading guard
+    // Show spinner while loading request data
     if (!requestData) {
         return (
             <div className="flex justify-center items-center min-h-screen">

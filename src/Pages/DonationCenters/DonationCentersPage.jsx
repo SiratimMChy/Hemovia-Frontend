@@ -114,7 +114,7 @@ const DonationCentersPage = () => {
         centers={centers}
       />
 
-      {/* Centers List */}
+      {/* Blood donation centers list */}
       <div id="results-section" className="py-8 sm:py-12 md:py-16 bg-base-200">
         <div className="px-4 lg:px-30 mx-auto">
           <div id="all-centers-section">

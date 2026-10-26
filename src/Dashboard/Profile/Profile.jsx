@@ -18,7 +18,7 @@ const Profile = () => {
     const { checkDemoRestriction } = useDemoRestriction();
     const axiosSecure = useAxiosSecure();
 
-    // Fetch user profile data
+    // Fetch user profile data from database
     useEffect(() => {
         if (user?.email) {
             axiosSecure.get(`/users/role/${user.email}`)
@@ -53,7 +53,7 @@ const Profile = () => {
         e.preventDefault();
         if (!isEditing) return;
         
-        // Check if user is demo user and restrict action
+        // Don't let demo users change profile info
         if (checkDemoRestriction()) return;
 
         setUploading(true);
@@ -67,13 +67,13 @@ const Profile = () => {
         try {
             let imageUrl = user?.photoURL || profileData?.imageUrl;
 
-            // Handle image upload if a new image is selected
+            // Upload new profile photo if selected
             if (photoUrlInput.files && photoUrlInput.files[0]) {
                 const imageFile = photoUrlInput.files[0];
                 const formData = new FormData();
                 formData.append('image', imageFile);
 
-                // Upload to ImgBB
+                // Upload photo to image ImgBB
                 const imgResponse = await axios.post(
                     `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API_KEY}`,
                     formData
@@ -81,14 +81,14 @@ const Profile = () => {
                 imageUrl = imgResponse.data.data.display_url;
             }
 
-            // Update Firebase profile
+            // Update name and photo in Firebase
             await updateProfile(auth.currentUser, { displayName: name, photoURL: imageUrl });
 
-            // Update database
+            // Save updated profile info in database
             const updatedData = { name, imageUrl, district, upazila, bloodGroup };
             await axiosSecure.patch('/users/update/profile', updatedData);
 
-            // Update local state
+            // Update local user state immediately
             setUser({ ...user, displayName: name, photoURL: imageUrl });
             setProfileData({ ...profileData, ...updatedData });
 
@@ -113,7 +113,7 @@ const Profile = () => {
 
     return (
         <div className="w-full max-w-4xl mx-auto py-1 sm:py-4 md:py-6 px-0 sm:px-2 md:px-0 min-w-0">
-            {/* Header */}
+            {/* Page title and description */}
             <div className="text-center mb-4 sm:mb-8">
                 <h1 className="text-xl sm:text-3xl md:text-4xl font-bold text-base-content mb-1 sm:mb-2">
                     My Profile

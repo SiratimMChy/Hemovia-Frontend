@@ -2,34 +2,34 @@ import { useContext } from 'react';
 import { AuthContext } from '../Provider/AuthProvider';
 import Swal from 'sweetalert2';
 
-// Demo user emails 
+// Demo accounts used for visitors to test the site
 const DEMO_EMAILS = {
   DONOR: "donor@hemovia.com",
   ADMIN: "admin@hemovia.com"
 };
 
-// Check if current user is a demo user
+// Check if the current user is logged in with a demo account
 const isDemoUser = (userEmail) => {
   if (!userEmail) return false;
   return Object.values(DEMO_EMAILS).includes(userEmail);
 };
 
-// Get demo user type
+// Check if this demo account is a donor or an admin
 const getDemoUserType = (userEmail) => {
   if (!userEmail) return null;
-  
+
   if (userEmail === DEMO_EMAILS.DONOR) return 'DONOR';
   if (userEmail === DEMO_EMAILS.ADMIN) return 'ADMIN';
-  
+
   return null;
 };
 
-// Demo user restriction message
+// Warning message shown when a demo user tries to edit or delete data
 const getDemoRestrictionMessage = (userEmail) => {
   const demoType = getDemoUserType(userEmail);
-  
+
   if (!demoType) return null;
-  
+
   const messages = {
     DONOR: {
       title: "Demo User Restriction!",
@@ -38,29 +38,29 @@ const getDemoRestrictionMessage = (userEmail) => {
       confirmButtonText: "Understood"
     },
     ADMIN: {
-      title: "Demo Admin Restriction!", 
+      title: "Demo Admin Restriction!",
       text: "You are a demo admin. To perform this action, you must login as a real admin.",
       icon: "warning",
       confirmButtonText: "Understood"
     }
   };
-  
+
   return messages[demoType];
 };
 
-// Custom hook for demo user restrictions
+// Helper hook to protect data from being edited by demo accounts
 export const useDemoRestriction = () => {
   const { user } = useContext(AuthContext);
-  
+
   const checkDemoRestriction = (callback = null) => {
     if (!user?.email) {
       if (callback) callback();
       return false;
     }
-    
+
     if (isDemoUser(user.email)) {
       const message = getDemoRestrictionMessage(user.email);
-      
+
       Swal.fire({
         title: message.title,
         text: message.text,
@@ -79,16 +79,16 @@ export const useDemoRestriction = () => {
           popup: 'animate__animated animate__fadeOutUp'
         }
       });
-      
-      return true; // Restricted
+
+      return true; // Stop demo user from making changes
     }
-    
+
     if (callback) callback();
-    return false; // Not restricted
+    return false; // Allow real user to continue
   };
-  
+
   const isDemo = user?.email ? isDemoUser(user.email) : false;
-  
+
   return {
     checkDemoRestriction,
     isDemo,

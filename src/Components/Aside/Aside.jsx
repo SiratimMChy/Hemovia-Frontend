@@ -15,12 +15,12 @@ const Aside = () => {
   const { role } = useContext(AuthContext);
   const navigate = useNavigate();
   
-  // Auto-collapse on small screens (< 768px)
+  // Keep sidebar small on mobile screens to save space
   const [isCollapsed, setIsCollapsed] = useState(() => {
     return typeof window !== 'undefined' ? window.innerWidth < 768 : false;
   });
   
-  // Theme state management
+  // Check if user prefers light or dark theme
   const [isDark, setIsDark] = useState(() => {
     const savedTheme = localStorage.getItem("theme");
     return savedTheme === "dark";
@@ -33,7 +33,7 @@ const Aside = () => {
       localStorage.setItem("theme", theme);
       document.documentElement.setAttribute("data-theme", theme);
       
-      // Dispatch custom event for other components to listen
+      // Tell other components that theme has changed
       window.dispatchEvent(new CustomEvent('themeChange', { 
         detail: { theme } 
       }));
@@ -42,7 +42,7 @@ const Aside = () => {
     });
   };
 
-  // Listen for theme changes from other components
+  // Update theme if changed in another component or tab
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "light";
     document.documentElement.setAttribute("data-theme", savedTheme);
@@ -67,7 +67,7 @@ const Aside = () => {
     };
   }, []);
 
-  // Listen for window resize to collapse on mobile
+  // Collapse sidebar when screen becomes small
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 768) {
@@ -83,7 +83,7 @@ const Aside = () => {
   const inactiveClass = 'text-base-content hover:bg-red-50 dark:hover:bg-base-300 hover:text-red-600';
 
   const handleNavClick = () => {
-    // If on mobile screen, auto-collapse after clicking a navigation link
+    // Close sidebar after user clicks a link on mobile
     if (window.innerWidth < 768) {
       setIsCollapsed(true);
     }
@@ -91,7 +91,7 @@ const Aside = () => {
 
   return (
     <>
-      {/* Mobile Backdrop Overlay when expanded */}
+      {/* Dark background overlay on mobile */}
       {!isCollapsed && (
         <div
           className="md:hidden fixed inset-0 bg-black/40 backdrop-blur-xs z-40 transition-opacity duration-300"
@@ -99,7 +99,7 @@ const Aside = () => {
         />
       )}
 
-      {/* Unified Single Aside Sidebar */}
+      {/* Main sidebar navigation */}
       <aside
         className={`min-h-screen bg-base-200 border-r-2 border-base-300 flex flex-col shadow-lg transition-all duration-300 shrink-0 ${
           isCollapsed
@@ -107,7 +107,7 @@ const Aside = () => {
             : 'w-64 max-w-[85vw] fixed md:sticky top-0 left-0 h-screen z-50 shadow-2xl md:shadow-lg'
         }`}
       >
-        {/* Single Circular Toggle Button on the border edge beside the logo */}
+        {/* Collapse and expand button */}
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
           className="absolute -right-2 top-17 w-7 h-7 bg-base-100 border-2 border-base-300 rounded-full flex items-center justify-center shadow-md hover:border-red-400 hover:text-red-500 text-base-content/70 transition-all duration-200 z-50 cursor-pointer"
@@ -116,7 +116,7 @@ const Aside = () => {
           {isCollapsed ? <ChevronRight size={14} /> : <ChevronLeft size={14} />}
         </button>
 
-        {/* Brand Header */}
+        {/* Logo and site name */}
         <div className="px-4 py-6 border-b-2 border-base-300 bg-base-100 shrink-0">
           <Link
             to="/"

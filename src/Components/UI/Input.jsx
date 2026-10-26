@@ -8,7 +8,7 @@ const Input = ({
 }) => {
   const getInputStyle = () => {
     const baseStyle = error ? COMPONENT_STYLES.input.error : COMPONENT_STYLES.input.default;
-    // Replace subtle border with more visible border-2
+    // Make border clearer and easier to see
     return baseStyle.replace('border border-base-300/50', 'border-2 border-base-300').replace('border border-red-300', 'border-2 border-red-300');
   };
   return (

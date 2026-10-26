@@ -1,4 +1,4 @@
-import { UserCheck, Search, PhoneCall, HeartHandshake, ArrowRight } from 'lucide-react';
+import { UserCheck, Search, PhoneCall, HeartPulse, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router';
 
 const steps = [
@@ -33,7 +33,7 @@ const steps = [
     step: '04',
     phase: 'IMPACT',
     title: 'Donate & Save',
-    icon: HeartHandshake,
+    icon: HeartPulse,
     action: 'Find Centers',
     link: '/center',
     desc: 'Meet at the hospital or certified blood bank. Every donation helps a trauma patient or child in surgery.'

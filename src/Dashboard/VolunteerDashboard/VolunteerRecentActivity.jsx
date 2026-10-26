@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { FileText, UserCheck, ArrowUpRight } from 'lucide-react';
+import { UserRoundPlus, UserCheck, ArrowUpRight } from 'lucide-react';
 
 const VolunteerRecentActivity = ({ recentRequests, recentUsers, loading }) => {
   const getStatusBadge = (status) => {
@@ -24,7 +24,7 @@ const VolunteerRecentActivity = ({ recentRequests, recentUsers, loading }) => {
           <div className="flex items-center justify-between gap-2 mb-3 pb-3 border-b border-base-300">
             <h3 className="font-bold text-sm sm:text-base text-base-content flex items-center gap-2">
               <div className="w-6 h-6 rounded-lg bg-red-500/10 text-red-600 flex items-center justify-center shrink-0">
-                <FileText size={14} />
+                <UserRoundPlus size={14} />
               </div>
               <span>Recent Blood Requests</span>
             </h3>

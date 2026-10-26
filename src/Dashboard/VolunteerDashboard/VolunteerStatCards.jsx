@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heart, Users, UserCheck, DollarSign } from 'lucide-react';
+import { HeartPulse, Users, UserCheck, DollarSign } from 'lucide-react';
 
 const VolunteerStatCards = ({ stats, volunteerStats, totalFunding, totalUsers }) => {
   const cards = [
@@ -7,7 +7,7 @@ const VolunteerStatCards = ({ stats, volunteerStats, totalFunding, totalUsers })
       title: 'Lives Saved',
       value: stats.done || 0,
       subtext: 'Completed donations',
-      icon: Heart,
+      icon: HeartPulse,
       gradient: 'from-red-500 to-rose-600 shadow-red-500/25',
     },
     {

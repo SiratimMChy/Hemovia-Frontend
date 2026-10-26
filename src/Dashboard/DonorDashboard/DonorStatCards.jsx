@@ -1,5 +1,5 @@
 import React from 'react';
-import { Users, Clock, CheckCircle, TrendingUp } from 'lucide-react';
+import { UserRoundPlus, Clock, CheckCircle, TrendingUp } from 'lucide-react';
 
 const DonorStatCards = ({ stats, completionRate }) => {
   const cards = [
@@ -7,7 +7,7 @@ const DonorStatCards = ({ stats, completionRate }) => {
       title: 'Total Requests',
       value: stats.totalRequests,
       subtext: 'All time',
-      icon: Users,
+      icon: UserRoundPlus,
       gradient: 'from-red-500 to-rose-600 shadow-red-500/25',
     },
     {

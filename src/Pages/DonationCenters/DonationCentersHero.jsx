@@ -62,7 +62,7 @@ const DonationCentersHero = ({
                   className="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-2.5 sm:py-3 border-2 border-base-300 rounded-lg sm:rounded-xl focus:border-red-500 focus:outline-none transition-all duration-300 hover:border-base-content/30 text-sm sm:text-base bg-base-100 text-base-content"
                 />
               </div>
-              <button 
+              <button
                 onClick={handleSearch}
                 disabled={isLoading}
                 className="bg-gradient-to-r from-red-600 to-rose-600 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg sm:rounded-xl font-bold hover:from-red-700 hover:to-rose-700 transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center gap-2 disabled:opacity-70 text-sm sm:text-base"

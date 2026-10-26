@@ -1,4 +1,4 @@
-import { Heart, Activity, Phone, Mail, MapPin } from 'lucide-react';
+import { HeartPulse, Search, Phone, Mail, MapPin } from 'lucide-react';
 
 const AboutCta = ({ stats }) => {
   return (
@@ -18,14 +18,14 @@ const AboutCta = ({ stats }) => {
                 href="/signup"
                 className="group inline-flex items-center justify-center gap-3 bg-white text-red-600 px-8 py-4 rounded-2xl font-bold text-lg hover:bg-red-50 transition-all shadow-lg hover:shadow-xl hover:scale-105"
               >
-                <Heart size={20} className="group-hover:scale-110 transition-transform" />
+                <HeartPulse size={20} className="group-hover:scale-110 transition-transform" />
                 <span>Become a Donor</span>
               </a>
               <a
                 href="/donation-requests"
                 className="group inline-flex items-center justify-center gap-3 bg-red-800 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:bg-red-900 transition-all shadow-lg hover:shadow-xl hover:scale-105"
               >
-                <Activity size={20} className="group-hover:scale-110 transition-transform" />
+                <Search size={20} className="group-hover:scale-110 transition-transform" />
                 <span>Find Donors</span>
               </a>
             </div>

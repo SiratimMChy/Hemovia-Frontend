@@ -1,5 +1,5 @@
 import { Card } from '../../Components/UI';
-import { Heart, AlertCircle, Clock, CheckCircle } from 'lucide-react';
+import { UserRoundPlus, AlertCircle, Clock, CheckCircle } from 'lucide-react';
 import { LAYOUT, SPACING } from '../../styles/designSystem';
 
 const MyRequestStatCards = ({ totalRequests, myRequests }) => {
@@ -7,7 +7,7 @@ const MyRequestStatCards = ({ totalRequests, myRequests }) => {
         <div className={`${LAYOUT.grid.stats} ${SPACING.marginMd}`}>
             <Card className="text-center hover:border-red-200 dark:hover:border-red-900/50 transition-all">
                 <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-red-500 to-red-600 rounded-lg flex items-center justify-center mx-auto mb-2 shadow-lg">
-                    <Heart className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+                    <UserRoundPlus className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                 </div>
                 <p className="text-lg sm:text-xl font-bold text-base-content">{totalRequests}</p>
                 <p className="text-xs sm:text-sm text-base-content/70 font-semibold">Total Requests</p>

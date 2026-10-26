@@ -2,7 +2,7 @@ import { Droplet } from 'lucide-react';
 
 const AboutHero = ({ stats }) => {
   return (
-    <div className="relative py-20 bg-gradient-to-br from-red-50 via-white to-rose-50 dark:from-base-200 dark:via-base-100 dark:to-base-200 overflow-hidden">
+    <div className="relative pt-10 sm:pt-12 md:pt-14 pb-8 sm:pb-10 bg-gradient-to-br from-red-50 via-white to-rose-50 dark:from-base-200 dark:via-base-100 dark:to-base-200 overflow-hidden">
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-30 dark:opacity-10" style={{
         backgroundImage: 'radial-gradient(circle at 1px 1px, rgb(254 202 202 / 0.3) 1px, transparent 0)',
@@ -13,20 +13,20 @@ const AboutHero = ({ stats }) => {
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-rose-200 dark:bg-rose-900/20 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse" style={{ animationDelay: '2s' }}></div>
       <div className="relative px-4 lg:px-30 mx-auto w-full">
         <div className="text-center">
-          <div className="inline-flex items-center gap-2 bg-base-200 border-2 border-red-100 dark:border-red-900/50 px-5 py-3 rounded-full shadow-sm mb-8">
-            <div className="w-8 h-8 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center shadow-sm">
-              <Droplet className="text-white" size={16} />
+          <div className="inline-flex items-center gap-2 bg-base-200 border-2 border-red-100 dark:border-red-900/50 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full shadow-sm mb-4 sm:mb-6">
+            <div className="w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center shadow-sm">
+              <Droplet className="text-white" size={14} />
             </div>
-            <span className="text-red-600 dark:text-red-400 font-bold text-sm">About Hemovia</span>
+            <span className="text-red-600 dark:text-red-400 font-bold text-xs sm:text-sm">About Hemovia</span>
           </div>
-          <div className="mb-8">
-            <h1 className="text-4xl md:text-5xl xl:text-6xl font-black text-base-content leading-none mb-5">
+          <div className="mb-5 sm:mb-6">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-black text-base-content leading-none mb-3 sm:mb-4">
               Connecting<span className="bg-gradient-to-r from-red-600 to-rose-600 bg-clip-text text-transparent"> Hearts</span>
             </h1>
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <div className="h-1 w-20 bg-gradient-to-r from-red-600 to-rose-600 rounded-full"></div>
-              <p className="text-xl md:text-2xl font-bold text-base-content/80">Saving Lives</p>
-              <div className="h-1 w-20 bg-gradient-to-r from-red-600 to-rose-600 rounded-full"></div>
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <div className="h-1 w-16 sm:w-20 bg-gradient-to-r from-red-600 to-rose-600 rounded-full"></div>
+              <p className="text-lg sm:text-xl md:text-2xl font-bold text-base-content/80">Saving Lives</p>
+              <div className="h-1 w-16 sm:w-20 bg-gradient-to-r from-red-600 to-rose-600 rounded-full"></div>
             </div>
           </div>
           <p className="text-lg md:text-xl text-base-content/70 leading-relaxed max-w-4xl mx-auto font-medium">

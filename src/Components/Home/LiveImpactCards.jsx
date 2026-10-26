@@ -1,4 +1,4 @@
-import { Heart, Activity, Users, Award, Droplet, Search } from 'lucide-react';
+import { Siren, Activity, Users, CheckCircle, Droplet, Search } from 'lucide-react';
 import { Card } from '../UI';
 
 const LiveImpactCards = ({ livesSaved, apiStats }) => {
@@ -9,7 +9,7 @@ const LiveImpactCards = ({ livesSaved, apiStats }) => {
         <Card className="group p-6 hover:border-red-200 dark:hover:border-red-900/50 transition-all">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-12 h-12 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-red-200 dark:shadow-red-900/30">
-              <Heart className="text-white fill-white" size={24} />
+              <Siren className="text-white" size={24} />
             </div>
             <div>
               <p className="text-2xl font-black text-base-content">{Math.floor(livesSaved * 0.8)}</p>
@@ -54,7 +54,7 @@ const LiveImpactCards = ({ livesSaved, apiStats }) => {
         <Card className="group p-6 hover:border-purple-200 dark:hover:border-purple-900/50 transition-all">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-purple-200 dark:shadow-purple-900/30">
-              <Award className="text-white" size={24} />
+              <CheckCircle className="text-white" size={24} />
             </div>
             <div>
               <p className="text-2xl font-black text-base-content">{apiStats.successRate}%</p>

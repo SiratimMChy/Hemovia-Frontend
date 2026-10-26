@@ -1,4 +1,4 @@
-import { Activity, Heart, CheckCircle, Users, Clock } from 'lucide-react';
+import { Activity, UserRoundPlus, CheckCircle, Users, Clock } from 'lucide-react';
 
 const AboutLiveStats = ({ stats }) => {
   return (
@@ -20,7 +20,7 @@ const AboutLiveStats = ({ stats }) => {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="bg-base-200 rounded-2xl shadow-lg border border-base-300 p-6 text-center hover:shadow-xl transition-all">
             <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-blue-200 dark:shadow-blue-900/30">
-              <Heart className="text-white" size={24} />
+              <UserRoundPlus className="text-white" size={24} />
             </div>
             <p className="text-2xl font-black text-base-content mb-2">{stats.totalRequests}</p>
             <p className="text-base-content/70 font-semibold">Total Requests</p>

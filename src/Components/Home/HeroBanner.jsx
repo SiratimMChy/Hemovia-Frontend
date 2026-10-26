@@ -1,5 +1,5 @@
 import { Link } from 'react-router';
-import { Heart, Search, Droplet, Users, Activity, Shield, CheckCircle2 } from 'lucide-react';
+import { LayoutDashboard, Search, Droplet, Users, Building, Shield, CheckCircle2, HeartPulse } from 'lucide-react';
 import { Button } from '../UI';
 
 const HeroBanner = ({
@@ -44,7 +44,7 @@ const HeroBanner = ({
 
             <div className="flex flex-row gap-2.5 sm:gap-3 justify-center md:justify-start items-center w-full max-w-md mx-auto md:mx-0 pt-1">
               <Button as={Link} to={getDashboardPath()} variant="primary" className="flex-1 sm:flex-none group inline-flex items-center justify-center gap-1.5 sm:gap-2 px-4 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-bold hover:scale-105 whitespace-nowrap shadow-md hover:shadow-lg transition-all">
-                <Heart size={15} className="group-hover:scale-110 transition-transform fill-white shrink-0" />
+                <LayoutDashboard size={15} className="group-hover:scale-110 transition-transform fill-white shrink-0" />
                 <span>{user ? 'Dashboard' : 'Join as Donor'}</span>
               </Button>
               <Button as={Link} to="/search" variant="outline" className="flex-1 sm:flex-none group inline-flex items-center justify-center gap-1.5 sm:gap-2 px-4 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-bold hover:scale-105 whitespace-nowrap transition-all">
@@ -68,14 +68,14 @@ const HeroBanner = ({
                 </div>
                 <div className="bg-base-200/90 border border-base-300 hover:border-red-300 dark:hover:border-red-900/60 rounded-2xl p-2.5 sm:p-3 transition-all duration-300 text-center flex flex-col items-center justify-center shadow-xs hover:shadow-md">
                   <div className="flex items-center justify-center gap-1 mb-1">
-                    <Heart className="text-red-600 dark:text-red-500 fill-red-600 dark:fill-red-500" size={16} />
+                    <HeartPulse className="text-red-600 dark:text-red-500" size={16} />
                   </div>
                   <p className="text-base sm:text-lg font-black text-base-content leading-tight">{livesSaved}</p>
                   <p className="text-[11px] sm:text-xs text-base-content/70 font-semibold mt-0.5">Lives Saved</p>
                 </div>
                 <div className="bg-base-200/90 border border-base-300 hover:border-red-300 dark:hover:border-red-900/60 rounded-2xl p-2.5 sm:p-3 transition-all duration-300 text-center flex flex-col items-center justify-center shadow-xs hover:shadow-md">
                   <div className="flex items-center justify-center gap-1 mb-1">
-                    <Activity className="text-red-600 dark:text-red-500" size={16} />
+                    <Building className="text-red-600 dark:text-red-500" size={16} />
                   </div>
                   <p className="text-base sm:text-lg font-black text-base-content leading-tight">{formatCount(totalCenters || centersData.length)}</p>
                   <p className="text-[11px] sm:text-xs text-base-content/70 font-semibold mt-0.5">Blood Banks</p>

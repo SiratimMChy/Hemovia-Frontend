@@ -1,5 +1,5 @@
 import React from 'react';
-import { Users, Heart, DollarSign, FileText } from 'lucide-react';
+import { Users, HeartPulse, DollarSign, UserRoundPlus } from 'lucide-react';
 
 const AdminStatCards = ({ totalUsers, requestStats, totalFunding, totalRequests }) => {
   const cards = [
@@ -14,7 +14,7 @@ const AdminStatCards = ({ totalUsers, requestStats, totalFunding, totalRequests 
       title: 'Lives Saved',
       value: requestStats.done || 0,
       subtext: 'Successful donations',
-      icon: Heart,
+      icon: HeartPulse,
       gradient: 'from-emerald-500 to-teal-600 shadow-emerald-500/25',
     },
     {
@@ -28,7 +28,7 @@ const AdminStatCards = ({ totalUsers, requestStats, totalFunding, totalRequests 
       title: 'Blood Requests',
       value: totalRequests || 0,
       subtext: 'Total requests logged',
-      icon: FileText,
+      icon: UserRoundPlus,
       gradient: 'from-blue-500 to-indigo-600 shadow-blue-500/25',
     },
   ];

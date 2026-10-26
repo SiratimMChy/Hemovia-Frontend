@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Heart, Users, Award, Shield, Target, Activity } from 'lucide-react';
+import { HandHeart, HeartPulse, Users, Shield, Target, Building, MapPin } from 'lucide-react';
 import useAxios from '../../Hooks/useAxios';
 import AboutHero from './AboutHero';
 import AboutStats from './AboutStats';
@@ -76,19 +76,19 @@ const About = () => {
       color: 'red' 
     },
     { 
-      icon: Heart, 
+      icon: HeartPulse, 
       value: `${stats.successfulDonations}`, 
       label: 'Lives Saved', 
       color: 'red' 
     },
     { 
-      icon: Activity, 
+      icon: Building, 
       value: `${stats.totalCenters}`, 
       label: 'Blood Banks', 
       color: 'red' 
     },
     { 
-      icon: Award, 
+      icon: MapPin, 
       value: `${stats.totalCities}+`, 
       label: 'Cities Covered', 
       color: 'red' 
@@ -97,7 +97,7 @@ const About = () => {
 
   const values = [
     {
-      icon: Heart,
+      icon: HandHeart,
       title: 'Compassion',
       description: 'We believe in the power of human kindness and the willingness to help others in their time of need.'
     },

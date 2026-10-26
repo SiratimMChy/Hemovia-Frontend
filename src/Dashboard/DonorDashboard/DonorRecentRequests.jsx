@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router';
-import { FileText, Eye, ArrowUpRight, Plus } from 'lucide-react';
+import { UserRoundPlus, Eye, ArrowUpRight, Plus } from 'lucide-react';
 
 const DonorRecentRequests = ({ requests, loading }) => {
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ const DonorRecentRequests = ({ requests, loading }) => {
       <div className="flex items-center justify-between gap-2 mb-4 pb-3 border-b border-base-300">
         <h3 className="font-bold text-sm sm:text-base text-base-content flex items-center gap-2">
           <div className="w-6 h-6 rounded-lg bg-red-500/10 text-red-600 flex items-center justify-center shrink-0">
-            <FileText size={14} />
+            <UserRoundPlus size={14} />
           </div>
           <span>Recent Donation Requests</span>
         </h3>
@@ -123,7 +123,7 @@ const DonorRecentRequests = ({ requests, loading }) => {
         </>
       ) : (
         <div className="text-center py-8">
-          <FileText size={40} className="text-base-content/30 mx-auto mb-2" />
+          <UserRoundPlus size={40} className="text-base-content/30 mx-auto mb-2" />
           <p className="text-sm font-semibold text-base-content/70">No donation requests yet</p>
           <Link
             to="/dashboard/addRequest"

@@ -1,9 +1,9 @@
-import { Heart, Clock, Stethoscope, ShieldCheck, Droplets, Timer, HeartPulse, CheckCheck } from 'lucide-react';
+import { HeartPulse, Clock, Stethoscope, ShieldCheck, Droplets, Timer, CheckCheck } from 'lucide-react';
 import { TYPOGRAPHY } from '../../styles/designSystem';
 
 const whyDonateStats = [
   {
-    icon: Heart,
+    icon: HeartPulse,
     highlightIcon: Droplets,
     title: 'Save 3 Lives',
     badge: 'Triple Impact',
@@ -54,7 +54,7 @@ const WhyDonateBlood = () => {
       <div className="px-4 lg:px-30 mx-auto">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 bg-base-200 border-2 border-red-100 dark:border-red-900/50 px-4 py-2 rounded-full mb-4">
-            <Heart className="text-red-600 fill-red-600" size={15} />
+            <HeartPulse className="text-red-600 dark:text-red-500" size={16} />
             <span className="text-red-600 dark:text-red-500 font-bold text-sm">LIFE-SAVING IMPACT</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-extrabold text-base-content mb-4">

@@ -1,12 +1,12 @@
 import { Link } from 'react-router';
-import { Heart } from 'lucide-react';
+import { Droplet } from 'lucide-react';
 import { FaPlus } from 'react-icons/fa';
 
 const MyRequestEmptyState = ({ statusFilter }) => {
     return (
         <div className="text-center py-12 sm:py-16">
             <div className="w-16 h-16 sm:w-20 sm:h-20 bg-base-300 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Heart className="w-8 h-8 sm:w-10 sm:h-10 text-base-content/40" />
+                <Droplet className="w-8 h-8 sm:w-10 sm:h-10 text-base-content/40" />
             </div>
             <h3 className="text-xl sm:text-2xl font-bold text-base-content mb-2">No Requests Found</h3>
             <p className="text-base-content/70 mb-6 max-w-md mx-auto">

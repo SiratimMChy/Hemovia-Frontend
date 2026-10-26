@@ -1,4 +1,4 @@
-import { Droplet, Activity } from 'lucide-react';
+import { Droplet, HeartPulse } from 'lucide-react';
 import LiveImpactCards from './LiveImpactCards';
 
 const LiveImpact = ({ livesSaved, apiStats, formatCount }) => {
@@ -57,7 +57,7 @@ const LiveImpact = ({ livesSaved, apiStats, formatCount }) => {
                   {livesSaved}
                 </p>
                 <div className="inline-flex items-center gap-1.5 text-red-600 dark:text-red-400 font-bold text-xl sm:text-2xl">
-                  <Activity size={20} className="animate-pulse" />
+                  <HeartPulse size={20} className="animate-pulse" />
                   <span>Lives Saved Today</span>
                 </div>
               </div>

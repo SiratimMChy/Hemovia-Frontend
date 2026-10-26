@@ -39,7 +39,6 @@ const About = () => {
     const fetchStats = async () => {
       try {
         const response = await axiosInstance.get('/public-stats');
-        console.log('Public stats response:', response.data);
         const { successRate, totalRequests, totalDonors } = response.data;
         const estimatedDone = Math.round((successRate / (100 - successRate)) * totalRequests);
         setLivesSaved(estimatedDone > 0 ? estimatedDone : 0);

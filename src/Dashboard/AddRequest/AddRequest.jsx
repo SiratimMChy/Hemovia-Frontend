@@ -1,5 +1,7 @@
 import { Droplet } from 'lucide-react';
 import { useEffect, useContext, useState } from 'react';
+import { useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
 import { AuthContext } from '../../Provider/AuthProvider';
 import axios from 'axios';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
@@ -8,6 +10,7 @@ import AddRequestForm from './AddRequestForm';
 
 const AddRequest = () => {
     const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
     const [upazilas, setUpazilas] = useState([]);
     const [districts, setDistricts] = useState([]);
     const [district, setDistrict] = useState('');
@@ -70,10 +73,14 @@ const AddRequest = () => {
 
         axiosSecure.post('/requests', formData)
             .then(res => {
-                alert(res.data.insertedId);
+                if (res.data.insertedId) {
+                    toast.success('Donation request created successfully!');
+                    navigate('/dashboard/myRequest');
+                }
             })
             .catch(err => {
                 console.log(err);
+                toast.error('Failed to create donation request. Please try again.');
             });
     };
 

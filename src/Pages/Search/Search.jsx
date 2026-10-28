@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
 import useAxios from '../../Hooks/useAxios';
 import { AuthContext } from '../../Provider/AuthProvider';
 import {
@@ -42,7 +43,7 @@ const Search = () => {
         const bloodGroup = encodeURIComponent(e.target.bloodGroup.value);
 
         if (!bloodGroup && !district && !upazila) {
-            alert('Please select at least one search criteria');
+            toast.error('Please select at least one search criteria');
             return;
         }
 

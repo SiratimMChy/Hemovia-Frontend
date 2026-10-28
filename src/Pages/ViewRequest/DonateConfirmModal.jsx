@@ -1,4 +1,4 @@
-import { Heart } from 'lucide-react';
+import { Heart, X } from 'lucide-react';
 
 const DonateConfirmModal = ({
     showDonateModal,
@@ -9,53 +9,56 @@ const DonateConfirmModal = ({
     if (!showDonateModal) return null;
 
     return (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-            <div className="bg-base-200 border-2 border-base-300 rounded-xl sm:rounded-2xl w-full max-w-md shadow-2xl">
-                <div className="p-4 sm:p-6">
-                    <div className="text-center mb-6">
-                        <div className="w-16 h-16 bg-gradient-to-r from-red-500 to-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <Heart className="w-8 h-8 text-white" />
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+            <div className="bg-base-200 border border-base-300 rounded-2xl w-full max-w-md shadow-2xl overflow-hidden">
+                {/* Modal Header */}
+                <div className="p-5 sm:p-6 pb-4 border-b border-base-300 flex items-center justify-between">
+                    <div className="flex items-center gap-2.5">
+                        <div className="w-9 h-9 rounded-xl bg-red-100 dark:bg-red-950/50 text-red-600 dark:text-red-400 flex items-center justify-center">
+                            <Heart size={18} className="fill-red-600 dark:fill-red-400" />
                         </div>
-                        <h3 className="text-xl sm:text-2xl font-bold text-base-content mb-2">
-                            Confirm Your Donation
-                        </h3>
-                        <p className="text-sm sm:text-base text-base-content/70">
-                            You're about to save a life. Please confirm your details.
-                        </p>
+                        <h3 className="text-lg font-bold text-base-content">Confirm Donation</h3>
+                    </div>
+                    <button
+                        onClick={() => setShowDonateModal(false)}
+                        className="btn btn-ghost btn-circle btn-xs text-base-content/60 hover:text-base-content"
+                    >
+                        <X size={16} />
+                    </button>
+                </div>
+
+                {/* Modal Body */}
+                <div className="p-5 sm:p-6 space-y-4">
+                    <p className="text-xs sm:text-sm text-base-content/70">
+                        Please review your contact info. The requester will be able to contact you once confirmed.
+                    </p>
+
+                    <div className="space-y-3">
+                        <div className="p-3 rounded-xl bg-base-100 border border-base-300">
+                            <p className="text-[11px] font-semibold text-base-content/50 uppercase tracking-wider">Donor Name</p>
+                            <p className="text-sm font-bold text-base-content">{user?.displayName || user?.name || 'Anonymous'}</p>
+                        </div>
+                        <div className="p-3 rounded-xl bg-base-100 border border-base-300">
+                            <p className="text-[11px] font-semibold text-base-content/50 uppercase tracking-wider">Donor Email</p>
+                            <p className="text-sm font-bold text-base-content break-all">{user?.email}</p>
+                        </div>
                     </div>
 
-                    <div className="space-y-4 mb-6">
-                        <div>
-                            <label className="block text-sm font-semibold text-base-content mb-2">Your Name</label>
-                            <input
-                                readOnly
-                                value={user?.displayName || user?.name || ''}
-                                className="w-full px-4 py-3 rounded-lg border-2 border-base-300 bg-base-100 text-base-content font-medium"
-                            />
-                        </div>
-                        <div>
-                            <label className="block text-sm font-semibold text-base-content mb-2">Your Email</label>
-                            <input
-                                readOnly
-                                value={user?.email || ''}
-                                className="w-full px-4 py-3 rounded-lg border-2 border-base-300 bg-base-100 text-base-content font-medium"
-                            />
-                        </div>
-                    </div>
-
-                    <div className="flex flex-col sm:flex-row gap-3">
+                    <div className="flex gap-2.5 pt-2">
                         <button
-                            onClick={handleConfirmDonate}
-                            className="flex-1 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white py-3 px-4 rounded-lg font-bold transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2"
-                        >
-                            <Heart className="w-4 h-4" />
-                            <span>Confirm Donation</span>
-                        </button>
-                        <button
+                            type="button"
                             onClick={() => setShowDonateModal(false)}
-                            className="flex-1 bg-base-300 hover:bg-base-400 text-base-content py-3 px-4 rounded-lg font-bold transition-all duration-300"
+                            className="btn btn-ghost flex-1 border border-base-300 hover:bg-base-300 text-base-content rounded-xl font-semibold"
                         >
                             Cancel
+                        </button>
+                        <button
+                            type="button"
+                            onClick={handleConfirmDonate}
+                            className="btn bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 text-white flex-1 border-0 rounded-xl shadow-md font-bold gap-1.5"
+                        >
+                            <Heart size={15} className="fill-white" />
+                            <span>Confirm</span>
                         </button>
                     </div>
                 </div>

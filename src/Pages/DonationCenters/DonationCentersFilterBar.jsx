@@ -34,7 +34,7 @@ const DonationCentersFilterBar = ({
         <div className="grid grid-cols-2 sm:flex sm:flex-wrap lg:flex-nowrap items-center gap-2 lg:gap-3">
           <button
             onClick={() => setSelectedFilter('All')}
-            className={`h-11 sm:h-12 px-3 sm:px-4 lg:px-5 rounded-lg sm:rounded-xl font-bold transition-colors duration-200 shadow-md text-xs sm:text-sm border-2 whitespace-nowrap inline-flex items-center justify-center gap-1.5 shrink-0 ${
+            className={`w-full sm:w-auto h-11 sm:h-12 px-3 sm:px-4 lg:px-5 rounded-lg sm:rounded-xl font-bold transition-colors duration-200 shadow-md text-xs sm:text-sm border-2 whitespace-nowrap inline-flex items-center justify-center gap-1.5 ${
               selectedFilter === 'All'
                 ? 'bg-gradient-to-r from-red-600 to-rose-600 text-white border-transparent'
                 : 'bg-base-100 border-base-300 text-base-content hover:border-red-300 dark:hover:border-red-900/50 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400'
@@ -47,7 +47,7 @@ const DonationCentersFilterBar = ({
           </button>
           <button
             onClick={() => setSelectedFilter('Featured')}
-            className={`h-11 sm:h-12 px-3 sm:px-4 lg:px-5 rounded-lg sm:rounded-xl font-bold transition-colors duration-200 shadow-md inline-flex items-center justify-center gap-1.5 text-xs sm:text-sm border-2 whitespace-nowrap shrink-0 ${
+            className={`w-full sm:w-auto h-11 sm:h-12 px-3 sm:px-4 lg:px-5 rounded-lg sm:rounded-xl font-bold transition-colors duration-200 shadow-md inline-flex items-center justify-center gap-1.5 text-xs sm:text-sm border-2 whitespace-nowrap ${
               selectedFilter === 'Featured'
                 ? 'bg-gradient-to-r from-red-500 to-red-600 text-white border-transparent'
                 : 'bg-base-100 border-base-300 text-base-content hover:border-red-300 dark:hover:border-red-900/50 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400'
@@ -61,7 +61,7 @@ const DonationCentersFilterBar = ({
           </button>
           <button
             onClick={() => setSelectedFilter('24/7')}
-            className={`h-11 sm:h-12 px-3 sm:px-4 lg:px-5 rounded-lg sm:rounded-xl font-bold transition-colors duration-200 shadow-md inline-flex items-center justify-center gap-1.5 text-xs sm:text-sm border-2 whitespace-nowrap shrink-0 ${
+            className={`w-full sm:w-auto h-11 sm:h-12 px-3 sm:px-4 lg:px-5 rounded-lg sm:rounded-xl font-bold transition-colors duration-200 shadow-md inline-flex items-center justify-center gap-1.5 text-xs sm:text-sm border-2 whitespace-nowrap ${
               selectedFilter === '24/7'
                 ? 'bg-gradient-to-r from-red-600 to-red-700 text-white border-transparent'
                 : 'bg-base-100 border-base-300 text-base-content hover:border-red-300 dark:hover:border-red-900/50 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400'
@@ -75,20 +75,26 @@ const DonationCentersFilterBar = ({
           </button>
 
           {/* Division Filter Dropdown */}
-          <div className="relative shrink-0">
+          <div className="relative w-full sm:w-auto">
             <select
               value={selectedDivision}
               onChange={(e) => setSelectedDivision(e.target.value)}
-              className="h-11 sm:h-12 pl-3 sm:pl-4 pr-8 sm:pr-9 border-2 border-base-300 rounded-lg sm:rounded-xl focus:border-red-500 focus:outline-none appearance-none bg-base-100 font-bold text-base-content hover:border-base-content/30 shadow-md cursor-pointer text-xs sm:text-sm whitespace-nowrap"
+              className={`w-full h-11 sm:h-12 pl-3 sm:pl-4 pr-8 sm:pr-9 border-2 rounded-lg sm:rounded-xl focus:border-red-500 focus:outline-none appearance-none font-bold shadow-md cursor-pointer text-xs sm:text-sm whitespace-nowrap transition-colors duration-200 ${
+                selectedDivision !== 'All'
+                  ? 'bg-red-50 dark:bg-red-950/40 border-red-500 text-red-600 dark:text-red-400'
+                  : 'bg-base-100 border-base-300 text-base-content hover:border-red-300 dark:hover:border-red-900/50 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400'
+              }`}
             >
               {divisions.map(division => (
-                <option key={division} value={division}>
+                <option key={division} value={division} className="bg-base-100 text-base-content font-medium">
                   {division === 'All' ? 'All Divisions' : division}
                   {division !== 'All' && ` (${centers.filter(c => c.division === division).length})`}
                 </option>
               ))}
             </select>
-            <ChevronDown className="absolute right-2.5 sm:right-3 top-1/2 transform -translate-y-1/2 text-base-content/40 pointer-events-none" size={14} />
+            <ChevronDown className={`absolute right-2.5 sm:right-3 top-1/2 transform -translate-y-1/2 pointer-events-none transition-colors ${
+              selectedDivision !== 'All' ? 'text-red-500' : 'text-base-content/40'
+            }`} size={14} />
           </div>
         </div>
       </div>

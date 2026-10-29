@@ -7,7 +7,7 @@ const DonationCentersHero = ({
   isLoading
 }) => {
   return (
-    <div className="relative min-h-screen bg-base-100 overflow-hidden">
+    <div className={`relative ${searchQuery.trim() ? 'min-h-0' : 'min-h-[80vh] lg:min-h-screen'} bg-base-100 overflow-hidden transition-all duration-300`}>
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-gradient-to-br from-red-50 via-white to-rose-50 dark:from-base-200 dark:via-base-100 dark:to-base-200">
         <div className="absolute inset-0 opacity-30 dark:opacity-10" style={{
@@ -19,8 +19,8 @@ const DonationCentersHero = ({
       <div className="absolute top-0 right-0 w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 lg:w-96 lg:h-96 bg-red-200 dark:bg-red-900/20 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
       <div className="absolute bottom-0 left-0 w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 lg:w-96 lg:h-96 bg-rose-200 dark:bg-rose-900/20 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse" style={{ animationDelay: '2s' }}></div>
 
-      <div className="relative px-4 lg:px-30 mx-auto w-full pt-6 sm:pt-8 md:pt-12 lg:pt-16 pb-8 sm:pb-10 md:pb-12 lg:pb-16">
-        <div className="text-center space-y-6 sm:space-y-8 max-w-5xl mx-auto">
+      <div className={`relative px-4 lg:px-30 mx-auto w-full ${searchQuery.trim() ? 'pt-6 sm:pt-8 pb-4 sm:pb-6' : 'pt-6 sm:pt-8 md:pt-12 lg:pt-16 pb-6 sm:pb-8 md:pb-10 lg:pb-12'} transition-all duration-300`}>
+        <div className={`text-center ${searchQuery.trim() ? 'space-y-4 sm:space-y-6' : 'space-y-6 sm:space-y-8'} max-w-5xl mx-auto transition-all duration-300`}>
           {/* Badge matching Home theme */}
           <div className="inline-flex items-center gap-2 sm:gap-2.5 bg-base-200 border-2 border-red-100 dark:border-red-900/50 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-sm hover:border-red-200 dark:hover:border-red-800 transition-colors">
             <div className="w-5 h-5 sm:w-6 sm:h-6 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center shrink-0 shadow-sm">
@@ -44,7 +44,7 @@ const DonationCentersHero = ({
           </div>
 
           {/* Description */}
-          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-base-content/70 leading-relaxed max-w-2xl mx-auto font-medium px-4">
+          <p className="text-sm sm:text-base lg:text-base xl:text-lg text-base-content/70 leading-relaxed max-w-2xl lg:max-w-none lg:whitespace-nowrap mx-auto font-medium px-4">
             Connect with verified donation centers across Bangladesh. Safe, reliable, and always ready to help save lives in your community.
           </p>
 
@@ -59,6 +59,11 @@ const DonationCentersHero = ({
                   placeholder="Search by name, location, or district..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      handleSearch();
+                    }
+                  }}
                   className="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-2.5 sm:py-3 border-2 border-base-300 rounded-lg sm:rounded-xl focus:border-red-500 focus:outline-none transition-all duration-300 hover:border-base-content/30 text-sm sm:text-base bg-base-100 text-base-content"
                 />
               </div>
@@ -101,11 +106,13 @@ const DonationCentersHero = ({
       </div>
 
       {/* Bottom Wave */}
-      <div className="absolute bottom-0 left-0 right-0">
-        <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-12 sm:h-16 md:h-auto">
-          <path d="M0 120L60 105C120 90 240 60 360 45C480 30 600 30 720 37.5C840 45 960 60 1080 67.5C1200 75 1320 75 1380 75L1440 75V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="currentColor" className="text-base-100" />
-        </svg>
-      </div>
+      {!searchQuery.trim() && (
+        <div className="absolute bottom-0 left-0 right-0">
+          <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-12 sm:h-16 md:h-auto">
+            <path d="M0 120L60 105C120 90 240 60 360 45C480 30 600 30 720 37.5C840 45 960 60 1080 67.5C1200 75 1320 75 1380 75L1440 75V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="currentColor" className="text-base-100" />
+          </svg>
+        </div>
+      )}
     </div>
   );
 };

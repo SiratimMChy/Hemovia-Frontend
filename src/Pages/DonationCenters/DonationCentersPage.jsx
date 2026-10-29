@@ -45,12 +45,14 @@ const DonationCentersPage = () => {
       });
   }, []);
 
-  // Enhanced search with loading effect
+  // Enhanced search with auto-scroll to results
   const handleSearch = () => {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-    }, 800);
+      const target = document.getElementById('all-centers-section') || document.getElementById('results-section');
+      target?.scrollIntoView({ behavior: 'smooth' });
+    }, 200);
   };
 
   // Client-side filtering 
@@ -109,13 +111,16 @@ const DonationCentersPage = () => {
         isLoading={isLoading}
       />
 
-      <DonationCentersStats
-        isInitialLoading={isInitialLoading}
-        centers={centers}
-      />
+      {/* Hide Our Network stats when search query is active */}
+      {!searchQuery.trim() && (
+        <DonationCentersStats
+          isInitialLoading={isInitialLoading}
+          centers={centers}
+        />
+      )}
 
       {/* Blood donation centers list */}
-      <div id="results-section" className="py-8 sm:py-12 md:py-16 bg-base-200">
+      <div id="results-section" className={`${searchQuery.trim() ? 'py-2 sm:py-4 md:py-5' : 'py-8 sm:py-12 md:py-16'} bg-base-200 transition-all duration-300`}>
         <div className="px-4 lg:px-30 mx-auto">
           <div id="all-centers-section">
             <DonationCentersFilterBar

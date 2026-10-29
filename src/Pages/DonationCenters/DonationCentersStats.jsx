@@ -49,12 +49,43 @@ const DonationCentersStats = ({ isInitialLoading, centers }) => {
     return () => clearInterval(timer);
   }, [centers]);
 
+  const statsList = [
+    {
+      icon: Building,
+      value: animatedStats.centers,
+      label: 'Active Centers',
+      color: 'bg-gradient-to-br from-red-500 to-red-600',
+      shadow: 'shadow-red-200 dark:shadow-red-900/30'
+    },
+    {
+      icon: Globe,
+      value: animatedStats.divisions,
+      label: 'Divisions Covered',
+      color: 'bg-gradient-to-br from-blue-500 to-blue-600',
+      shadow: 'shadow-blue-200 dark:shadow-blue-900/30'
+    },
+    {
+      icon: Shield,
+      value: animatedStats.verified,
+      label: 'Verified Centers',
+      color: 'bg-gradient-to-br from-emerald-500 to-green-600',
+      shadow: 'shadow-emerald-200 dark:shadow-emerald-900/30'
+    },
+    {
+      icon: Clock,
+      value: '24/7',
+      label: 'Emergency Support',
+      color: 'bg-gradient-to-br from-rose-500 to-red-600',
+      shadow: 'shadow-rose-200 dark:shadow-rose-900/30'
+    }
+  ];
+
   return (
-    <div className="py-8 sm:py-12 md:py-16 lg:py-20 bg-base-100">
+    <div className="pt-1 sm:pt-2 pb-4 sm:pb-6 bg-base-100">
       <div className="px-4 lg:px-30 mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-6 sm:mb-8 md:mb-12">
-          <div className="inline-flex items-center gap-2 sm:gap-2.5 bg-base-200 border-2 border-red-100 dark:border-red-900/50 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full mb-3 sm:mb-4 shadow-sm hover:border-red-200 dark:hover:border-red-800 transition-colors">
+        <div className="text-center mb-6 sm:mb-8">
+          <div className="inline-flex items-center gap-2 sm:gap-2.5 bg-base-200 border-2 border-red-100 dark:border-red-900/50 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full mb-3 shadow-sm hover:border-red-200 dark:hover:border-red-800 transition-colors">
             <div className="w-5 h-5 sm:w-6 sm:h-6 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center shrink-0 shadow-sm">
               <Award className="text-white" size={12} />
             </div>
@@ -62,57 +93,37 @@ const DonationCentersStats = ({ isInitialLoading, centers }) => {
               NETWORK OVERVIEW
             </span>
           </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-base-content mb-2 sm:mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-base-content mb-2">
             Our Network
           </h2>
-          <p className="text-base sm:text-lg md:text-xl text-base-content/70 max-w-2xl mx-auto px-4">
+          <p className="text-sm sm:text-base md:text-lg text-base-content/70 max-w-2xl mx-auto px-4">
             Real-time statistics from our nationwide donation network
           </p>
         </div>
 
-        {/* Stats Cards */}
+        {/* Stats Cards matching About page style & height */}
         {isInitialLoading ? (
           <SkeletonLoader type="stats" count={4} />
         ) : (
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
-            <div className="group bg-base-200 border-2 border-base-300 rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 hover:border-red-200 dark:hover:border-red-900/50 hover:shadow-xl transition-all">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-4 md:mb-6 group-hover:scale-110 transition-transform shadow-lg shadow-red-200 dark:shadow-red-900/30">
-                <Building className="text-white" size={20} />
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
+            {statsList.map((stat, index) => (
+              <div
+                key={index}
+                className="bg-base-200/90 border border-base-300 rounded-2xl p-3 sm:p-4 md:p-5 flex items-center gap-3 sm:gap-4 hover:border-red-300 dark:hover:border-red-900/50 hover:shadow-md transition-all duration-300 group"
+              >
+                <div className={`w-11 h-11 sm:w-12 sm:h-12 md:w-13 md:h-13 rounded-xl ${stat.color} flex items-center justify-center shrink-0 shadow-sm ${stat.shadow} group-hover:scale-105 transition-transform`}>
+                  <stat.icon className="text-white" size={20} />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-xl sm:text-2xl md:text-3xl font-black text-base-content leading-tight tabular-nums">
+                    {stat.value}
+                  </p>
+                  <p className="text-xs sm:text-sm text-base-content/70 font-semibold truncate mt-0.5">
+                    {stat.label}
+                  </p>
+                </div>
               </div>
-              <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-base-content mb-1 sm:mb-2 tabular-nums">{animatedStats.centers}</h3>
-              <p className="text-xs sm:text-sm md:text-base text-base-content/70 leading-relaxed font-semibold">
-                Active Centers
-              </p>
-            </div>
-            <div className="group bg-base-200 border-2 border-base-300 rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 hover:border-blue-200 dark:hover:border-blue-900/50 hover:shadow-xl transition-all">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-4 md:mb-6 group-hover:scale-110 transition-transform shadow-lg shadow-blue-200 dark:shadow-blue-900/30">
-                <Globe className="text-white" size={20} />
-              </div>
-              <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-base-content mb-1 sm:mb-2 tabular-nums">{animatedStats.divisions}</h3>
-              <p className="text-xs sm:text-sm md:text-base text-base-content/70 leading-relaxed font-semibold">
-                Divisions Covered
-              </p>
-            </div>
-
-            <div className="group bg-base-200 border-2 border-base-300 rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 hover:border-green-200 dark:hover:border-green-900/50 hover:shadow-xl transition-all">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-4 md:mb-6 group-hover:scale-110 transition-transform shadow-lg shadow-green-200 dark:shadow-green-900/30">
-                <Shield className="text-white" size={20} />
-              </div>
-              <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-base-content mb-1 sm:mb-2 tabular-nums">{animatedStats.verified}</h3>
-              <p className="text-xs sm:text-sm md:text-base text-base-content/70 leading-relaxed font-semibold">
-                Verified Centers
-              </p>
-            </div>
-
-            <div className="group bg-base-200 border-2 border-base-300 rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 hover:border-red-200 dark:hover:border-red-900/50 hover:shadow-xl transition-all">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-4 md:mb-6 group-hover:scale-110 transition-transform shadow-lg shadow-red-200 dark:shadow-red-900/30">
-                <Clock className="text-white" size={20} />
-              </div>
-              <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-base-content mb-1 sm:mb-2">24/7</h3>
-              <p className="text-xs sm:text-sm md:text-base text-base-content/70 leading-relaxed font-semibold">
-                Emergency Support
-              </p>
-            </div>
+            ))}
           </div>
         )}
       </div>

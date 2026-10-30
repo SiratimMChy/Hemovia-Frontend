@@ -109,18 +109,17 @@ const DonationCentersPage = () => {
         setSearchQuery={setSearchQuery}
         handleSearch={handleSearch}
         isLoading={isLoading}
-      />
-
-      {/* Hide Our Network stats when search query is active */}
-      {!searchQuery.trim() && (
-        <DonationCentersStats
-          isInitialLoading={isInitialLoading}
-          centers={centers}
-        />
-      )}
+      >
+        {!searchQuery.trim() && (
+          <DonationCentersStats
+            isInitialLoading={isInitialLoading}
+            centers={centers}
+          />
+        )}
+      </DonationCentersHero>
 
       {/* Blood donation centers list */}
-      <div id="results-section" className={`${searchQuery.trim() ? 'py-2 sm:py-4 md:py-5' : 'py-8 sm:py-12 md:py-16'} bg-base-200 transition-all duration-300`}>
+      <div id="results-section" className={`${searchQuery.trim() ? 'py-4 sm:py-6' : 'py-8 sm:py-12 md:py-14'} bg-base-200 transition-all duration-300`}>
         <div className="px-4 lg:px-30 mx-auto">
           <div id="all-centers-section">
             <DonationCentersFilterBar

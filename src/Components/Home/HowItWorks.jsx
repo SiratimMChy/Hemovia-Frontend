@@ -42,9 +42,9 @@ const steps = [
 
 const HowItWorks = () => {
   return (
-    <section className="py-16 md:py-20 bg-base-100">
+    <section className="py-8 sm:py-10 md:py-12 lg:py-14 bg-base-100">
       <div className="px-4 lg:px-30 mx-auto">
-        <div className="text-center mb-16">
+        <div className="text-center mb-8 sm:mb-10 md:mb-12">
           <div className="inline-flex items-center gap-2 bg-base-200 border-2 border-red-100 dark:border-red-900/50 px-4 py-2 rounded-full mb-4">
             <span className="w-2 h-2 rounded-full bg-red-600 animate-pulse" />
             <span className="text-red-600 dark:text-red-500 font-bold text-sm tracking-wide">THE LIFELINE PROCESS</span>

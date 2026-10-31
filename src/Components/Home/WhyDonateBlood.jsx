@@ -50,9 +50,9 @@ const whyDonateStats = [
 
 const WhyDonateBlood = () => {
   return (
-    <section className="py-20 bg-base-100">
+    <section className="py-12 md:py-16 bg-base-100">
       <div className="px-4 lg:px-30 mx-auto">
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 md:mb-12">
           <div className="inline-flex items-center gap-2 bg-base-200 border-2 border-red-100 dark:border-red-900/50 px-4 py-2 rounded-full mb-4">
             <HeartPulse className="text-red-600 dark:text-red-500" size={16} />
             <span className="text-red-600 dark:text-red-500 font-bold text-sm">LIFE-SAVING IMPACT</span>

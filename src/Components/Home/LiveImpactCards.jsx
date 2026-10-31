@@ -1,98 +1,68 @@
 import { Siren, Activity, Users, CheckCircle, Droplet, Search } from 'lucide-react';
-import { Card } from '../UI';
+import { Link } from 'react-router';
 
 const LiveImpactCards = ({ livesSaved, apiStats }) => {
+  const metricCards = [
+    { label: 'Emergency Cases', value: Math.floor(livesSaved * 0.8), icon: Siren, gradient: 'from-red-500 to-red-600', shadow: 'shadow-red-500/20', progressWidth: '80%', hoverBorder: 'hover:border-red-300 dark:hover:border-red-900/50' },
+    { label: 'Surgeries Enabled', value: Math.floor(livesSaved * 0.6), icon: Activity, gradient: 'from-blue-500 to-blue-600', shadow: 'shadow-blue-500/20', progressWidth: '60%', hoverBorder: 'hover:border-blue-300 dark:hover:border-blue-900/50' },
+    { label: 'Families Helped', value: Math.floor(livesSaved * 1.2), icon: Users, gradient: 'from-emerald-500 to-teal-600', shadow: 'shadow-emerald-500/20', progressWidth: '90%', hoverBorder: 'hover:border-emerald-300 dark:hover:border-emerald-900/50' },
+    { label: 'Success Rate', value: `${apiStats.successRate}%`, icon: CheckCircle, gradient: 'from-purple-500 to-indigo-600', shadow: 'shadow-purple-500/20', progressWidth: `${apiStats.successRate}%`, hoverBorder: 'hover:border-purple-300 dark:hover:border-purple-900/50' }
+  ];
+
   return (
     <>
-      {/* Impact Visualization */}
-      <div className="grid md:grid-cols-4 gap-6">
-        <Card className="group p-6 hover:border-red-200 dark:hover:border-red-900/50 transition-all">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-12 h-12 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-red-200 dark:shadow-red-900/30">
-              <Siren className="text-white" size={24} />
+      {/* Impact Metrics Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+        {metricCards.map((item) => {
+          const Icon = item.icon;
+          return (
+            <div
+              key={item.label}
+              className={`bg-base-100 border border-base-300 rounded-2xl p-4 sm:p-5 shadow-sm hover:shadow-md ${item.hoverBorder} transition-all duration-200 group flex flex-col justify-between`}
+            >
+              <div className="flex items-center gap-3 mb-3">
+                <div className={`w-11 h-11 bg-gradient-to-br ${item.gradient} rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform shadow-md ${item.shadow} shrink-0`}>
+                  <Icon className="text-white" size={20} />
+                </div>
+                <div>
+                  <p className="text-2xl font-black text-base-content leading-none mb-1">{item.value}</p>
+                  <p className="text-xs sm:text-sm font-semibold text-base-content/70">{item.label}</p>
+                </div>
+              </div>
+              <div className="w-full bg-base-300 rounded-full h-1.5 overflow-hidden">
+                <div className={`bg-gradient-to-r ${item.gradient} h-1.5 rounded-full`} style={{ width: item.progressWidth }}></div>
+              </div>
             </div>
-            <div>
-              <p className="text-2xl font-black text-base-content">{Math.floor(livesSaved * 0.8)}</p>
-              <p className="text-sm font-bold text-base-content/70">Emergency Cases</p>
-            </div>
-          </div>
-          <div className="w-full bg-base-300 rounded-full h-2">
-            <div className="bg-gradient-to-r from-red-500 to-red-600 h-2 rounded-full" style={{ width: '80%' }}></div>
-          </div>
-        </Card>
-
-        <Card className="group p-6 hover:border-blue-200 dark:hover:border-blue-900/50 transition-all">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-blue-200 dark:shadow-blue-900/30">
-              <Activity className="text-white" size={24} />
-            </div>
-            <div>
-              <p className="text-2xl font-black text-base-content">{Math.floor(livesSaved * 0.6)}</p>
-              <p className="text-sm font-bold text-base-content/70">Surgeries Enabled</p>
-            </div>
-          </div>
-          <div className="w-full bg-base-300 rounded-full h-2">
-            <div className="bg-gradient-to-r from-blue-500 to-blue-600 h-2 rounded-full" style={{ width: '60%' }}></div>
-          </div>
-        </Card>
-
-        <Card className="group p-6 hover:border-green-200 dark:hover:border-green-900/50 transition-all">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-green-200 dark:shadow-green-900/30">
-              <Users className="text-white" size={24} />
-            </div>
-            <div>
-              <p className="text-2xl font-black text-base-content">{Math.floor(livesSaved * 1.2)}</p>
-              <p className="text-sm font-bold text-base-content/70">Families Helped</p>
-            </div>
-          </div>
-          <div className="w-full bg-base-300 rounded-full h-2">
-            <div className="bg-gradient-to-r from-green-500 to-green-600 h-2 rounded-full" style={{ width: '90%' }}></div>
-          </div>
-        </Card>
-
-        <Card className="group p-6 hover:border-purple-200 dark:hover:border-purple-900/50 transition-all">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-purple-200 dark:shadow-purple-900/30">
-              <CheckCircle className="text-white" size={24} />
-            </div>
-            <div>
-              <p className="text-2xl font-black text-base-content">{apiStats.successRate}%</p>
-              <p className="text-sm font-bold text-base-content/70">Success Rate</p>
-            </div>
-          </div>
-          <div className="w-full bg-base-300 rounded-full h-2">
-            <div className="bg-gradient-to-r from-purple-500 to-purple-600 h-2 rounded-full" style={{ width: `${apiStats.successRate}%` }}></div>
-          </div>
-        </Card>
+          );
+        })}
       </div>
 
       {/* Call to Action */}
-      <div className="text-center mt-12">
-        <Card className="p-8 hover:border-red-200 dark:hover:border-red-900/70 transition-all">
-          <h3 className="text-2xl md:text-3xl font-bold text-base-content mb-4">
+      <div className="text-center mt-10 sm:mt-12">
+        <div className="bg-base-100 border-2 border-base-300 rounded-3xl p-6 sm:p-8 hover:border-red-300/60 dark:hover:border-red-900/50 transition-all shadow-md">
+          <h3 className="text-2xl sm:text-3xl font-extrabold text-base-content mb-3">
             Be Part of This Impact
           </h3>
-          <p className="text-base-content/70 mb-6 max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base text-base-content/70 mb-6 max-w-xl mx-auto">
             Join thousands of heroes who are making a difference every day. Your single donation can save up to 3 lives.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="/signup"
-              className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-red-600 to-red-700 text-white px-8 py-4 rounded-xl font-bold hover:from-red-700 hover:to-red-800 transition-all shadow-lg hover:shadow-xl hover:scale-105"
+          <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+            <Link
+              to="/signup"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 text-white px-7 py-3 rounded-xl font-bold text-sm sm:text-base shadow-md hover:shadow-xl hover:scale-105 transition-all"
             >
-              <Droplet className="fill-white" size={20} />
-              Start Saving Lives
-            </a>
-            <a
-              href="/search"
-              className="inline-flex items-center justify-center gap-2 bg-base-200 border-2 border-red-600 text-red-600 px-8 py-4 rounded-xl font-bold hover:bg-red-50 dark:hover:bg-base-300 hover:border-red-700 transition-all shadow-lg hover:shadow-xl hover:scale-105"
+              <Droplet className="fill-white" size={17} />
+              <span>Start Saving Lives</span>
+            </Link>
+            <Link
+              to="/search"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-base-200 border-2 border-red-600 text-red-600 dark:text-red-400 dark:border-red-500 hover:bg-red-600 hover:text-white dark:hover:bg-red-600 dark:hover:text-white px-7 py-3 rounded-xl font-bold text-sm sm:text-base shadow-md hover:shadow-xl hover:scale-105 transition-all"
             >
-              <Search size={20} />
-              Find Blood Now
-            </a>
+              <Search size={17} />
+              <span>Find Blood Now</span>
+            </Link>
           </div>
-        </Card>
+        </div>
       </div>
     </>
   );

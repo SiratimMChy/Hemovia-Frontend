@@ -13,7 +13,7 @@ const HeroBanner = ({
   formatCount
 }) => {
   return (
-    <div className="relative bg-base-100 overflow-hidden py-8 sm:py-10 md:py-12 lg:py-14">
+    <div className="relative bg-base-100 overflow-hidden lg:min-h-[calc(100vh-3.75rem)] lg:flex lg:items-center pt-4 pb-8 sm:py-8 md:py-12 lg:py-16">
       <div className="absolute inset-0 bg-gradient-to-br from-red-50 via-white to-rose-50 dark:from-base-200 dark:via-base-100 dark:to-base-200"></div>
       <div className="absolute top-0 right-0 w-64 h-64 md:w-96 md:h-96 bg-red-200 dark:bg-red-900/20 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
       <div className="absolute bottom-0 left-0 w-64 h-64 md:w-96 md:h-96 bg-rose-200 dark:bg-rose-900/20 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse" style={{ animationDelay: '2s' }}></div>

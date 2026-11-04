@@ -50,7 +50,7 @@ const HowItWorks = () => {
             <span className="text-red-600 dark:text-red-500 font-bold text-sm tracking-wide">THE LIFELINE PROCESS</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-base-content mb-4 tracking-tight">
-            How Hemovia Works
+            How Hemovia <span className="bg-gradient-to-r from-red-600 to-rose-600 bg-clip-text text-transparent">Works</span>
           </h2>
           <p className="text-base sm:text-lg text-base-content/70 max-w-2xl mx-auto">
             A transparent four-stage pathway connecting volunteer blood donors with families in urgent medical need.
@@ -63,7 +63,7 @@ const HowItWorks = () => {
             return (
               <div
                 key={idx}
-                className="group relative bg-base-100 hover:bg-base-200/40 border-2 border-base-200 dark:border-base-800 hover:border-red-500/40 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl flex flex-col justify-between"
+                className="group relative bg-base-100 hover:bg-base-200/40 border-2 border-base-200 dark:border-base-800 hover:border-red-500/40 rounded-xl p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-5">
@@ -75,7 +75,7 @@ const HowItWorks = () => {
                     </span>
                   </div>
 
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-red-500 to-rose-600 text-white flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-md shadow-red-500/20">
+                  <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-red-500 to-rose-600 text-white flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-md shadow-red-500/20">
                     <Icon size={22} />
                   </div>
 
@@ -90,7 +90,7 @@ const HowItWorks = () => {
                 <div className="pt-4 border-t border-base-200 dark:border-base-800">
                   <Link
                     to={item.link}
-                    className="inline-flex items-center justify-between w-full px-3.5 py-2 rounded-xl bg-base-200/70 hover:bg-red-600 dark:bg-base-800/60 dark:hover:bg-red-600 text-base-content hover:text-white transition-all duration-200 text-xs font-semibold group/btn"
+                    className="inline-flex items-center justify-between w-full px-3.5 py-2 rounded-lg bg-base-200/70 hover:bg-red-600 dark:bg-base-800/60 dark:hover:bg-red-600 text-base-content hover:text-white transition-all duration-200 text-xs font-semibold group/btn"
                   >
                     <span>{item.action}</span>
                     <ArrowRight size={13} className="text-red-600 dark:text-red-400 group-hover/btn:text-white group-hover/btn:translate-x-1 transition-transform" />

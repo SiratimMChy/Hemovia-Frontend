@@ -55,25 +55,25 @@ const HeroBanner = ({
 
             {isStatsLoading ? (
               <div className="grid grid-cols-3 gap-2 sm:gap-3.5 pt-4 max-w-md mx-auto md:mx-0">
-                {[1, 2, 3].map((i) => <div key={i} className="animate-pulse bg-base-300 rounded-2xl h-18"></div>)}
+                {[1, 2, 3].map((i) => <div key={i} className="animate-pulse bg-base-300 rounded-xl h-18"></div>)}
               </div>
             ) : (
               <div className="grid grid-cols-3 gap-2 sm:gap-3.5 pt-4 max-w-md mx-auto md:mx-0">
-                <div className="bg-base-200/90 border border-base-300 hover:border-red-300 dark:hover:border-red-900/60 rounded-2xl p-2.5 sm:p-3 transition-all duration-300 text-center flex flex-col items-center justify-center shadow-xs hover:shadow-md">
+                <div className="bg-base-200/90 border border-base-300 hover:border-red-300 dark:hover:border-red-900/60 rounded-xl p-2.5 sm:p-3 transition-all duration-300 text-center flex flex-col items-center justify-center shadow-xs hover:shadow-md">
                   <div className="flex items-center justify-center gap-1 mb-1">
                     <Users className="text-red-600 dark:text-red-500" size={16} />
                   </div>
                   <p className="text-base sm:text-lg font-black text-base-content leading-tight">{formatCount(apiStats.totalDonors)}</p>
                   <p className="text-[11px] sm:text-xs text-base-content/70 font-semibold mt-0.5">Active Donors</p>
                 </div>
-                <div className="bg-base-200/90 border border-base-300 hover:border-red-300 dark:hover:border-red-900/60 rounded-2xl p-2.5 sm:p-3 transition-all duration-300 text-center flex flex-col items-center justify-center shadow-xs hover:shadow-md">
+                <div className="bg-base-200/90 border border-base-300 hover:border-red-300 dark:hover:border-red-900/60 rounded-xl p-2.5 sm:p-3 transition-all duration-300 text-center flex flex-col items-center justify-center shadow-xs hover:shadow-md">
                   <div className="flex items-center justify-center gap-1 mb-1">
                     <HeartPulse className="text-red-600 dark:text-red-500" size={16} />
                   </div>
                   <p className="text-base sm:text-lg font-black text-base-content leading-tight">{livesSaved}</p>
                   <p className="text-[11px] sm:text-xs text-base-content/70 font-semibold mt-0.5">Lives Saved</p>
                 </div>
-                <div className="bg-base-200/90 border border-base-300 hover:border-red-300 dark:hover:border-red-900/60 rounded-2xl p-2.5 sm:p-3 transition-all duration-300 text-center flex flex-col items-center justify-center shadow-xs hover:shadow-md">
+                <div className="bg-base-200/90 border border-base-300 hover:border-red-300 dark:hover:border-red-900/60 rounded-xl p-2.5 sm:p-3 transition-all duration-300 text-center flex flex-col items-center justify-center shadow-xs hover:shadow-md">
                   <div className="flex items-center justify-center gap-1 mb-1">
                     <Building className="text-red-600 dark:text-red-500" size={16} />
                   </div>
@@ -86,16 +86,16 @@ const HeroBanner = ({
 
           <div className="relative mt-4 md:mt-0 max-w-md mx-auto md:max-w-xl lg:max-w-2xl md:ml-auto md:mr-3 lg:mr-3.5 xl:mr-4">
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-red-500 to-rose-500 rounded-3xl transform rotate-1 md:rotate-2 shadow-lg"></div>
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl transform hover:rotate-0 transition-transform duration-500">
+              <div className="absolute inset-0 bg-gradient-to-br from-red-500 to-rose-500 rounded-2xl transform rotate-1 md:rotate-2 shadow-lg"></div>
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl transform hover:rotate-0 transition-transform duration-500">
                 <img src="https://images.unsplash.com/photo-1615461066159-fea0960485d5?q=80&w=2016&auto=format&fit=crop" alt="Blood Donation" className="w-full h-[240px] sm:h-[280px] md:h-[320px] lg:h-[390px] object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
               </div>
             </div>
 
-            <div className="absolute -bottom-2 -left-2 sm:-bottom-3 sm:-left-3 md:-bottom-3 md:-left-6 lg:-bottom-3 lg:-left-8 bg-base-200/95 backdrop-blur-md border-2 border-base-300 rounded-2xl p-2 sm:p-2.5 md:p-2.5 lg:p-3.5 shadow-xl w-max max-w-[185px] sm:max-w-[200px] md:max-w-[200px] lg:max-w-[215px] hover:border-red-200 dark:hover:border-red-900/50 transition-all z-10">
+            <div className="absolute -bottom-2 -left-2 sm:-bottom-3 sm:-left-3 md:-bottom-3 md:-left-6 lg:-bottom-3 lg:-left-8 bg-base-200/95 backdrop-blur-md border-2 border-base-300 rounded-xl p-2 sm:p-2.5 md:p-2.5 lg:p-3.5 shadow-xl w-max max-w-[185px] sm:max-w-[200px] md:max-w-[200px] lg:max-w-[215px] hover:border-red-200 dark:hover:border-red-900/50 transition-all z-10">
               <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5">
-                <div className="w-6 h-6 sm:w-7 sm:h-7 md:w-7 md:h-7 lg:w-8 lg:h-8 bg-gradient-to-br from-red-500 to-red-600 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg shrink-0">
+                <div className="w-6 h-6 sm:w-7 sm:h-7 md:w-7 md:h-7 lg:w-8 lg:h-8 bg-gradient-to-br from-red-500 to-red-600 rounded-lg flex items-center justify-center shadow-lg shrink-0">
                   <Shield className="text-white w-3 h-3 sm:w-3.5 sm:h-3.5" />
                 </div>
                 <div>
@@ -111,7 +111,7 @@ const HeroBanner = ({
               </div>
             </div>
 
-            <div className="absolute -top-2 -right-2 sm:-top-3 sm:-right-3 md:-top-3 md:-right-3 lg:-top-3 lg:-right-3.5 xl:-right-4 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl p-2 sm:p-2.5 shadow-xl z-10">
+            <div className="absolute -top-2 -right-2 sm:-top-3 sm:-right-3 md:-top-3 md:-right-3 lg:-top-3 lg:-right-3.5 xl:-right-4 bg-gradient-to-br from-red-500 to-red-600 rounded-xl p-2 sm:p-2.5 shadow-xl z-10">
               <Droplet className="text-white fill-white mb-0.5 sm:mb-1" size={14} />
               <p className="text-white font-bold text-[11px] sm:text-xs">Every Drop</p>
               <p className="text-white/90 text-[10px] sm:text-xs">Counts</p>

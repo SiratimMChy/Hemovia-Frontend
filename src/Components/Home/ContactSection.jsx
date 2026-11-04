@@ -20,7 +20,7 @@ const ContactSection = () => {
                         <span className="text-red-600 dark:text-red-400 font-bold text-xs uppercase tracking-wider">Get in Touch</span>
                     </div>
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-base-content mb-3">
-                        Contact <span className="text-red-600 dark:text-red-400">Hemovia</span>
+                        Contact <span className="bg-gradient-to-r from-red-600 to-rose-600 bg-clip-text text-transparent">Hemovia</span>
                     </h2>
                     <p className="text-base sm:text-lg text-base-content/70 max-w-xl mx-auto">
                         Need urgent blood support or have questions? Our volunteer coordination team is here 24/7.
@@ -36,7 +36,7 @@ const ContactSection = () => {
                         <ContactEmergencyCard />
 
                         {/* Operating Schedule Card */}
-                        <div className="bg-base-200 border-2 border-base-300 rounded-2xl p-4 sm:p-5 shadow-sm">
+                        <div className="bg-base-200 border-2 border-base-300 rounded-xl p-4 sm:p-5 shadow-sm">
                             <div className="flex items-center justify-between gap-2 mb-3 pb-2.5 border-b border-base-300">
                                 <div className="flex items-center gap-2 text-base-content font-bold text-sm sm:text-base">
                                     <Clock size={16} className="text-red-600 dark:text-red-400" />
@@ -48,7 +48,7 @@ const ContactSection = () => {
                             </div>
                             <div className="grid grid-cols-3 gap-2 text-xs">
                                 {hours.map(h => (
-                                    <div key={h.day} className="bg-base-100 p-2.5 rounded-xl border border-base-300 text-center">
+                                    <div key={h.day} className="bg-base-100 p-2.5 rounded-lg border border-base-300 text-center">
                                         <p className="font-semibold text-base-content/60 text-[11px]">{h.day}</p>
                                         <p className="font-bold text-base-content mt-0.5">{h.time}</p>
                                     </div>

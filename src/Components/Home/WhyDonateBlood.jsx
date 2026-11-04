@@ -58,7 +58,7 @@ const WhyDonateBlood = () => {
             <span className="text-red-600 dark:text-red-500 font-bold text-sm">LIFE-SAVING IMPACT</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-extrabold text-base-content mb-4">
-            Why Donate Blood?
+            Why Donate <span className="bg-gradient-to-r from-red-600 to-rose-600 bg-clip-text text-transparent">Blood?</span>
           </h2>
           <p className="text-xl text-base-content/70 max-w-2xl mx-auto">
             A single act of kindness creates an irreplaceable lifeline for patients in emergency trauma, surgery, and chronic care.
@@ -72,12 +72,12 @@ const WhyDonateBlood = () => {
             return (
               <div
                 key={idx}
-                className="group bg-base-100 hover:bg-base-200/40 border-2 border-base-200 dark:border-base-800 hover:border-red-500/40 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl flex flex-col justify-between h-full min-h-[318px]"
+                className="group bg-base-100 hover:bg-base-200/40 border-2 border-base-200 dark:border-base-800 hover:border-red-500/40 rounded-xl p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl flex flex-col justify-between h-full min-h-[318px]"
               >
                 <div>
                   {/* Top Bar: Icon & Badge */}
                   <div className="flex items-center justify-between mb-4">
-                    <div className={`w-12 h-12 bg-gradient-to-br ${item.gradient} rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform shadow-md ${item.shadow}`}>
+                    <div className={`w-12 h-12 bg-gradient-to-br ${item.gradient} rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform shadow-md ${item.shadow}`}>
                       <Icon className="text-white" size={24} />
                     </div>
                     <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-base-200 dark:bg-base-800 text-base-content/70 border border-base-300 dark:border-base-700">

@@ -31,7 +31,7 @@ const DonateHero = ({ showForm, setShowForm }) => {
             <div className="pt-1">
                 <button
                     onClick={() => setShowForm(!showForm)}
-                    className="bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 text-white font-bold py-2.5 sm:py-3 px-6 sm:px-7 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 inline-flex items-center gap-2 text-sm sm:text-base cursor-pointer"
+                    className="bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 text-white font-bold py-2.5 sm:py-3 px-6 sm:px-7 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 inline-flex items-center gap-2 text-sm sm:text-base cursor-pointer"
                 >
                     <HandHeart size={16} className="fill-white" />
                     <span>{showForm ? 'Close Form' : 'Give Fund'}</span>

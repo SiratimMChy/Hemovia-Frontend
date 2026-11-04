@@ -64,7 +64,7 @@ export const SPACING = {
 };
 
 export const BORDER_RADIUS = {
-  default: 'rounded-lg',
+  default: 'rounded-xl',
   button: 'rounded-lg',
   small: 'rounded-md',
   large: 'rounded-xl',

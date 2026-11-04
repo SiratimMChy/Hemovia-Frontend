@@ -26,7 +26,7 @@ const CompatibilityChart = ({ stats, selectedBloodType, onSelectBloodType, selec
   const slices = total > 0 ? getDonutSlices(stats.bloodTypeCounts, total) : [];
 
   return (
-    <div className="lg:col-span-5 bg-base-200 border border-base-300 rounded-2xl p-5 sm:p-6 shadow-sm flex flex-col justify-between">
+    <div className="lg:col-span-5 bg-base-200 border border-base-300 rounded-xl p-5 sm:p-6 shadow-sm flex flex-col justify-between">
       <div className="flex items-center justify-between mb-4 pb-3 border-b border-base-300">
         <div className="flex items-center gap-2">
           <Activity size={16} className="text-red-600" />

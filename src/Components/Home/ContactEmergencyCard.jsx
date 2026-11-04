@@ -3,11 +3,11 @@ import { Phone, Mail, MapPin, ShieldAlert } from 'lucide-react';
 
 const ContactEmergencyCard = () => {
     return (
-        <div className="bg-gradient-to-br from-red-600 to-red-700 rounded-2xl p-5 sm:p-6 text-white shadow-md flex flex-col justify-between flex-1">
+        <div className="bg-gradient-to-br from-red-600 to-red-700 rounded-xl p-5 sm:p-6 text-white shadow-md flex flex-col justify-between flex-1">
             {/* Emergency Hotline Header */}
             <div className="flex items-center justify-between pb-3.5 border-b border-white/20">
                 <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center shrink-0">
+                    <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center shrink-0">
                         <ShieldAlert size={20} className="text-white" />
                     </div>
                     <div>
@@ -17,7 +17,7 @@ const ContactEmergencyCard = () => {
                 </div>
                 <a
                     href="tel:+8801234567890"
-                    className="hidden sm:inline-flex items-center gap-1.5 font-bold text-xs bg-white text-red-600 px-3 py-1.5 rounded-xl hover:bg-red-50 transition-colors shrink-0 shadow-sm"
+                    className="hidden sm:inline-flex items-center gap-1.5 font-bold text-xs bg-white text-red-600 px-3 py-1.5 rounded-lg hover:bg-red-50 transition-colors shrink-0 shadow-sm"
                 >
                     <Phone size={12} />
                     <span>Call Now</span>
@@ -28,7 +28,7 @@ const ContactEmergencyCard = () => {
             <div className="grid sm:grid-cols-2 gap-3 py-3">
                 <a
                     href="tel:+8801234567890"
-                    className="flex items-center gap-2.5 p-3 rounded-xl bg-white/10 hover:bg-white/20 transition-colors border border-white/15"
+                    className="flex items-center gap-2.5 p-3 rounded-lg bg-white/10 hover:bg-white/20 transition-colors border border-white/15"
                 >
                     <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center shrink-0">
                         <Phone size={15} className="text-white" />
@@ -41,7 +41,7 @@ const ContactEmergencyCard = () => {
 
                 <a
                     href="mailto:support@Hemovia.org"
-                    className="flex items-center gap-2.5 p-3 rounded-xl bg-white/10 hover:bg-white/20 transition-colors border border-white/15"
+                    className="flex items-center gap-2.5 p-3 rounded-lg bg-white/10 hover:bg-white/20 transition-colors border border-white/15"
                 >
                     <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center shrink-0">
                         <Mail size={15} className="text-white" />

@@ -57,11 +57,11 @@ const CompatibilityMatches = ({
   };
 
   return (
-    <div className="lg:col-span-7 bg-base-200 border border-base-300 rounded-2xl p-5 sm:p-6 shadow-sm flex flex-col justify-between">
+    <div className="lg:col-span-7 bg-base-200 border border-base-300 rounded-xl p-5 sm:p-6 shadow-sm flex flex-col justify-between">
       <div className="flex-1 flex flex-col">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 mb-4 border-b border-base-300 gap-3">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center text-white font-black text-xl shadow-md shrink-0">
+            <div className="w-12 h-12 bg-gradient-to-br from-red-500 to-red-600 rounded-lg flex items-center justify-center text-white font-black text-xl shadow-md shrink-0">
               {selectedBloodType}
             </div>
             <div>
@@ -74,7 +74,7 @@ const CompatibilityMatches = ({
             </div>
           </div>
 
-          <div className="inline-flex bg-base-100 p-1 rounded-xl border border-base-300 text-xs font-bold self-start sm:self-auto">
+          <div className="inline-flex bg-base-100 p-1 rounded-lg border border-base-300 text-xs font-bold self-start sm:self-auto">
             <button onClick={() => setViewMode('donate')} className={`px-3 py-1.5 rounded-lg border transition ${viewMode === 'donate' ? 'bg-green-600 border-green-600 text-white shadow-sm' : 'border-transparent text-base-content/70 hover:text-base-content'}`}>Give Blood</button>
             <button onClick={() => setViewMode('receive')} className={`px-3 py-1.5 rounded-lg border transition ${viewMode === 'receive' ? 'bg-red-600 border-red-600 text-white shadow-sm' : 'border-transparent text-base-content/70 hover:text-base-content'}`}>Receive Blood</button>
             <button onClick={() => setViewMode('all')} className={`px-3 py-1.5 rounded-lg border transition ${viewMode === 'all' ? 'bg-gradient-to-r from-gray-600 to-gray-700 text-white border-gray-600 shadow-sm' : 'border-transparent text-base-content/70 hover:text-base-content'}`}>Both</button>
@@ -92,11 +92,11 @@ const CompatibilityMatches = ({
           Active hospital requests for {selectedBloodType}: <strong className="text-base-content">{selectedCount}</strong>
         </span>
         <div className="flex items-center gap-2 w-full sm:w-auto">
-          <a href="/search" className="flex-1 sm:flex-none text-center px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-red-600 hover:bg-red-700 text-white transition-all shadow-sm flex items-center justify-center gap-1.5">
+          <a href="/search" className="flex-1 sm:flex-none text-center px-4 py-2 rounded-lg text-xs sm:text-sm font-bold bg-red-600 hover:bg-red-700 text-white transition-all shadow-sm flex items-center justify-center gap-1.5">
             <Search size={14} />
             <span>Find {selectedBloodType} Donors</span>
           </a>
-          <a href="/donation-requests" className="flex-1 sm:flex-none text-center px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-base-100 hover:bg-base-300 text-base-content border border-base-300 transition-colors">
+          <a href="/donation-requests" className="flex-1 sm:flex-none text-center px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold bg-base-100 hover:bg-base-300 text-base-content border border-base-300 transition-colors">
             Requests
           </a>
         </div>

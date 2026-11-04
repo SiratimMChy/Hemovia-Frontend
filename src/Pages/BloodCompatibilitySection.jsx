@@ -63,7 +63,7 @@ const BloodCompatibilitySection = () => {
             </span>
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-base-content mb-2">
-            Blood Type Compatibility
+            Blood Type <span className="bg-gradient-to-r from-red-600 to-rose-600 bg-clip-text text-transparent">Compatibility</span>
           </h2>
           <p className="text-sm sm:text-base text-base-content/70 max-w-xl mx-auto">
             Select your blood group to see who you can safely donate to and receive blood from.
@@ -78,7 +78,7 @@ const BloodCompatibilitySection = () => {
               <button
                 key={type}
                 onClick={() => setSelectedBloodType(type)}
-                className={`px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl font-bold text-sm sm:text-base transition-all flex items-center gap-1.5 ${
+                className={`px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-lg font-bold text-sm sm:text-base transition-all flex items-center gap-1.5 ${
                   isSelected ? 'bg-red-600 text-white shadow-md scale-105' : 'bg-base-200 hover:bg-base-300 text-base-content border border-base-300'
                 }`}
               >

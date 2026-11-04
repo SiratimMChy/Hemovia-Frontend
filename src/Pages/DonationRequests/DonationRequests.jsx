@@ -1,143 +1,123 @@
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { FaTint } from "react-icons/fa";
+import { Droplet } from 'lucide-react';
 import useAxios from '../../Hooks/useAxios';
 import { AuthContext } from '../../Provider/AuthProvider';
 import SkeletonLoader from '../../Components/SkeletonLoader/SkeletonLoader';
 import DonationRequestCard from './DonationRequestCard';
+import DonationRequestsPagination from './DonationRequestsPagination';
 
 const DonationRequests = () => {
-  const { user } = useContext(AuthContext);
-  const [pendingRequests, setPendingRequests] = useState([]);
-  const [totalRequests, setTotalRequests] = useState(0);
-  const [page] = useState(12);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [loading, setLoading] = useState(true);
-  const axiosInstance = useAxios();
-  const navigate = useNavigate();
+    const { user } = useContext(AuthContext);
+    const [pendingRequests, setPendingRequests] = useState([]);
+    const [totalRequests, setTotalRequests] = useState(0);
+    const [page] = useState(12);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [loading, setLoading] = useState(true);
+    const axiosInstance = useAxios();
+    const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchRequests = async () => {
-      setLoading(true);
-      try {
-        const response = await axiosInstance.get(`/public-requests?page=${currentPage - 1}&size=${page}&status=pending`);
-        setPendingRequests(response.data.requests);
-        setTotalRequests(response.data.totalRequests);
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
+    useEffect(() => {
+        const fetchRequests = async () => {
+            setLoading(true);
+            try {
+                const response = await axiosInstance.get(`/public-requests?page=${currentPage - 1}&size=${page}&status=pending`);
+                setPendingRequests(response.data.requests || []);
+                setTotalRequests(response.data.totalRequests || 0);
+            } catch (err) {
+                console.error(err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchRequests();
+    }, [axiosInstance, currentPage, page]);
+
+    const numberOfPages = Math.ceil(totalRequests / page);
+
+    const handleViewDetails = (id) => {
+        if (user) {
+            navigate(`/dashboard/view-request/${id}`);
+        } else {
+            navigate('/login');
+        }
     };
 
-    fetchRequests();
-  }, [axiosInstance, currentPage, page]);
-
-  const numberOfPages = Math.ceil(totalRequests / page);
-  const Pages = [...Array(numberOfPages).keys()].map(num => num + 1);
-
-  const handlePrevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  }
-
-  const handleNextPage = () => {
-    if (currentPage < Pages.length) {
-      setCurrentPage(currentPage + 1);
-    }
-  }
-
-  const handleViewDetails = (id) => {
-    if (user) {
-      navigate(`/dashboard/view-request/${id}`);
-    } else {
-      navigate('/login');
-    }
-  };
-
-  return (
-    <div className="min-h-screen bg-base-100 py-8 px-4">
-      <div className="container mx-auto max-w-7xl">
-        {/* Page title and count of active requests */}
-        <div className="text-center mb-10">
-          <h2 className="text-4xl md:text-5xl font-bold text-base-content mb-3">
-            Pending Donation Requests
-          </h2>
-          <p className="text-base-content/70 text-lg">
-            Help save lives by responding to urgent blood requests
-          </p>
-          {!loading && (
-            <div className="mt-4">
-              <span className="badge badge-lg bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 font-semibold">
-                {pendingRequests.length} {pendingRequests.length === 1 ? 'Request' : 'Requests'} Pending
-              </span>
-            </div>
-          )}
-        </div>
-
-        {/* Loading placeholders */}
-        {loading ? (
-          <SkeletonLoader type="card" count={8} />
-        ) : (
-          <>
-            {/* List of blood request cards */}
-            {pendingRequests.length === 0 ? (
-              <div className="bg-base-200 rounded-2xl shadow-lg border border-base-300 p-12 text-center">
-                <div className="text-base-content/40 mb-4">
-                  <FaTint size={64} className="mx-auto" />
+    return (
+        <div className="min-h-screen bg-base-100 py-8 sm:py-10 md:py-14 px-4">
+            <div className="container mx-auto max-w-7xl">
+                {/* Header Section */}
+                <div className="text-center mb-8 sm:mb-10">
+                    <div className="inline-flex items-center gap-2 bg-base-200 border-2 border-red-100 dark:border-red-900/50 px-4 py-1.5 rounded-full mb-3 shadow-sm">
+                        <Droplet className="text-red-600 dark:text-red-400 fill-red-600" size={14} />
+                        <span className="text-red-600 dark:text-red-400 font-bold text-xs uppercase tracking-wider">
+                            Urgent Blood Calls
+                        </span>
+                    </div>
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-base-content mb-3">
+                        Pending Donation <span className="bg-gradient-to-r from-red-600 to-rose-600 bg-clip-text text-transparent">Requests</span>
+                    </h1>
+                    <p className="text-base sm:text-lg text-base-content/70 max-w-xl mx-auto">
+                        Help save lives by responding to urgent hospital and emergency blood requests
+                    </p>
                 </div>
-                <h3 className="text-2xl font-bold text-base-content mb-2">No Pending Requests</h3>
-                <p className="text-base-content/70">
-                  There are currently no pending donation requests.
-                </p>
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
-                {pendingRequests.map(request => (
-                  <DonationRequestCard
-                    key={request._id}
-                    request={request}
-                    onViewDetails={handleViewDetails}
-                  />
-                ))}
-              </div>
-            )}
 
-            {/* Page buttons */}
-            {pendingRequests.length > 0 && (
-              <div className="flex justify-center items-center mt-12 gap-4">
-                <button
-                  onClick={handlePrevPage}
-                  className="btn bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white border-0 rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
-                >
-                  Prev
-                </button>
-                {Pages.map(pg => (
-                  <button
-                    key={pg}
-                    className={`btn rounded-lg shadow-md hover:shadow-lg transition-all duration-200 border-0 ${pg === currentPage
-                      ? 'bg-gradient-to-r from-red-500 to-red-600 text-white'
-                      : 'bg-base-200 text-base-content hover:bg-base-300'
-                      }`}
-                    onClick={() => setCurrentPage(pg)}
-                  >
-                    {pg}
-                  </button>
-                ))}
-                <button
-                  onClick={handleNextPage}
-                  className="btn bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white border-0 rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
-                >
-                  Next
-                </button>
-              </div>
-            )}
-          </>
-        )}
-      </div>
-    </div>
-  );
+                {/* Content Section */}
+                {loading ? (
+                    <SkeletonLoader type="card" count={8} />
+                ) : pendingRequests.length === 0 ? (
+                    <div className="bg-base-200 rounded-xl shadow-sm border-2 border-base-300 p-8 sm:p-12 text-center max-w-lg mx-auto">
+                        <div className="w-16 h-16 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900/40 rounded-full flex items-center justify-center mx-auto mb-4 text-red-600 dark:text-red-400">
+                            <Droplet size={32} />
+                        </div>
+                        <h3 className="text-xl sm:text-2xl font-bold text-base-content mb-2">No Pending Requests</h3>
+                        <p className="text-sm sm:text-base text-base-content/70">
+                            There are currently no urgent blood requests. Please check back later.
+                        </p>
+                    </div>
+                ) : (
+                    <>
+                        {/* Live Counter Info Bar above grid */}
+                        <div className="flex items-center justify-between mb-4 sm:mb-6 pb-2.5 border-b border-base-300">
+                            <div className="flex items-center gap-2">
+                                <span className="relative flex h-2.5 w-2.5">
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-600"></span>
+                                </span>
+                                <p className="text-xs sm:text-sm font-semibold text-base-content/80">
+                                    Available Requests: <span className="text-red-600 dark:text-red-400 font-black">{totalRequests || pendingRequests.length}</span>
+                                </p>
+                            </div>
+                            {numberOfPages > 1 && (
+                                <span className="text-xs text-base-content/60 font-medium">
+                                    Page {currentPage} of {numberOfPages}
+                                </span>
+                            )}
+                        </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 items-stretch">
+                            {pendingRequests.map(request => (
+                                <DonationRequestCard
+                                    key={request._id}
+                                    request={request}
+                                    onViewDetails={handleViewDetails}
+                                />
+                            ))}
+                        </div>
+
+                        <DonationRequestsPagination
+                            currentPage={currentPage}
+                            totalPages={numberOfPages}
+                            onPrevPage={() => currentPage > 1 && setCurrentPage(currentPage - 1)}
+                            onNextPage={() => currentPage < numberOfPages && setCurrentPage(currentPage + 1)}
+                            onPageSelect={(pg) => setCurrentPage(pg)}
+                        />
+                    </>
+                )}
+            </div>
+        </div>
+    );
 };
 
 export default DonationRequests;

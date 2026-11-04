@@ -38,7 +38,7 @@ const FAQPage = () => {
               <span className="text-red-600 dark:text-red-400 font-bold text-sm">FREQUENTLY ASKED QUESTIONS</span>
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-base-content mb-4">
-              How Can We Help You?
+              How Can We <span className="bg-gradient-to-r from-red-600 to-rose-600 bg-clip-text text-transparent">Help You?</span>
             </h1>
             <p className="text-base sm:text-lg text-base-content/70 max-w-2xl mx-auto">
               Find answers to common questions about blood donation, eligibility, and our platform
@@ -62,12 +62,12 @@ const FAQPage = () => {
                 <div
                   key={categoryIndex}
                   onClick={() => toggleCategory(categoryIndex)}
-                  className={`group bg-base-200 border-2 border-base-300 rounded-xl md:rounded-2xl p-4 md:p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer ${
+                  className={`group bg-base-200 border-2 border-base-300 rounded-xl p-4 md:p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer ${
                     isActive ? 'border-red-300 dark:border-red-900/50 shadow-xl shadow-gray-300 dark:shadow-gray-900/70 scale-105' : 'hover:border-red-200 dark:hover:border-red-900/50'
                   }`}
                 >
                   <div className="flex items-center justify-between mb-3 md:mb-4">
-                    <div className={`w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br ${colorClasses[category.color]} rounded-lg md:rounded-xl flex items-center justify-center shadow-md group-hover:scale-110 transition-transform`}>
+                    <div className={`w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br ${colorClasses[category.color]} rounded-lg flex items-center justify-center shadow-md group-hover:scale-110 transition-transform`}>
                       <Icon className="text-white" size={18} />
                     </div>
                     <ChevronDown

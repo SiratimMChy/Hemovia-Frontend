@@ -6,9 +6,9 @@ const FeaturedCenterCard = ({ center, index }) => {
   const is24_7 = center.emergency && center.emergency.includes('24/7');
 
   return (
-    <div className="bg-base-100 border-2 border-base-300 rounded-xl sm:rounded-2xl p-3.5 sm:p-4 md:p-5 shadow-sm hover:shadow-xl hover:border-red-300 dark:hover:border-red-900/60 transition-all duration-300 group flex flex-col justify-between h-full">
+    <div className="bg-base-100 border-2 border-base-300 rounded-xl p-3.5 sm:p-4 md:p-5 shadow-sm hover:shadow-xl hover:border-red-300 dark:hover:border-red-900/60 transition-all duration-300 group flex flex-col justify-between h-full">
       {/* Top Media / Center Visual Banner */}
-      <div className="w-full h-42 min-[360px]:h-48 min-[400px]:h-56 sm:h-42 md:h-44 bg-gradient-to-br from-red-600 via-rose-600 to-red-700 rounded-xl mb-3 min-[360px]:mb-4 sm:mb-4 p-3 min-[360px]:p-3.5 sm:p-3 flex flex-col justify-between overflow-hidden relative shadow-md shrink-0 group-hover:shadow-lg transition-all duration-300">
+      <div className="w-full h-32 min-[360px]:h-40 min-[400px]:h-48 sm:h-36 md:h-40 bg-gradient-to-br from-red-600 via-rose-600 to-red-700 rounded-lg mb-3 min-[360px]:mb-4 sm:mb-4 p-3 min-[360px]:p-3.5 sm:p-3 flex flex-col justify-between overflow-hidden relative shadow-md shrink-0 group-hover:shadow-lg transition-all duration-300">
         <div className="absolute -right-6 -bottom-6 w-24 h-24 bg-white/10 rounded-full blur-xl pointer-events-none" />
         <div className="absolute -left-6 -top-6 w-24 h-24 bg-rose-400/20 rounded-full blur-lg pointer-events-none" />
         <svg className="absolute inset-0 w-full h-full text-white/10 pointer-events-none" viewBox="0 0 300 120" fill="none" preserveAspectRatio="none">
@@ -34,7 +34,7 @@ const FeaturedCenterCard = ({ center, index }) => {
         </div>
 
         <div className="flex items-center justify-center my-auto z-10">
-          <div className="w-14 h-14 min-[360px]:w-16 min-[360px]:h-16 sm:w-15 sm:h-15 bg-white/15 backdrop-blur-md border border-white/30 rounded-2xl flex items-center justify-center shadow-md group-hover:scale-110 group-hover:bg-white/25 transition-all duration-300">
+          <div className="w-12 h-12 min-[360px]:w-14 min-[360px]:h-14 sm:w-13 sm:h-13 bg-white/15 backdrop-blur-md border border-white/30 rounded-lg flex items-center justify-center shadow-md group-hover:scale-110 group-hover:bg-white/25 transition-all duration-300">
             <Building className="text-white drop-shadow-sm w-6 h-6 min-[360px]:w-7 min-[360px]:h-7 sm:w-6 sm:h-6" />
           </div>
         </div>
@@ -85,7 +85,7 @@ const FeaturedCenterCard = ({ center, index }) => {
 
           <Link
             to={`/center/${centerId}`}
-            className="w-full bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 text-white py-2 sm:py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all duration-300 hover:scale-[1.02] shadow-md hover:shadow-lg flex items-center justify-center gap-1.5"
+            className="w-full bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 text-white py-2 sm:py-2.5 rounded-lg font-bold text-xs sm:text-sm transition-all duration-300 hover:scale-[1.02] shadow-md hover:shadow-lg flex items-center justify-center gap-1.5"
           >
             <span>View Details</span>
             <ArrowRight size={14} />

@@ -14,7 +14,7 @@ const DonateForm = ({
 
     return (
         <div id="donate-form-section" className="flex justify-center mb-6 animate-fade-in">
-            <div className="w-full max-w-xl bg-base-200 border-2 border-base-300 rounded-2xl p-4 sm:p-5 shadow-xl">
+            <div className="w-full max-w-xl bg-base-200 border-2 border-base-300 rounded-xl p-4 sm:p-5 shadow-xl">
                 <form onSubmit={handleSubmit} className="space-y-3">
                     <div className="text-center">
                         <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-base-content/60">
@@ -29,7 +29,7 @@ const DonateForm = ({
                                 key={preset}
                                 type="button"
                                 onClick={() => setDonateAmount(preset.toString())}
-                                className={`py-2 sm:py-2.5 rounded-xl font-bold text-sm sm:text-base transition-all duration-200 border-2 cursor-pointer ${
+                                className={`py-2 sm:py-2.5 rounded-lg font-bold text-sm sm:text-base transition-all duration-200 border-2 cursor-pointer ${
                                     donateAmount === preset.toString()
                                         ? 'bg-gradient-to-r from-red-600 to-rose-600 text-white border-transparent shadow-md'
                                         : 'bg-base-100 border-base-300 text-base-content hover:border-red-300 dark:hover:border-red-900/50 hover:text-red-600'
@@ -53,7 +53,7 @@ const DonateForm = ({
                             value={donateAmount}
                             onChange={(e) => setDonateAmount(e.target.value)}
                             placeholder="Enter amount"
-                            className="w-full pl-8 pr-3 py-2.5 border-2 border-base-300 rounded-xl bg-base-100 text-base-content placeholder-base-content/40 focus:border-red-500 focus:outline-none font-bold text-base transition-all"
+                            className="w-full pl-8 pr-3 py-2.5 border-2 border-base-300 rounded-lg bg-base-100 text-base-content placeholder-base-content/40 focus:border-red-500 focus:outline-none font-bold text-base transition-all"
                             required
                         />
                     </div>
@@ -62,7 +62,7 @@ const DonateForm = ({
                     <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 text-white font-bold py-2.5 sm:py-3 rounded-xl text-sm sm:text-base transition-all duration-300 shadow-md hover:shadow-lg hover:scale-[1.01] flex items-center justify-center gap-2 disabled:opacity-70 cursor-pointer"
+                        className="w-full bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 text-white font-bold py-2.5 sm:py-3 rounded-lg text-sm sm:text-base transition-all duration-300 shadow-md hover:shadow-lg hover:scale-[1.01] flex items-center justify-center gap-2 disabled:opacity-70 cursor-pointer"
                     >
                         {isSubmitting ? (
                             <>

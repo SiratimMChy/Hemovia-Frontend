@@ -18,10 +18,10 @@ const LiveImpactCards = ({ livesSaved, apiStats }) => {
           return (
             <div
               key={item.label}
-              className={`bg-base-100 border border-base-300 rounded-2xl p-4 sm:p-5 shadow-sm hover:shadow-md ${item.hoverBorder} transition-all duration-200 group flex flex-col justify-between`}
+              className={`bg-base-100 border border-base-300 rounded-xl p-4 sm:p-5 shadow-sm hover:shadow-md ${item.hoverBorder} transition-all duration-200 group flex flex-col justify-between`}
             >
               <div className="flex items-center gap-3 mb-3">
-                <div className={`w-11 h-11 bg-gradient-to-br ${item.gradient} rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform shadow-md ${item.shadow} shrink-0`}>
+                <div className={`w-11 h-11 bg-gradient-to-br ${item.gradient} rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform shadow-md ${item.shadow} shrink-0`}>
                   <Icon className="text-white" size={20} />
                 </div>
                 <div>
@@ -39,7 +39,7 @@ const LiveImpactCards = ({ livesSaved, apiStats }) => {
 
       {/* Call to Action */}
       <div className="text-center mt-10 sm:mt-12">
-        <div className="bg-base-100 border-2 border-base-300 rounded-3xl p-6 sm:p-8 hover:border-red-300/60 dark:hover:border-red-900/50 transition-all shadow-md">
+        <div className="bg-base-100 border-2 border-base-300 rounded-xl p-6 sm:p-8 hover:border-red-300/60 dark:hover:border-red-900/50 transition-all shadow-md">
           <h3 className="text-2xl sm:text-3xl font-extrabold text-base-content mb-3">
             Be Part of This Impact
           </h3>
@@ -49,14 +49,14 @@ const LiveImpactCards = ({ livesSaved, apiStats }) => {
           <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
             <Link
               to="/signup"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 text-white px-7 py-3 rounded-xl font-bold text-sm sm:text-base shadow-md hover:shadow-xl hover:scale-105 transition-all"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 text-white px-7 py-3 rounded-lg font-bold text-sm sm:text-base shadow-md hover:shadow-xl hover:scale-105 transition-all"
             >
               <Droplet className="fill-white" size={17} />
               <span>Start Saving Lives</span>
             </Link>
             <Link
               to="/search"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-base-200 border-2 border-red-600 text-red-600 dark:text-red-400 dark:border-red-500 hover:bg-red-600 hover:text-white dark:hover:bg-red-600 dark:hover:text-white px-7 py-3 rounded-xl font-bold text-sm sm:text-base shadow-md hover:shadow-xl hover:scale-105 transition-all"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-base-200 border-2 border-red-600 text-red-600 dark:text-red-400 dark:border-red-500 hover:bg-red-600 hover:text-white dark:hover:bg-red-600 dark:hover:text-white px-7 py-3 rounded-lg font-bold text-sm sm:text-base shadow-md hover:shadow-xl hover:scale-105 transition-all"
             >
               <Search size={17} />
               <span>Find Blood Now</span>

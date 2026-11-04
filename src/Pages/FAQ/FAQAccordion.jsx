@@ -11,10 +11,10 @@ const FAQAccordion = ({ category, openQuestion, toggleQuestion, activeCategory }
   };
 
   return (
-    <div className="bg-base-200 border-2 border-base-300 rounded-2xl shadow-lg shadow-gray-200 dark:shadow-gray-900/50 overflow-hidden hover:border-red-200 dark:hover:border-red-900/50 transition-all">
+    <div className="bg-base-200 border-2 border-base-300 rounded-xl shadow-lg shadow-gray-200 dark:shadow-gray-900/50 overflow-hidden hover:border-red-200 dark:hover:border-red-900/50 transition-all">
       <div className="p-8">
         <div className="flex items-center gap-4 mb-6">
-          <div className={`w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br ${colorMap[category.color] || 'from-blue-500 to-blue-600'} rounded-lg md:rounded-xl flex items-center justify-center shadow-md`}>
+          <div className={`w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br ${colorMap[category.color] || 'from-blue-500 to-blue-600'} rounded-lg flex items-center justify-center shadow-md`}>
             {Icon && <Icon className="text-white" size={18} />}
           </div>
           <div>
@@ -35,7 +35,7 @@ const FAQAccordion = ({ category, openQuestion, toggleQuestion, activeCategory }
             return (
               <div
                 key={questionIndex}
-                className="border-2 border-gray-100 dark:border-gray-700 rounded-xl overflow-hidden hover:border-red-200 transition-all"
+                className="border-2 border-gray-100 dark:border-gray-700 rounded-lg overflow-hidden hover:border-red-200 transition-all"
               >
                 <button
                   onClick={() => toggleQuestion(activeCategory, questionIndex)}

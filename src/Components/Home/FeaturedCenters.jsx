@@ -19,7 +19,7 @@ const FeaturedCenters = ({ centersData = [] }) => {
             <span className="text-red-600 dark:text-red-400 font-bold text-xs sm:text-sm tracking-wide">DONATION CENTERS</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-base-content mb-3 md:mb-4">
-            Featured Blood Centers
+            Featured Blood <span className="bg-gradient-to-r from-red-600 to-rose-600 bg-clip-text text-transparent">Centers</span>
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-base-content/70 max-w-2xl mx-auto font-medium">
             Locate blood donation centers near you for safe and convenient donation
@@ -45,7 +45,7 @@ const FeaturedCenters = ({ centersData = [] }) => {
         <div className="text-center mt-10 sm:mt-12">
           <Link
             to="/center"
-            className="inline-flex items-center justify-center gap-2.5 bg-base-200 border-2 border-red-600 text-red-600 dark:text-red-400 dark:border-red-500 px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl font-bold text-sm sm:text-base hover:bg-red-600 hover:text-white dark:hover:bg-red-600 dark:hover:text-white transition-all duration-300 shadow-md hover:shadow-xl hover:scale-105"
+            className="inline-flex items-center justify-center gap-2.5 bg-base-200 border-2 border-red-600 text-red-600 dark:text-red-400 dark:border-red-500 px-6 sm:px-8 py-3 sm:py-3.5 rounded-lg font-bold text-sm sm:text-base hover:bg-red-600 hover:text-white dark:hover:bg-red-600 dark:hover:text-white transition-all duration-300 shadow-md hover:shadow-xl hover:scale-105"
           >
             <MapPin size={18} />
             <span>View All Centers</span>

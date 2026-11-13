@@ -119,7 +119,7 @@ const Profile = () => {
                 <div className="inline-flex items-center gap-2 bg-base-200 border-2 border-red-100 dark:border-red-900/50 px-4 py-1.5 rounded-full mb-3 shadow-sm">
                     <User className="text-red-600 dark:text-red-400" size={14} />
                     <span className="text-red-600 dark:text-red-400 font-bold text-xs uppercase tracking-wider">
-                        Blood Donor
+                        Account Settings
                     </span>
                 </div>
                 <h1 className="text-xl sm:text-3xl md:text-4xl font-bold text-base-content mb-1 sm:mb-2">

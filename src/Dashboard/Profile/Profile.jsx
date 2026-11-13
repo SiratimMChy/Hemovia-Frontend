@@ -8,6 +8,7 @@ import axios from "axios";
 import { useDemoRestriction } from "../../Hooks/useDemoRestriction";
 import ProfileHeader from "./ProfileHeader";
 import ProfileFormFields from "./ProfileFormFields";
+import { User } from "lucide-react";
 
 const Profile = () => {
     const { setUser, user } = useContext(AuthContext);
@@ -115,8 +116,14 @@ const Profile = () => {
         <div className="w-full max-w-4xl mx-auto py-1 sm:py-4 md:py-6 px-0 sm:px-2 md:px-0 min-w-0">
             {/* Page title and description */}
             <div className="text-center mb-4 sm:mb-8">
+                <div className="inline-flex items-center gap-2 bg-base-200 border-2 border-red-100 dark:border-red-900/50 px-4 py-1.5 rounded-full mb-3 shadow-sm">
+                    <User className="text-red-600 dark:text-red-400" size={14} />
+                    <span className="text-red-600 dark:text-red-400 font-bold text-xs uppercase tracking-wider">
+                        Blood Donor
+                    </span>
+                </div>
                 <h1 className="text-xl sm:text-3xl md:text-4xl font-bold text-base-content mb-1 sm:mb-2">
-                    My Profile
+                    My <span className="bg-gradient-to-r from-red-600 to-rose-600 bg-clip-text text-transparent">Profile</span>
                 </h1>
                 <p className="text-base-content/70 text-xs sm:text-sm md:text-base">
                     Manage your account information and preferences

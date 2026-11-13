@@ -17,8 +17,10 @@ const ProfileHeader = ({ user, profileData }) => {
                 <p className="text-base-content/70 text-xs sm:text-sm md:text-base truncate px-1 mt-0.5 sm:mt-1">
                     {user?.email}
                 </p>
-                <div className="badge badge-sm sm:badge-md md:badge-lg bg-red-600 text-white font-bold mt-1.5 sm:mt-2">
-                    {profileData?.role?.toUpperCase() || 'USER'}
+                <div className="mt-1.5 sm:mt-2 flex justify-center md:justify-start">
+                    <span className="inline-flex items-center bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-900/50 px-3 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider">
+                        {profileData?.role || 'User'}
+                    </span>
                 </div>
             </div>
         </div>

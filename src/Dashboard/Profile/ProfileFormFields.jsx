@@ -1,10 +1,14 @@
+import { User, Mail, Droplet, MapPin, Camera } from 'lucide-react';
+
 const ProfileFormFields = ({ user, profileData, isEditing }) => {
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-5 md:gap-6 w-full min-w-0">
             {/* Name Field */}
             <div className="w-full min-w-0">
                 <label className="label py-1 sm:py-1.5">
-                    <span className="label-text text-xs sm:text-sm text-base-content font-semibold">Full Name</span>
+                    <span className="label-text text-xs sm:text-sm text-base-content font-semibold flex items-center gap-1.5">
+                        <User size={13} className="text-red-500" /> Full Name
+                    </span>
                 </label>
                 <input
                     defaultValue={user?.displayName || profileData?.name}
@@ -20,7 +24,9 @@ const ProfileFormFields = ({ user, profileData, isEditing }) => {
             {/* Email Field */}
             <div className="w-full min-w-0">
                 <label className="label py-1 sm:py-1.5">
-                    <span className="label-text text-xs sm:text-sm text-base-content font-semibold">Email Address</span>
+                    <span className="label-text text-xs sm:text-sm text-base-content font-semibold flex items-center gap-1.5">
+                        <Mail size={13} className="text-red-500" /> Email Address
+                    </span>
                 </label>
                 <input
                     defaultValue={user?.email}
@@ -33,7 +39,9 @@ const ProfileFormFields = ({ user, profileData, isEditing }) => {
             {/* Blood Group Field */}
             <div className="w-full min-w-0">
                 <label className="label py-1 sm:py-1.5">
-                    <span className="label-text text-xs sm:text-sm text-base-content font-semibold">Blood Group</span>
+                    <span className="label-text text-xs sm:text-sm text-base-content font-semibold flex items-center gap-1.5">
+                        <Droplet size={13} className="text-red-500" /> Blood Group
+                    </span>
                 </label>
                 <select
                     name="bloodGroup"
@@ -57,7 +65,9 @@ const ProfileFormFields = ({ user, profileData, isEditing }) => {
             {/* District Field */}
             <div className="w-full min-w-0">
                 <label className="label py-1 sm:py-1.5">
-                    <span className="label-text text-xs sm:text-sm text-base-content font-semibold">District</span>
+                    <span className="label-text text-xs sm:text-sm text-base-content font-semibold flex items-center gap-1.5">
+                        <MapPin size={13} className="text-red-500" /> District
+                    </span>
                 </label>
                 <input
                     defaultValue={profileData?.district}
@@ -73,7 +83,9 @@ const ProfileFormFields = ({ user, profileData, isEditing }) => {
             {/* Upazila Field */}
             <div className="w-full min-w-0">
                 <label className="label py-1 sm:py-1.5">
-                    <span className="label-text text-xs sm:text-sm text-base-content font-semibold">Upazila</span>
+                    <span className="label-text text-xs sm:text-sm text-base-content font-semibold flex items-center gap-1.5">
+                        <MapPin size={13} className="text-red-500" /> Upazila
+                    </span>
                 </label>
                 <input
                     defaultValue={profileData?.upazila}
@@ -89,7 +101,9 @@ const ProfileFormFields = ({ user, profileData, isEditing }) => {
             {/* Photo Upload Field */}
             <div className="w-full min-w-0">
                 <label className="label py-1 sm:py-1.5">
-                    <span className="label-text text-xs sm:text-sm text-base-content font-semibold">Profile Photo</span>
+                    <span className="label-text text-xs sm:text-sm text-base-content font-semibold flex items-center gap-1.5">
+                        <Camera size={13} className="text-red-500" /> Profile Photo
+                    </span>
                 </label>
                 <input
                     name="photoUrl"

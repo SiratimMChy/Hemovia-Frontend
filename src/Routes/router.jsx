@@ -26,6 +26,9 @@ import DonationCentersPage from "../Pages/DonationCenters/DonationCentersPage";
 import CenterDetails from "../Pages/CenterDetails/CenterDetails";
 import About from "../Pages/About/About";
 import ForgetPassword from "../Pages/ForgetPassword";
+import PrivacyPolicy from "../Pages/PrivacyPolicy";
+import TermsOfService from "../Pages/TermsOfService";
+import ErrorPage from "../Pages/ErrorPage";
 
 
 
@@ -34,6 +37,7 @@ const router = createBrowserRouter([
     {
         path: "/",
         element: <RootLayout />,
+        errorElement:<ErrorPage/>,
         children: [
             {
                 path: '/',
@@ -98,6 +102,14 @@ const router = createBrowserRouter([
             {
                 path:'/about',
                 Component: About
+            },
+            {
+                path: '/privacy-policy',
+                Component: PrivacyPolicy
+            },
+            {
+                path: '/terms-of-service',
+                Component: TermsOfService
             }
               
         ]
@@ -105,6 +117,7 @@ const router = createBrowserRouter([
     {
         path: "/dashboard",
         element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
+        errorElement:<ErrorPage/>,
         children: [
             {
                 path: "addRequest",

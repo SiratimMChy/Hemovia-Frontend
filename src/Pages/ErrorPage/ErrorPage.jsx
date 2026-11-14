@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router';
 import { Home, ArrowLeft, Droplet } from 'lucide-react';
-import Navbar from '../Components/Navbar/Navbar';
-import Footer from '../Components/Footer/Footer';
+import Navbar from '../../Components/Navbar/Navbar';
+import Footer from '../../Components/Footer/Footer';
 
 const ErrorPage = () => {
     const navigate = useNavigate();
